@@ -233,7 +233,7 @@ table.dt td:first-child { font-weight: 600; }
   <p class="meta" id="meta"></p>
   <div class="stats">
     <div><div class="stat-n">12</div><div class="stat-l" data-i18n="stApps"></div></div>
-    <div><div class="stat-n">9</div><div class="stat-l" data-i18n="stOpt"></div></div>
+    <div><div class="stat-n">11</div><div class="stat-l" data-i18n="stOpt"></div></div>
     <div><div class="stat-n">4</div><div class="stat-l" data-i18n="stSes"></div></div>
     <div><div class="stat-n">10 h</div><div class="stat-l" data-i18n="stHours"></div></div>
     <div><div class="stat-n">1</div><div class="stat-l" data-i18n="stDoi"></div></div>
@@ -375,12 +375,12 @@ const APPS = [
 ];
 /* APPS OPCIONALES POR SESIÓN */
 const OPT = {
-  2: [["aulia","AulIA"], ["corrigia","CorrigIA"]],
+  2: [["aulia","AulIA"], ["corrigia","CorrigIA"], ["mentoria","MentorIA"], ["evaluador_oral","Evaluador Oral"]],
   3: [["prismia","PRISMIA"], ["publication_radar","Publication Radar"], ["grantwriter","GrantWriter"], ["autoresearch","Autoresearch"]],
   4: [["tutoria","TutorIA"], ["claria","ClarIA"], ["generator","Generator"]]
 };
 /* COMPLEMENTARIAS DEL CATÁLOGO (solo en la franja de fases) */
-const COMP = {"pericia":"Pericia", "casopracticoAI":"CasoPrácticoAI", "evaluador_oral":"Evaluador Oral", "desafia":"DesafIA", "cribia":"CribIA", "mentoria":"MentorIA", "meritoria":"MeritorIA", "Estudia":"EstudIA"};
+const COMP = {"pericia":"Pericia", "casopracticoAI":"CasoPrácticoAI", "desafia":"DesafIA", "cribia":"CribIA", "meritoria":"MeritorIA", "Estudia":"EstudIA"};
 const PHASES = [
   ["sillabusAI","aulia","generator","pericia","casopracticoAI"],
   ["examforge","anticonvocatoria","TFG_evaluator","corrigia","evaluador_oral"],
@@ -716,7 +716,7 @@ const NEW = {
   "dates": ["Lunes 30/11/2026", "Lunes 07/12/2026", "Lunes 14/12/2026", "Lunes 21/12/2026"],
   "tz": [["México (CDMX)", "10:00"], ["Centroamérica", "10:00"], ["Colombia · Perú · Ecuador", "11:00"], ["Cuba · Panamá", "11:00"], ["Venezuela · Bolivia", "12:00"], ["Rep. Dominicana · P. Rico", "12:00"], ["Chile · Paraguay", "13:00"], ["Argentina · Uruguay", "13:00"], ["Brasil (Brasilia)", "13:00"], ["Portugal", "16:00"]],
   "phasesH": "Las apps en cada fase del trabajo académico",
-  "phasesLead": "Las doce apps del curso, las nueve opcionales y otras complementarias del catálogo, ordenadas por la fase del trabajo de enseñar e investigar en que se usan.",
+  "phasesLead": "Las doce apps del curso, las once opcionales y otras complementarias del catálogo, ordenadas por la fase del trabajo de enseñar e investigar en que se usan.",
   "phasesNote": "Las opcionales amplían cada sesión si te sobra tiempo o quieres seguir por tu cuenta; las complementarias no se trabajan en el curso. Revisa en cada una qué proveedor de IA admite. Los datos de estudiantes se anonimizan y la nota siempre la firma el profesor.",
   "legOpt": "Opcional", "tagOpt": "opc.",
   "phases": ["Diseñar la asignatura", "Evaluar", "Alfabetización e integridad", "Estado del arte", "Analizar y redactar", "Publicar y financiar", "Crear y acompañar"],
@@ -784,7 +784,7 @@ const NEW = {
   "dates": ["Monday 30/11/2026", "Monday 07/12/2026", "Monday 14/12/2026", "Monday 21/12/2026"],
   "tz": [["Mexico (CDMX)", "10:00"], ["Central America", "10:00"], ["Colombia · Peru · Ecuador", "11:00"], ["Cuba · Panama", "11:00"], ["Venezuela · Bolivia", "12:00"], ["Dominican Rep. · P. Rico", "12:00"], ["Chile · Paraguay", "13:00"], ["Argentina · Uruguay", "13:00"], ["Brazil (Brasília)", "13:00"], ["Portugal", "16:00"]],
   "phasesH": "The apps at each stage of academic work",
-  "phasesLead": "The twelve course apps, the nine optional ones and other complementary apps from the catalogue, arranged by the stage of teaching and research in which they are used.",
+  "phasesLead": "The twelve course apps, the eleven optional ones and other complementary apps from the catalogue, arranged by the stage of teaching and research in which they are used.",
   "phasesNote": "Optional apps extend each session if you have time or want to continue on your own; complementary apps are not covered in the course. Check which AI provider each one supports. Student data is anonymised and the grade is always signed by the lecturer.",
   "legOpt": "Optional", "tagOpt": "opt.",
   "phases": ["Design the course", "Assess", "AI literacy and integrity", "State of the art", "Analyse and write", "Publish and fund", "Build and support"],
@@ -852,7 +852,7 @@ const NEW = {
   "dates": ["Segunda 30/11/2026", "Segunda 07/12/2026", "Segunda 14/12/2026", "Segunda 21/12/2026"],
   "tz": [["México (CDMX)", "10:00"], ["América Central", "10:00"], ["Colômbia · Peru · Equador", "11:00"], ["Cuba · Panamá", "11:00"], ["Venezuela · Bolívia", "12:00"], ["Rep. Dominicana · P. Rico", "12:00"], ["Chile · Paraguai", "13:00"], ["Argentina · Uruguai", "13:00"], ["Brasil (Brasília)", "13:00"], ["Portugal", "16:00"]],
   "phasesH": "As apps em cada fase do trabalho académico",
-  "phasesLead": "As doze apps do curso, as nove opcionais e outras complementares do catálogo, organizadas pela fase do trabalho de ensinar e investigar em que se usam.",
+  "phasesLead": "As doze apps do curso, as onze opcionais e outras complementares do catálogo, organizadas pela fase do trabalho de ensinar e investigar em que se usam.",
   "phasesNote": "As opcionais ampliam cada sessão se te sobrar tempo ou quiseres continuar por tua conta; as complementares não se trabalham no curso. Verifica em cada uma que fornecedor de IA admite. Os dados dos estudantes são anonimizados e a nota é sempre assinada pelo professor.",
   "legOpt": "Opcional", "tagOpt": "opc.",
   "phases": ["Desenhar a unidade curricular", "Avaliar", "Literacia e integridade", "Estado da arte", "Analisar e redigir", "Publicar e financiar", "Criar e acompanhar"],
