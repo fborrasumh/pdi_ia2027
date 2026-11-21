@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Del prompt al DOI · Herramientas para enseñar e investigar</title>
+<meta name="description" content="Curso «Del prompt al DOI» (Study Abroad, UMH): doce apps de IA para enseñar e investigar en cuatro sesiones, nueve opcionales y tu propia app publicada con DOI.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f7f7f5; --surface: #fff; --border: #e4e3df; --border-strong: #cccbc6;
+  --text: #1a1916; --muted: #7a7872; --accent: #1a4fd8;
+  --s2: #1a4fd8; --s3: #126649; --s4: #6429a8; --s5: #c2186b;
+}
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; }
+a { color: var(--accent); }
+
+/* HEADER */
+header { background: #1a1916; color: #fff; padding: 56px 24px 48px; text-align: center; position: relative; }
+.lang-toggle { position: absolute; top: 16px; right: 16px; display: inline-flex; border: 1px solid #3a3934; border-radius: 99px; overflow: hidden; }
+.lang-toggle button { background: transparent; color: #888; border: 0; font: 600 12px/1 'Inter', sans-serif; letter-spacing: .06em; padding: 7px 11px; cursor: pointer; }
+.lang-toggle button.active { background: #fff; color: #1a1916; }
+.org { display: inline-block; margin-bottom: 28px; background: #fff; border-radius: 12px; padding: 12px 18px; }
+.org img { height: 72px; width: auto; display: block; }
+.eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #777; margin-bottom: 14px; }
+h1 { font-family: 'Sora', sans-serif; font-size: clamp(2rem, 4.6vw, 3.1rem); font-weight: 800; line-height: 1.1; letter-spacing: -.03em; margin: 0 auto 14px; max-width: 820px; }
+h1 span { color: #6b8fff; }
+.sub { font-size: 1rem; color: #aaa; max-width: 600px; margin: 0 auto 30px; }
+.stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.stat-n { font-family: 'Sora', sans-serif; font-size: 1.8rem; font-weight: 800; }
+.stat-l { font-size: .75rem; color: #777; text-transform: uppercase; letter-spacing: .08em; margin-top: 2px; }
+
+/* NAV */
+nav { position: sticky; top: 0; z-index: 5; background: rgba(247,247,245,.94); backdrop-filter: blur(6px); border-bottom: .5px solid var(--border); }
+nav .in { max-width: 1060px; margin: 0 auto; padding: 10px 24px; display: flex; gap: 6px; flex-wrap: wrap; }
+nav a { font-size: 13px; color: var(--muted); text-decoration: none; padding: 5px 12px; border-radius: 99px; border: .5px solid transparent; }
+nav a:hover { color: var(--text); border-color: var(--border-strong); background: var(--surface); }
+
+/* MAIN */
+main { max-width: 1060px; margin: 0 auto; padding: 40px 24px 80px; }
+section { margin-bottom: 56px; scroll-margin-top: 64px; }
+h2 { font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: 6px; }
+.lead { color: var(--muted); margin-bottom: 22px; max-width: 760px; }
+
+/* APP CARDS, AGRUPADAS POR SESIÓN */
+.sgroup { margin-bottom: 28px; }
+.sgroup h3 { font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 800; margin-bottom: 12px; color: var(--c); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: .5px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px; border-top: 4px solid var(--c); }
+.card-h { display: flex; align-items: center; gap: 12px; }
+.icon-box { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #fff; background: var(--c); flex-shrink: 0; }
+.card h4 { font-family: 'Sora', sans-serif; font-size: 1.2rem; font-weight: 800; }
+.card p { font-size: 14px; color: #444; }
+.card .chk { font-size: 13px; color: #555; background: #faf9f7; border-radius: 8px; padding: 10px 12px; }
+.card .chk b { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 3px; }
+.card .foot { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; padding-top: 6px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; font: 600 13px 'Inter', sans-serif; padding: 7px 14px; border-radius: 99px; text-decoration: none; background: var(--c); color: #fff; }
+.shared { margin-top: 4px; font-size: 14px; color: #555; background: var(--surface); border: .5px solid var(--border); border-radius: 12px; padding: 14px 18px; }
+
+/* FRANJA DE FASES */
+:root { --comp: #b45309; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i.sw { width: 14px; height: 14px; border-radius: 4px; background: var(--c); display: inline-block; }
+.legend i.sw.comp { background: #fff; border: 1.5px dashed var(--comp); }
+.phases-wrap { width: min(1400px, calc(100vw - 32px)); position: relative; left: 50%; transform: translateX(-50%); overflow-x: auto; padding-bottom: 6px; }
+.phases { display: grid; grid-template-columns: repeat(7, minmax(170px, 1fr)); gap: 10px; min-width: 1240px; }
+.phase { background: var(--surface); border: .5px solid var(--border); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.phase-h { display: flex; align-items: baseline; gap: 8px; padding-bottom: 8px; border-bottom: .5px solid var(--border); }
+.phase-n { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--muted); }
+.phase-t { font-family: 'Sora', sans-serif; font-weight: 700; font-size: .9rem; line-height: 1.25; }
+.chip { display: block; text-decoration: none; border-radius: 10px; padding: 9px 11px; font-size: 12.5px; line-height: 1.35; position: relative; }
+.chip b { display: block; font-family: 'Sora', sans-serif; font-size: 13.5px; margin-bottom: 2px; padding-right: 34px; }
+.chip .tag { position: absolute; top: 8px; right: 8px; font-size: 10px; font-weight: 600; letter-spacing: .04em; border-radius: 99px; padding: 1px 6px; }
+.chip.ses { background: var(--c); color: #fff; }
+.chip.ses .tag { background: rgba(255,255,255,.22); }
+.chip.comp { background: #fff; border: 1.5px dashed var(--comp); color: #444; }
+.chip.comp b { color: var(--comp); }
+.chip.comp .tag { background: #fdf3e7; color: var(--comp); }
+.chip:hover { filter: brightness(.95); }
+.phases-note { margin-top: 12px; font-size: 13px; color: var(--muted); }
+.vs-h { font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 800; margin-bottom: 12px; }
+.vs .box.api { border: 1.5px solid var(--accent); }
+.vs .box.api h3 { color: var(--accent); }
+.vs-note { margin: 10px 0 26px; }
+
+/* SESSIONS */
+.sessions { background: var(--surface); border: .5px solid var(--border); border-radius: 12px; overflow: hidden; }
+.srow { display: grid; grid-template-columns: 56px 1fr 1fr; gap: 16px; padding: 16px 18px; border-bottom: .5px solid var(--border); align-items: start; font-size: 14px; }
+.srow:last-child { border-bottom: 0; }
+.srow.head { background: #faf9f7; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding: 10px 18px; }
+.snum { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--c, var(--text)); }
+.stit { font-weight: 600; }
+.sapp { font-size: 12px; color: var(--muted); }
+.slink { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px; font-size: 13px; font-weight: 600; text-decoration: none; }
+
+/* STEPS / RULES */
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.box { background: var(--surface); border: .5px solid var(--border); border-radius: 12px; padding: 20px 22px; }
+.box h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; display: flex; gap: 8px; align-items: center; }
+ol, ul { padding-left: 20px; font-size: 14px; color: #444; }
+li { margin-bottom: 7px; }
+
+/* FOOTER */
+footer { background: var(--surface); border-top: .5px solid var(--border); padding: 28px 24px; text-align: center; font-size: 13px; color: var(--muted); }
+footer p + p { margin-top: 6px; }
+footer a { text-decoration: none; }
+
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (max-width: 720px) {
+  .srow { grid-template-columns: 40px 1fr; }
+  .srow .hide-sm { display: none; }
+  .lang-toggle { top: 10px; right: 10px; }
+  .lang-toggle button { padding: 6px 8px; }
+  header { padding-top: 64px; }
+}
+
+/* CLAVE DE IA: explicada desde cero y elección de modelo (adaptado de fborrasumh.github.io/oraculo/#clave) */
+.kx{--kx-ink:var(--text,#1a1916);--kx-acc:var(--accent,#1a4fd8);--kx-surf:var(--surface,#fff);--kx-line:var(--border,#e4e3df);--kx-muted:var(--muted,#7a7872);--kx-bg:var(--bg,#f7f7f5);--kx-head:'Sora',sans-serif;color:var(--kx-ink)}
+.kx-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.kx h3{font-family:var(--kx-head);font-size:1.15rem;font-weight:800;margin:0 0 10px;color:var(--kx-ink)}
+.kx-what{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;margin-bottom:34px}
+.kx-what p{font-size:15px;margin:0 0 10px}
+.kx-need{background:var(--kx-surf);border:1px solid var(--kx-line);border-radius:12px;padding:18px 20px;align-self:start}
+.kx-need ul{margin:0;padding-left:20px;font-size:14px;color:inherit}
+.kx-need li{margin-bottom:6px}
+.kx-tabs{display:inline-flex;flex-wrap:wrap;border:1.5px solid var(--kx-ink);border-radius:10px;overflow:hidden;margin:0 0 14px;background:var(--kx-surf)}
+.kx-tabs button{font:600 14px/1 inherit;font-family:inherit;padding:11px 16px;border:0;background:none;color:var(--kx-ink);cursor:pointer}
+.kx-tabs button+button{border-left:1.5px solid var(--kx-ink)}
+.kx-tabs button[aria-selected=true],.kx-tabs button[aria-pressed=true]{background:var(--kx-ink);color:var(--kx-surf)}
+.kx-tabs small{font-weight:400;opacity:.8}
+.kx-guide{background:var(--kx-surf);border:1px solid var(--kx-line);border-radius:12px;padding:6px 22px 18px;margin-bottom:44px}
+.kx-guide ol{list-style:none;margin:0;padding:0;counter-reset:kxp;color:inherit}
+.kx-guide li{counter-increment:kxp;display:grid;grid-template-columns:40px minmax(0,1fr);gap:10px;align-items:start;padding:12px 0;margin:0;border-bottom:1px solid var(--kx-line);font-size:14.5px}
+.kx-guide li::before{content:counter(kxp);width:30px;height:30px;border-radius:50%;border:1.5px solid var(--kx-ink);display:grid;place-items:center;font:800 .9rem/1 var(--kx-head)}
+.kx-go{display:inline-block;margin-top:14px;font-weight:600;color:var(--kx-acc)}
+.kx code{background:rgba(0,0,0,.06);padding:1px 5px;border-radius:4px;font-size:.92em}
+.kx-models>p{font-size:15px;max-width:52em;margin:0 0 14px}
+.kx-ladder{position:relative;padding-top:96px}
+.kx-arc{position:absolute;top:22px;left:12%;right:11%;height:70px;border:2.5px solid var(--kx-ink);border-bottom:0;border-radius:50% 50% 0 0/100% 100% 0 0;pointer-events:none}
+.kx-arc::after{content:"";position:absolute;right:-9px;bottom:-12px;border:8px solid transparent;border-top:12px solid var(--kx-ink);border-bottom:0}
+.kx-x{position:absolute;top:0;left:50%;transform:translateX(-50%);font:900 1.9rem/1 var(--kx-head);background:var(--kx-bg);padding:0 10px}
+.kx-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:end}
+.kx-step{display:flex;flex-direction:column;padding:18px;border-radius:12px;border:1.5px solid var(--kx-ink);background:var(--kx-surf)}
+.kx-step:nth-child(1){min-height:215px;background:var(--kx-bg)}
+.kx-step:nth-child(2){min-height:250px}
+.kx-step:nth-child(3){min-height:285px;background:var(--kx-acc);border-color:var(--kx-acc);color:#fff}
+.kx-step:nth-child(4){min-height:320px;background:var(--kx-ink);color:var(--kx-surf)}
+.kx-step h4{font-family:var(--kx-head);font-size:1.1rem;font-weight:800;margin:0 0 6px}
+.kx-step p{font-size:13.5px;margin:0;color:inherit}
+.kx-price{margin-top:auto;padding-top:14px;font:800 1.6rem/1 var(--kx-head);font-variant-numeric:tabular-nums}
+.kx-step small{display:block;margin-top:5px;font-size:12px;opacity:.85}
+.kx-step em{display:block;margin-top:7px;font-size:12px;opacity:.85}
+.kx-foot{margin:12px 0 0;font-size:12.5px;color:var(--kx-muted)}
+.kx-trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px}
+.kx-trio>div{background:var(--kx-surf);border:1px solid var(--kx-line);border-radius:12px;padding:18px 20px}
+.kx-trio p{font-size:14px;margin:0}
+.kx a:focus-visible,.kx button:focus-visible{outline:2px solid var(--kx-acc);outline-offset:2px}
+@media (max-width:760px){
+  .kx-what,.kx-trio{grid-template-columns:1fr}
+  .kx-steps{grid-template-columns:1fr 1fr}
+  .kx-step{min-height:0!important}
+  .kx-ladder{padding-top:0}
+  .kx-arc,.kx-x{display:none}
+}
+
+/* AÑADIDOS pdi_ia2027 */
+.meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: #bbb; margin: -12px auto 30px; max-width: 760px; }
+.meta span::before { content: "·"; margin-right: 18px; color: #555; }
+.meta span:first-child::before { content: none; margin: 0; }
+.intro { max-width: 760px; margin-bottom: 26px; }
+#apps .grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.chip.opt b { padding-right: 58px; }
+.chip.ses b, .chip.comp b { padding-right: 30px; }
+.intro p { font-size: 15px; margin-bottom: 10px; }
+.objs { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+.obj { background: var(--surface); border: .5px solid var(--border); border-top: 3px solid var(--text); border-radius: 12px; padding: 16px 18px; position: relative; }
+.obj h3 { font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 800; margin-bottom: 6px; }
+.obj p { font-size: 13.5px; color: #555; }
+.obj .n { position: absolute; top: 10px; right: 14px; font: 800 1.6rem/1 'Sora', sans-serif; color: #e8e7e2; }
+.cal { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 20px; align-items: start; }
+table.dt { width: 100%; border-collapse: collapse; background: var(--surface); border: .5px solid var(--border); border-radius: 12px; overflow: hidden; font-size: 14px; }
+table.dt th { background: #1a1916; color: #fff; text-align: left; font-size: 12px; font-weight: 600; padding: 10px 12px; }
+table.dt td { padding: 10px 12px; border-top: .5px solid var(--border); vertical-align: top; }
+table.dt td:first-child { font-weight: 600; }
+.tzmine { background: #1a1916; color: #fff; border-radius: 12px; padding: 12px 16px; font-size: 14px; margin-bottom: 10px; }
+.tzmine b { color: #ffb020; }
+.tzgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.tz { display: flex; justify-content: space-between; align-items: center; gap: 8px; background: var(--surface); border: .5px solid var(--border); border-radius: 10px; padding: 8px 12px; font-size: 13.5px; }
+.tz b { font-variant-numeric: tabular-nums; background: #fdf3e7; border-radius: 6px; padding: 2px 7px; font-size: 13px; }
+.tznote { font-size: 13px; color: var(--muted); margin-top: 8px; }
+.srow .sdate { font-size: 12.5px; font-weight: 600; color: var(--c, var(--text)); margin: 2px 0 4px; }
+.srow .sdesc { font-size: 13.5px; color: #555; margin-top: 4px; }
+.slinks { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 6px; }
+.slink.off { color: var(--muted); font-weight: 500; cursor: default; }
+.sopt { font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+.sopt a { color: var(--c); font-weight: 600; text-decoration: none; }
+.optrow { margin-top: 14px; }
+.optrow h4 { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; display: flex; gap: 6px; align-items: center; }
+.optgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.optcard { display: block; text-decoration: none; background: var(--surface); border: 1.5px dashed var(--c); border-radius: 10px; padding: 11px 13px; font-size: 13px; color: #444; }
+.optcard b { display: flex; justify-content: space-between; align-items: center; font-family: 'Sora', sans-serif; font-size: 14px; color: var(--c); margin-bottom: 2px; }
+.optcard:hover { background: #faf9f7; }
+.chip.opt { background: #fff; border: 1.5px dashed var(--c); color: #444; }
+.chip.opt b { color: var(--c); }
+.chip.opt .tag { background: #f1f0ec; color: var(--c); }
+.legend i.sw.opt { background: #fff; border: 1.5px dashed var(--text); }
+.gal { background: #1a1916; color: #fff; border-radius: 16px; padding: 30px 32px; }
+.gal h2 { color: #fff; }
+.gal p { color: #bbb; max-width: 640px; margin-bottom: 18px; }
+.gal .btn { --c: #ffb020; color: #1a1916; }
+.recs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.rec { display: block; text-decoration: none; text-align: center; background: var(--surface); border: .5px solid var(--border); border-radius: 12px; padding: 18px 14px; color: var(--text); }
+.rec i { font-size: 30px; color: var(--c); }
+.rec .rn { display: block; font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--c); margin-top: 6px; }
+.rec .rt { display: block; font-weight: 600; font-size: 14px; }
+.rec .rs { display: block; font-size: 12px; color: var(--muted); margin-top: 4px; }
+.rec.off { opacity: .75; cursor: default; }
+@media (max-width: 760px) { .cal { grid-template-columns: 1fr; } .tzgrid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="lang-toggle" role="group" aria-label="Idioma / Language / Idioma" id="langs"></div>
+  <p class="eyebrow" data-i18n="eyebrow"></p>
+  <h1 data-i18n-html="h1"></h1>
+  <p class="sub" data-i18n="sub"></p>
+  <p class="meta" id="meta"></p>
+  <div class="stats">
+    <div><div class="stat-n">12</div><div class="stat-l" data-i18n="stApps"></div></div>
+    <div><div class="stat-n">9</div><div class="stat-l" data-i18n="stOpt"></div></div>
+    <div><div class="stat-n">4</div><div class="stat-l" data-i18n="stSes"></div></div>
+    <div><div class="stat-n">10 h</div><div class="stat-l" data-i18n="stHours"></div></div>
+    <div><div class="stat-n">1</div><div class="stat-l" data-i18n="stDoi"></div></div>
+  </div>
+</header>
+
+<nav><div class="in">
+  <a href="#calendario" data-i18n="navCal"></a>
+  <a href="#curso" data-i18n="navCourse"></a>
+  <a href="#apps" data-i18n="navApps"></a>
+  <a href="#fases" data-i18n="navPhases"></a>
+  <a href="#clave" data-i18n="navKey"></a>
+  <a href="#galeria" data-i18n="navGal"></a>
+  <a href="#normas" data-i18n="navRules"></a>
+</div></nav>
+
+<main>
+  <section id="intro">
+    <div class="intro"><h2 data-i18n="introH"></h2><div id="introP"></div></div>
+    <h3 class="vs-h" data-i18n="objH"></h3>
+    <div class="objs" id="objs"></div>
+  </section>
+
+  <section id="calendario">
+    <h2 data-i18n="calH"></h2>
+    <p class="lead" data-i18n="calLead"></p>
+    <div class="cal">
+      <table class="dt" id="dt"></table>
+      <div>
+        <div class="tzmine" id="tzmine"></div>
+        <div class="tzgrid" id="tzgrid"></div>
+        <p class="tznote" data-i18n="tzNote"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="curso">
+    <h2 data-i18n="courseH"></h2>
+    <p class="lead" data-i18n="courseLead"></p>
+    <div class="sessions" id="sessions"></div>
+  </section>
+
+  <section id="apps">
+    <h2 data-i18n="appsH"></h2>
+    <p class="lead" data-i18n="appsLead"></p>
+    <div id="groups"></div>
+    <p class="shared" data-i18n="shared"></p>
+  </section>
+
+  <section id="fases">
+    <h2 data-i18n="phasesH"></h2>
+    <p class="lead" data-i18n="phasesLead"></p>
+    <h3 class="vs-h" data-i18n="vsH"></h3>
+    <div class="cols vs">
+      <div class="box">
+        <h3><i class="ti ti-message-circle"></i> <span data-i18n="chatH"></span></h3>
+        <ul id="chatL"></ul>
+      </div>
+      <div class="box api">
+        <h3><i class="ti ti-key"></i> <span data-i18n="apiH"></span></h3>
+        <ul id="apiL"></ul>
+      </div>
+    </div>
+    <p class="phases-note vs-note" data-i18n="vsNote"></p>
+    <div class="legend" id="legend"></div>
+    <div class="phases-wrap"><div class="phases" id="phases"></div></div>
+    <p class="phases-note" data-i18n="phasesNote"></p>
+  </section>
+
+  <section id="clave"><div class="kx" id="kx"></div></section>
+
+  <section id="galeria">
+    <div class="gal">
+      <h2 data-i18n="galH"></h2>
+      <p data-i18n="galP"></p>
+      <a class="btn" id="galBtn" target="_blank" rel="noopener"><i class="ti ti-layout-grid"></i> <span data-i18n="galBtn"></span></a>
+    </div>
+  </section>
+
+  <section id="grabaciones">
+    <h2 data-i18n="recH"></h2>
+    <p class="lead" data-i18n="recLead"></p>
+    <div class="recs" id="recs"></div>
+  </section>
+
+  <section id="normas">
+    <h2 data-i18n="rulesH"></h2>
+    <p class="lead" data-i18n="rulesLead"></p>
+    <div class="cols">
+      <div class="box">
+        <h3><i class="ti ti-shield-lock"></i> <span data-i18n="privH"></span></h3>
+        <ul id="priv"></ul>
+      </div>
+      <div class="box">
+        <h3><i class="ti ti-checklist"></i> <span data-i18n="ethH"></span></h3>
+        <ul id="eth"></ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p data-i18n="footOrg"></p>
+  <p><span data-i18n="footCourse"></span> Fernando Borrás Rocher · <a href="https://orcid.org/0000-0002-5519-4573" target="_blank" rel="noopener">ORCID 0000-0002-5519-4573</a> · <a href="https://github.com/fborrasumh/pdi_ia2027" target="_blank" rel="noopener">GitHub</a> · <span data-i18n="footLic"></span></p>
+</footer>
+
+<script>
+/* ============ ENLACES PENDIENTES: pega aquí las URL ============
+   Un enlace vacío ("") se muestra como «Enlace próximamente».      */
+const LINKS = {
+  slides: {
+    1: "https://fborrasumh.github.io/investigadoria/sesion1/", // presentación de ProfesorIA
+    2: "",   // Presentación de la sesión 2 (Google Slides)
+    3: "",   // Presentación de la sesión 3 (Google Slides)
+    4: ""    // Presentación de la sesión 4 (Google Slides)
+  },
+  cuentas: "",   // Guía «Preparación de cuentas» (PDF): sesiones 1 y 4
+  form: "",      // Formulario de alta en la galería (Google Forms): sesión 4
+  galeria: "",   // Galería de apps del profesorado (si está vacío, abre el catálogo)
+  grabaciones: { 1: "", 2: "", 3: "", 4: "" }
+};
+const CATALOGO = "https://fborrasumh.github.io/ia/";
+const START_UTC = "2026-11-30T16:00:00Z"; // 17:00 en España (CET)
+
+/* APPS DEL CURSO: cada ficha enlaza a https://fborrasumh.github.io/<id>/ */
+const APPS = [
+  {id:"sillabusAI", name:"SyllabusAI", ses:2, icon:"ti-building-monument"},
+  {id:"examforge", name:"ExamForge", ses:2, icon:"ti-pencil"},
+  {id:"anticonvocatoria", name:"AntiConvocatorIA", ses:2, icon:"ti-dice-5"},
+  {id:"criteria", name:"CriterIA", ses:2, icon:"ti-scale"},
+  {id:"TFG_evaluator", name:"TFG Evaluator", ses:2, icon:"ti-clipboard-check"},
+  {id:"doctoralia", name:"Doctoralia", ses:3, icon:"ti-microscope"},
+  {id:"humanitas", name:"Humanitas", ses:3, icon:"ti-books"},
+  {id:"cuadernia", name:"CuadernIA", ses:3, icon:"ti-notebook"},
+  {id:"narrativia", name:"NarrativIA", ses:3, icon:"ti-file-text"},
+  {id:"refinia", name:"RefinIA", ses:3, icon:"ti-zoom-check"},
+  {id:"revistafit", name:"RevistaFit", ses:3, icon:"ti-target-arrow"},
+  {id:"forja_ai", name:"ForjaIA", ses:4, icon:"ti-flame"}
+];
+/* APPS OPCIONALES POR SESIÓN */
+const OPT = {
+  2: [["aulia","AulIA"], ["corrigia","CorrigIA"], ["justitia","JustitIA"]],
+  3: [["prismia","PRISMIA"], ["publication_radar","Publication Radar"], ["grantwriter","GrantWriter"]],
+  4: [["tutoria","TutorIA"], ["claria","ClarIA"], ["generator","Generator"]]
+};
+/* COMPLEMENTARIAS DEL CATÁLOGO (solo en la franja de fases) */
+const COMP = {"pericia":"Pericia", "casopracticoAI":"CasoPrácticoAI", "evaluador_oral":"Evaluador Oral", "desafia":"DesafIA", "cribia":"CribIA", "mentoria":"MentorIA", "meritoria":"MeritorIA", "Estudia":"EstudIA"};
+const PHASES = [
+  ["sillabusAI","aulia","generator","pericia","casopracticoAI"],
+  ["examforge","anticonvocatoria","TFG_evaluator","corrigia","justitia","evaluador_oral"],
+  ["criteria","desafia","cribia","mentoria"],
+  ["doctoralia","humanitas","prismia","publication_radar"],
+  ["cuadernia","narrativia","refinia"],
+  ["revistafit","grantwriter","meritoria"],
+  ["forja_ai","tutoria","claria","Estudia"]
+];
+const SES_COLOR = { 1:"--text", 2:"--s2", 3:"--s3", 4:"--s4" };
+const LANGS = ["es","en","pt"];
+const R = {
+ "es": {
+  "short": {
+   "sillabusAI": "Guía docente con horas, alineamiento y bibliografía comprobados",
+   "aulia": "Sesión completa: diapositivas, cuestionarios y proyecto con rúbrica",
+   "pericia": "Curso completo: índice, contenido, evaluación y proyectos",
+   "generator": "Asignatura completa a partir de tus materiales",
+   "casopracticoAI": "Casos, role-plays, debates y análisis críticos",
+   "nanoclase": "Mejora un material y saca vídeo, PowerPoint y preguntas GIFT",
+   "claria": "Tus apuntes en página interactiva y vídeo, con citas comprobadas",
+   "tuitia": "Tuits verificados que refuerzan el guion de tu clase",
+   "escenia": "Charlas por beats con cada cita y cifra comprobada",
+   "relatoria": "De la grabación de clase al cuaderno docente y los apuntes",
+   "poliglotia": "Traduce un PDF y lo convierte en presentación locutada",
+   "tutoria": "Tutor socrático sobre tu propia lección",
+   "forja_ai": "Tu propia app docente de un solo fichero, sin programar",
+   "mentoria": "Tutor de TFG y TFM que acompaña pero no escribe",
+   "Estudia": "Tutor sobre los apuntes del estudiante, con citas comprobadas",
+   "examforge": "Un test distinto por estudiante, con corrección por escáner",
+   "corrigia": "Corrección de exámenes manuscritos con tu baremo",
+   "anticonvocatoria": "Examen imprevisible a partir de los resultados de aprendizaje",
+   "TFG_evaluator": "TFG y TFM con tu rúbrica y tres evaluadores de IA",
+   "evaluador_oral": "Evaluación estructurada de exposiciones orales",
+   "justitia": "Aprende tu criterio, mide el acuerdo y audita la equidad",
+   "desafia": "Evaluador con rúbrica para iterar con IA de forma transparente",
+   "cribia": "Detector de IA con tasa de falsos positivos controlada",
+   "criteria": "Uso de IA con criterio y declaración para el trabajo",
+   "publication_radar": "Revistas que publican tu tema y sus artículos nuevos",
+   "doctoralia": "Estado del arte con citas verificadas y PRISMA",
+   "grantwriter": "Memoria para convocatorias de I+D+i",
+   "revistafit": "Elegir revista con evidencia y carta de presentación",
+   "meritoria": "Memoria de aportaciones para el sexenio",
+   "acreditia": "Autoinforme del título y plan de mejora",
+   "acta_ai": "Actas de reuniones a partir de notas o audio"
+  },
+  "apps": {
+   "sillabusAI": {
+    "what": "Genera la guía docente, el sílabo o el programa según el país (España, Portugal, México, Brasil, Argentina, Colombia, Chile, Perú) o en modo genérico, con créditos, escala de calificación, recuperación y asistencia.",
+    "chk": "El código comprueba el alineamiento entre resultados, actividades y evaluación, las horas, los códigos oficiales y la bibliografía en OpenAlex y Crossref."
+   },
+   "examforge": {
+    "what": "Genera a partir del material de la asignatura un examen tipo test distinto para cada estudiante, imprime hojas de respuesta con casillas y corrige los escaneos en el navegador.",
+    "chk": "Cada respuesta correcta se apoya en una cita literal del material comprobada por código, y se equilibran las letras correctas entre modelos."
+   },
+   "forja_ai": {
+    "what": "Convierte la idea de una tarea docente (tutor, caso simulado, cuestionario, tarjetas o método Feynman) en una app web de un solo fichero, lista para publicar en GitHub Pages con DOI de Zenodo, sin programar.",
+    "chk": "Las advertencias del docente que la IA no recoge se añaden por código al encargo y la app se prueba dentro de ForjaIA antes de publicarla; sus respuestas las revisa el profesor."
+   }
+  },
+  "navApps": "Apps",
+  "navKey": "Clave de IA",
+  "navRules": "Normas de uso",
+  "checks": "Qué se comprueba",
+  "open": "Abrir app",
+  "session": "Sesión",
+  "chatH": "Chatbot con suscripción mensual (ChatGPT, Gemini, Claude)",
+  "chat": [
+   "Cuota fija al mes por cada proveedor, la uses mucho o poco.",
+   "Un proveedor por suscripción: comparar o combinar modelos exige pagar varias.",
+   "Conversación abierta: la calidad depende de cómo preguntes y el resultado cambia de una vez a otra.",
+   "Las citas, cifras y respuestas correctas que devuelve las tienes que comprobar tú a mano.",
+   "Las tareas largas (una guía docente, una sesión completa, un lote de exámenes) se hacen pregunta a pregunta, copiando y pegando.",
+   "En los planes de consumo, las conversaciones pueden usarse para entrenar modelos según la configuración de tu cuenta."
+  ],
+  "apiH": "Clave de API en estas apps",
+  "api": [
+   "Pagas solo lo que usas, por tokens: la mayoría de tareas cuestan céntimos, con un límite de gasto que fijas tú.",
+   "Eliges proveedor y modelo en cada tarea: OpenAI, Gemini o Claude.",
+   "Flujo fijo y reproducible: los mismos pasos, las mismas instrucciones y el modelo que elegiste quedan registrados.",
+   "La IA propone y el código comprueba: citas de tu material, respuestas correctas, horas, pesos de la rúbrica y notas calculadas.",
+   "Equipos de agentes trabajan en paralelo (siete en AulIA, un equipo completo en AcreditIA) y entregan documentos completos.",
+   "Por API los datos no se usan para entrenar por defecto, y la clave se guarda solo en tu navegador."
+  ],
+  "vsH": "¿Por qué usar tu clave de API y no el chatbot con suscripción mensual?",
+  "vsNote": "Son complementarios: el chatbot va bien para explorar y conversar; las apps con clave, para producir entregables verificables. La suscripción al chatbot no incluye el uso de la API, que se factura aparte en la plataforma de desarrolladores de cada proveedor.",
+  "rulesH": "Normas de uso",
+  "rulesLead": "Se aplican en todas las sesiones y en todas las apps.",
+  "privH": "Protección de datos",
+  "priv": [
+   "Solo datos anonimizados: nunca nombres, DNI, NIA ni notas de estudiantes identificables.",
+   "Quita o anonimiza la cabecera de exámenes y trabajos antes de subirlos.",
+   "Anonimiza antes de enviar: el texto y los documentos viajan al proveedor de IA.",
+   "Usa materiales propios o que tengas derecho a usar en tu docencia.",
+   "Cada participante usa su propia clave, guardada solo en su navegador."
+  ],
+  "ethH": "Uso responsable",
+  "eth": [
+   "Revisa todo lo que propone la IA antes de compartirlo con tus estudiantes: la responsabilidad es tuya.",
+   "La nota siempre la firma el profesor: la IA propone y el profesor decide.",
+   "Informa a tus estudiantes de cuándo y cómo usas IA en la docencia y en la evaluación.",
+   "Ninguna referencia entra sin verificar: las apps marcan las que no encuentran.",
+   "Las valoraciones simuladas (MeritorIA, AcreditIA) orientan, pero no predicen la evaluación real."
+  ],
+  "footDev": "Desarrollo:",
+  "footLic": "Licencia MIT",
+  "legSes": "Sesión",
+  "legComp": "Complementaria",
+  "tagComp": "+",
+  "thSes": "Sesión",
+  "thOut": "Entregable"
+ },
+ "en": {
+  "short": {
+   "sillabusAI": "Course guide with checked hours, alignment and bibliography",
+   "aulia": "Full session: slides, quizzes and a project with a rubric",
+   "pericia": "Full course: outline, content, assessment and projects",
+   "generator": "A complete subject built from your materials",
+   "casopracticoAI": "Cases, role-plays, debates and critical analyses",
+   "nanoclase": "Improve a material and get video, PowerPoint and GIFT questions",
+   "claria": "Your notes as an interactive page and video, with checked quotes",
+   "tuitia": "Verified tweets that reinforce your lecture script",
+   "escenia": "Beat-by-beat talks with every quote and figure checked",
+   "relatoria": "From a class recording to teaching notebook and study notes",
+   "poliglotia": "Translate a PDF and turn it into a narrated presentation",
+   "tutoria": "Socratic tutor built on your own lesson",
+   "forja_ai": "Your own single-file teaching app, no coding",
+   "mentoria": "Thesis tutor that guides but never writes",
+   "Estudia": "Tutor on the student's own notes, with checked quotes",
+   "examforge": "A different test per student, with scanner marking",
+   "corrigia": "Marking of handwritten exams with your scheme",
+   "anticonvocatoria": "Unpredictable exam drawn from the learning outcomes",
+   "TFG_evaluator": "Final projects with your rubric and three AI assessors",
+   "evaluador_oral": "Structured assessment of oral presentations",
+   "justitia": "Learns your criterion, measures agreement and audits fairness",
+   "desafia": "Rubric-based assessor for transparent iteration with AI",
+   "cribia": "AI detector with a controlled false-positive rate",
+   "criteria": "Thoughtful AI use and a declaration for the assignment",
+   "publication_radar": "Journals that publish on your topic and their new articles",
+   "doctoralia": "State of the art with verified citations and PRISMA",
+   "grantwriter": "Proposals for R&D calls",
+   "revistafit": "Evidence-based journal choice and cover letter",
+   "meritoria": "Research assessment dossier for the sexenio",
+   "acreditia": "Degree self-assessment report and improvement plan",
+   "acta_ai": "Meeting minutes from notes or audio"
+  },
+  "apps": {
+   "sillabusAI": {
+    "what": "Generates the course guide, syllabus or programme for each country (Spain, Portugal, Mexico, Brazil, Argentina, Colombia, Chile, Peru) or in generic mode, with credits, grading scale, resits and attendance.",
+    "chk": "The code checks the alignment between outcomes, activities and assessment, the hours, the official codes and the bibliography in OpenAlex and Crossref."
+   },
+   "examforge": {
+    "what": "Generates from the course material a different multiple-choice exam for each student, prints answer sheets with boxes and marks the scans in the browser.",
+    "chk": "Every correct answer rests on a literal quote from the material checked by code, and correct letters are balanced across versions."
+   },
+   "forja_ai": {
+    "what": "Turns the idea for a teaching task (tutor, simulated case, quiz, flashcards or Feynman method) into a single-file web app, ready to publish on GitHub Pages with a Zenodo DOI, with no coding.",
+    "chk": "The lecturer's warnings that the AI misses are added to the brief by code, and the app is tested inside ForjaIA before publishing; the lecturer reviews its answers."
+   }
+  },
+  "navApps": "Apps",
+  "navKey": "AI key",
+  "navRules": "Rules of use",
+  "checks": "What is checked",
+  "open": "Open app",
+  "session": "Session",
+  "chatH": "Chatbot with a monthly subscription (ChatGPT, Gemini, Claude)",
+  "chat": [
+   "Fixed monthly fee per provider, whether you use it a lot or a little.",
+   "One provider per subscription: comparing or combining models means paying for several.",
+   "Open conversation: quality depends on how you ask and results vary from one time to the next.",
+   "You have to check the quotes, figures and correct answers it returns by hand.",
+   "Long tasks (a course guide, a full session, a batch of exams) are done question by question, copying and pasting.",
+   "On consumer plans, conversations may be used to train models depending on your account settings."
+  ],
+  "apiH": "API key in these apps",
+  "api": [
+   "You pay only for what you use, per token: most tasks cost cents, with a spending limit you set.",
+   "You choose provider and model for each task: OpenAI, Gemini or Claude.",
+   "Fixed, reproducible workflow: the same steps, the same instructions and the model you chose are recorded.",
+   "The AI proposes and the code checks: quotes from your material, correct answers, hours, rubric weights and computed grades.",
+   "Teams of agents work in parallel (seven in AulIA, a full team in AcreditIA) and deliver complete documents.",
+   "Via the API, data is not used for training by default, and the key is stored only in your browser."
+  ],
+  "vsH": "Why use your API key rather than a monthly chatbot subscription?",
+  "vsNote": "They are complementary: the chatbot is good for exploring and conversing; the apps with a key, for producing verifiable deliverables. A chatbot subscription does not include API usage, which is billed separately on each provider's developer platform.",
+  "rulesH": "Rules of use",
+  "rulesLead": "They apply in every session and every app.",
+  "privH": "Data protection",
+  "priv": [
+   "Anonymised data only: never names, ID numbers, student numbers or grades of identifiable students.",
+   "Remove or anonymise the header of exams and assignments before uploading them.",
+   "Anonymise before sending: text and documents travel to the AI provider.",
+   "Use your own materials or materials you are entitled to use in your teaching.",
+   "Each participant uses their own key, stored only in their browser."
+  ],
+  "ethH": "Responsible use",
+  "eth": [
+   "Review everything the AI proposes before sharing it with your students: the responsibility is yours.",
+   "The grade is always signed by the lecturer: the AI proposes and the lecturer decides.",
+   "Tell your students when and how you use AI in teaching and assessment.",
+   "No reference goes in unverified: the apps flag those they cannot find.",
+   "Simulated assessments (MeritorIA, AcreditIA) give guidance but do not predict the real evaluation."
+  ],
+  "footDev": "Developed by",
+  "footLic": "MIT licence",
+  "legSes": "Session",
+  "legComp": "Complementary",
+  "tagComp": "+",
+  "thSes": "Session",
+  "thOut": "Deliverable"
+ },
+ "pt": {
+  "short": {
+   "sillabusAI": "Guia da unidade curricular com horas, alinhamento e bibliografia verificados",
+   "aulia": "Sessão completa: diapositivos, questionários e projeto com rubrica",
+   "pericia": "Curso completo: índice, conteúdo, avaliação e projetos",
+   "generator": "Unidade curricular completa a partir dos teus materiais",
+   "casopracticoAI": "Casos, role-plays, debates e análises críticas",
+   "nanoclase": "Melhora um material e gera vídeo, PowerPoint e perguntas GIFT",
+   "claria": "Os teus apontamentos em página interativa e vídeo, com citações verificadas",
+   "tuitia": "Tuítes verificados que reforçam o guião da tua aula",
+   "escenia": "Palestras por beats com cada citação e número verificados",
+   "relatoria": "Da gravação da aula ao caderno docente e aos apontamentos",
+   "poliglotia": "Traduz um PDF e converte-o numa apresentação narrada",
+   "tutoria": "Tutor socrático sobre a tua própria lição",
+   "forja_ai": "A tua própria app docente num só ficheiro, sem programar",
+   "mentoria": "Tutor de TFC e dissertação que acompanha mas não escreve",
+   "Estudia": "Tutor sobre os apontamentos do estudante, com citações verificadas",
+   "examforge": "Um teste diferente por estudante, com correção por scanner",
+   "corrigia": "Correção de exames manuscritos com os teus critérios",
+   "anticonvocatoria": "Exame imprevisível a partir dos resultados de aprendizagem",
+   "TFG_evaluator": "Trabalhos finais com a tua rubrica e três avaliadores de IA",
+   "evaluador_oral": "Avaliação estruturada de apresentações orais",
+   "justitia": "Aprende o teu critério, mede a concordância e audita a equidade",
+   "desafia": "Avaliador com rubrica para iterar com IA de forma transparente",
+   "cribia": "Detetor de IA com taxa de falsos positivos controlada",
+   "criteria": "Uso de IA com critério e declaração para o trabalho",
+   "publication_radar": "Revistas que publicam o teu tema e os seus artigos novos",
+   "doctoralia": "Estado da arte com citações verificadas e PRISMA",
+   "grantwriter": "Candidaturas a concursos de I&D&I",
+   "revistafit": "Escolher revista com evidência e carta de apresentação",
+   "meritoria": "Memória de contributos para o sexénio",
+   "acreditia": "Relatório de autoavaliação do curso e plano de melhoria",
+   "acta_ai": "Atas de reuniões a partir de notas ou áudio"
+  },
+  "apps": {
+   "sillabusAI": {
+    "what": "Gera o guia da unidade curricular, o sílabo ou o plano de ensino segundo o país (Espanha, Portugal, México, Brasil, Argentina, Colômbia, Chile, Peru) ou em modo genérico, com créditos, escala de classificação, recurso e assiduidade.",
+    "chk": "O código verifica o alinhamento entre resultados, atividades e avaliação, as horas, os códigos oficiais e a bibliografia no OpenAlex e no Crossref."
+   },
+   "examforge": {
+    "what": "Gera a partir do material da unidade curricular um exame de escolha múltipla diferente para cada estudante, imprime folhas de resposta com quadrículas e corrige as digitalizações no navegador.",
+    "chk": "Cada resposta correta apoia-se numa citação literal do material verificada por código, e as letras corretas são equilibradas entre versões."
+   },
+   "forja_ai": {
+    "what": "Converte a ideia de uma tarefa docente (tutor, caso simulado, questionário, cartões ou método Feynman) numa app web num só ficheiro, pronta a publicar no GitHub Pages com DOI do Zenodo, sem programar.",
+    "chk": "Os avisos do docente que a IA não recolhe são acrescentados por código ao pedido e a app é testada dentro do ForjaIA antes de ser publicada; as respostas revê-as o professor."
+   }
+  },
+  "navApps": "Apps",
+  "navKey": "Chave de IA",
+  "navRules": "Normas de utilização",
+  "checks": "O que se verifica",
+  "open": "Abrir app",
+  "session": "Sessão",
+  "chatH": "Chatbot com subscrição mensal (ChatGPT, Gemini, Claude)",
+  "chat": [
+   "Mensalidade fixa por cada fornecedor, quer o uses muito ou pouco.",
+   "Um fornecedor por subscrição: comparar ou combinar modelos obriga a pagar várias.",
+   "Conversa aberta: a qualidade depende de como perguntas e o resultado muda de uma vez para outra.",
+   "As citações, números e respostas corretas que devolve tens de os verificar tu à mão.",
+   "As tarefas longas (um guia, uma sessão completa, um lote de exames) fazem-se pergunta a pergunta, copiando e colando.",
+   "Nos planos de consumo, as conversas podem ser usadas para treinar modelos conforme a configuração da tua conta."
+  ],
+  "apiH": "Chave de API nestas apps",
+  "api": [
+   "Pagas só o que usas, por tokens: a maioria das tarefas custa cêntimos, com um limite de gastos que defines tu.",
+   "Escolhes fornecedor e modelo em cada tarefa: OpenAI, Gemini ou Claude.",
+   "Fluxo fixo e reprodutível: os mesmos passos, as mesmas instruções e o modelo que escolheste ficam registados.",
+   "A IA propõe e o código verifica: citações do teu material, respostas corretas, horas, pesos da rubrica e notas calculadas.",
+   "Equipas de agentes trabalham em paralelo (sete no AulIA, uma equipa completa no AcreditIA) e entregam documentos completos.",
+   "Por API os dados não são usados para treino por defeito, e a chave é guardada apenas no teu navegador."
+  ],
+  "vsH": "Porquê usar a tua chave de API e não o chatbot com subscrição mensal?",
+  "vsNote": "São complementares: o chatbot serve para explorar e conversar; as apps com chave, para produzir resultados verificáveis. A subscrição do chatbot não inclui o uso da API, que é faturado à parte na plataforma de programadores de cada fornecedor.",
+  "rulesH": "Normas de utilização",
+  "rulesLead": "Aplicam-se em todas as sessões e em todas as apps.",
+  "privH": "Proteção de dados",
+  "priv": [
+   "Apenas dados anonimizados: nunca nomes, números de identificação, números de estudante ou notas de estudantes identificáveis.",
+   "Retira ou anonimiza o cabeçalho de exames e trabalhos antes de os carregar.",
+   "Anonimiza antes de enviar: o texto e os documentos viajam até ao fornecedor de IA.",
+   "Usa materiais próprios ou que tenhas direito a usar na tua docência.",
+   "Cada participante usa a sua própria chave, guardada apenas no seu navegador."
+  ],
+  "ethH": "Uso responsável",
+  "eth": [
+   "Revê tudo o que a IA propõe antes de o partilhar com os teus estudantes: a responsabilidade é tua.",
+   "A nota é sempre assinada pelo professor: a IA propõe e o professor decide.",
+   "Informa os teus estudantes de quando e como usas IA na docência e na avaliação.",
+   "Nenhuma referência entra sem verificação: as apps assinalam as que não encontram.",
+   "As apreciações simuladas (MeritorIA, AcreditIA) orientam, mas não preveem a avaliação real."
+  ],
+  "footDev": "Desenvolvimento:",
+  "footLic": "Licença MIT",
+  "legSes": "Sessão",
+  "legComp": "Complementar",
+  "tagComp": "+",
+  "thSes": "Sessão",
+  "thOut": "Resultado"
+ }
+};
+/* Textos propios de pdi_ia2027. Se fusionan con los textos reutilizados de ProfesorIA (R). */
+const NEW = {
+ "es": {
+  "title": "Del prompt al DOI · Herramientas para enseñar e investigar",
+  "eyebrow": "Study Abroad · Universidad Miguel Hernández",
+  "h1": "Del <span>prompt</span> al DOI",
+  "sub": "El profesor universitario potenciado por IA: aplicaciones listas para usar en docencia e investigación y, al final del curso, tu propia app publicada y citable.",
+  "meta": ["10 horas · 4 sesiones de 2,5 h", "1 crédito ECTS", "30 nov – 21 dic 2026", "Online en directo", "Profesorado iberoamericano"],
+  "stApps": "apps del curso", "stOpt": "opcionales", "stSes": "sesiones en directo", "stHours": "de formación", "stDoi": "app propia con DOI",
+  "navCal": "Calendario", "navPhases": "Fases", "navCourse": "Programa", "navGal": "Galería",
+  "introH": "Sobre el curso",
+  "intro": ["Curso de la <b>Universidad Miguel Hernández de Elche (UMH)</b>, dentro del programa <b>Study Abroad</b>, dirigido a profesorado de universidades iberoamericanas. Recorre el camino completo: de escribir un buen <i>prompt</i> a usar aplicaciones de IA en la docencia y la investigación, hasta crear y publicar tu propia herramienta con un DOI.", "No hace falta saber programar. Todas las aplicaciones funcionan en el navegador con tu propia clave de API de OpenAI, Google Gemini o Anthropic Claude, que dejaremos lista en la primera sesión."],
+  "objH": "Objetivos del curso",
+  "obj": [["Fundamentos", "Entender cómo funcionan los modelos de lenguaje, sus límites y su uso responsable, y dejar lista tu clave de API."], ["Enseñar con IA", "Diseñar guías docentes, generar y auditar exámenes, evaluar TFG y formar al estudiantado en el uso de la IA."], ["Investigar con IA", "Revisar la literatura, analizar datos, redactar resultados, verificar manuscritos y elegir revista."], ["Crear tu app", "Construir tu propia herramienta con ForjaIA, publicarla en GitHub Pages y hacerla citable con un DOI."]],
+  "calH": "Sesiones y horarios",
+  "calLead": "Cuatro lunes en directo. Cada sesión dura dos horas y media.",
+  "thDate": "Fecha", "thHour": "Hora (España)",
+  "tzMine": "En tu zona horaria ({tz}) las sesiones empiezan a las {h}.",
+  "tzNote": "Hora de inicio en cada país.",
+  "dates": ["Lunes 30/11/2026", "Lunes 07/12/2026", "Lunes 14/12/2026", "Lunes 21/12/2026"],
+  "tz": [["México (CDMX)", "10:00"], ["Centroamérica", "10:00"], ["Colombia · Perú · Ecuador", "11:00"], ["Cuba · Panamá", "11:00"], ["Venezuela · Bolivia", "12:00"], ["Rep. Dominicana · P. Rico", "12:00"], ["Chile · Paraguay", "13:00"], ["Argentina · Uruguay", "13:00"], ["Brasil (Brasilia)", "13:00"], ["Portugal", "16:00"]],
+  "phasesH": "Las apps en cada fase del trabajo académico",
+  "phasesLead": "Las doce apps del curso, las nueve opcionales y otras complementarias del catálogo, ordenadas por la fase del trabajo de enseñar e investigar en que se usan.",
+  "phasesNote": "Las opcionales amplían cada sesión si te sobra tiempo o quieres seguir por tu cuenta; las complementarias no se trabajan en el curso. Revisa en cada una qué proveedor de IA admite. Los datos de estudiantes se anonimizan y la nota siempre la firma el profesor.",
+  "legOpt": "Opcional", "tagOpt": "opc.",
+  "phases": ["Diseñar la asignatura", "Evaluar", "Alfabetización e integridad", "Estado del arte", "Analizar y redactar", "Publicar y financiar", "Crear y acompañar"],
+  "short": {
+   "humanitas": "Revisiones en Sociales, Humanidades y Derecho con citas verificadas",
+   "cuadernia": "Del CSV o Excel a un cuaderno Jupyter de análisis estadístico",
+   "narrativia": "Del cuaderno ejecutado a la sección de Resultados, cifra a cifra",
+   "refinia": "Revisión del manuscrito con seis lentes y comentarios anclados",
+   "prismia": "Revisión sistemática con dos revisores de IA y un árbitro"
+  },
+  "appsH": "Las doce apps",
+  "appsLead": "Cada app funciona en el navegador, sin instalación ni servidor, con OpenAI, Google Gemini o Anthropic Claude. La IA propone y el código comprueba. Bajo cada sesión, las apps opcionales para ampliar.",
+  "optH": "Opcionales de la sesión",
+  "apps": {
+   "anticonvocatoria": {"what": "Analiza tus exámenes de convocatorias anteriores para medir cuánto podría predecirlos un estudiante, deriva la tabla de especificaciones de los resultados de aprendizaje y sortea un examen nuevo con control de dificultad y rotación.", "chk": "Un predictor adversario rechaza el sorteo si lo cubre por encima del umbral; el plan de muestreo se publica en una carta al estudiante."},
+   "criteria": {"what": "Alfabetización en IA para tu alumnado: cinco niveles de uso permitido con lo que cabe en cada uno, bitácora de uso y declaración de IA para el trabajo. Funciona sin clave.", "chk": "Comprueba en directo en Crossref si las referencias que da un modelo existen de verdad."},
+   "TFG_evaluator": {"what": "Evalúa TFG, TFM, TCC o tesinas con tu rúbrica y la norma de tu país: tres evaluadores de IA independientes, síntesis y comentario formativo.", "chk": "Cada valoración se apoya en evidencias verificadas en el texto del trabajo; una capa de calidad señala las discrepancias entre evaluadores."},
+   "doctoralia": {"what": "Revisión del estado del arte en Ciencias de la Salud, Ciencias e Ingeniería a partir de seis bases bibliográficas, con diagrama PRISMA.", "chk": "Cada cita queda anclada a un artículo real y se verifica en el navegador; una auditoría final marca las que no se encuentran."},
+   "humanitas": {"what": "La versión de Doctoralia para Ciencias Sociales, Humanidades y Derecho: revisa la literatura tratando monografías, capítulos y fuentes especializadas como tales.", "chk": "Cada cita queda anclada a una obra real y se verifica en el navegador antes de entrar en la revisión."},
+   "cuadernia": {"what": "A partir de un CSV o Excel y la descripción del estudio, perfila las variables, propone un plan de análisis editable y escribe un cuaderno Jupyter con estadística descriptiva, inferencial y modelos.", "chk": "El perfil de variables se calcula en el navegador y el código usa pandas, scipy y statsmodels; el cuaderno ejecutado es la entrada de NarrativIA."},
+   "narrativia": {"what": "Convierte un cuaderno Jupyter o Colab ya ejecutado en la sección de Resultados del manuscrito, con tablas, figuras y contrastes en su orden.", "chk": "Las tablas se construyen con los valores exactos del cuaderno y cada cifra del texto se audita contra sus salidas."},
+   "refinia": {"what": "Revisa tu manuscrito pasaje a pasaje con seis lentes en paralelo (datos, matemáticas, método y estadística, consistencia, referencias y argumentación) y prepara el borrador de la carta de respuesta.", "chk": "Cada comentario queda anclado a su cita exacta en el texto; se cruzan las secciones para detectar contradicciones y se descartan los hallazgos que no se sostienen."},
+   "revistafit": {"what": "Busca dónde se publica de verdad la literatura parecida a tu manuscrito, ordena las revistas candidatas según tus prioridades (ajuste temático, impacto, acceso abierto, coste) y redacta la carta de presentación.", "chk": "Las revistas y los artículos que justifican cada recomendación proceden de OpenAlex, no los inventa el modelo."}
+  },
+  "shared": "Cada participante trabaja sobre su propia asignatura y su propia línea de investigación. En la sesión 2, la guía docente de SyllabusAI orienta el examen de ExamForge y la auditoría de AntiConvocatorIA; en la sesión 3, el cuaderno de CuadernIA es la entrada de NarrativIA, y esos Resultados pasan por RefinIA antes de elegir revista con RevistaFit.",
+  "courseH": "Programa",
+  "courseLead": "Cuatro sesiones de 2,5 horas: fundamentos, docencia, investigación y tu propia app. En las sesiones 2 y 3 se trabaja cada app unos 30 minutos sobre tu propio material; las opcionales quedan para ampliar.",
+  "slides": "Presentación", "soon": "Enlace próximamente", "optLbl": "Opcionales",
+  "sessions": [
+   {"t": "Fundamentos", "a": "Presentación · Preparación de cuentas · Catálogo de herramientas", "d": "Qué es un modelo de lenguaje, cómo escribir buenos prompts y qué límites éticos y prácticos conviene conocer. Dejaremos lista la clave de API y las cuentas de GitHub y Zenodo.", "o": "Clave de API con límite de gasto, cuentas de GitHub y Zenodo creadas y ficha de tu asignatura y tu línea de investigación."},
+   {"t": "Del programa a la calificación", "a": "SyllabusAI · ExamForge · AntiConvocatorIA · CriterIA · TFG Evaluator", "d": "Cinco aplicaciones, unos treinta minutos cada una: de la guía docente al examen y a la evaluación del trabajo fin de grado, pasando por la alfabetización en IA del estudiantado.", "o": "Guía docente comprobada, examen tipo test con un modelo por estudiante, auditoría de previsibilidad de tus exámenes, guía de uso de IA para tu alumnado y un TFG evaluado con tu rúbrica."},
+   {"t": "De la pregunta al envío", "a": "Doctoralia / Humanitas · CuadernIA · NarrativIA · RefinIA · RevistaFit", "d": "El ciclo de un artículo con cinco aplicaciones: estado del arte, análisis de datos, redacción de resultados, revisión del manuscrito y elección de revista.", "o": "Estado del arte con citas verificadas, cuaderno de análisis ejecutado, sección de Resultados auditada, manuscrito revisado y revistas candidatas con su carta de presentación."},
+   {"t": "Forja tu propia aplicación", "a": "ForjaIA · GitHub Pages · Zenodo", "d": "Cada participante diseña su herramienta con ForjaIA, la publica en su GitHub Pages y la registra en Zenodo para obtener un DOI. Del prompt al DOI, literalmente.", "o": "Tu app docente o de investigación publicada en GitHub Pages, con DOI de Zenodo y dada de alta en la galería del profesorado."}
+  ],
+  "lnk": {"slides1": "Herramientas IA para la academia", "cuentas": "Preparación de cuentas (OpenAI, GitHub y Zenodo)", "catalogo": "Catálogo de herramientas con sus DOI", "cuentas4": "Repasa GitHub y Zenodo antes de publicar", "form": "Envía tu app a la galería"},
+  "galH": "Galería de apps del profesorado",
+  "galP": "Las aplicaciones que cree cada participante en la sesión 4 se publican en su propio GitHub Pages y se reúnen en un apartado común del catálogo Herramientas IA para la academia.",
+  "galBtn": "Ver la galería",
+  "recH": "Grabaciones de las sesiones",
+  "recLead": "El enlace a cada grabación se añade al terminar la sesión.",
+  "recSoon": "Disponible tras la sesión",
+  "api4": "Equipos de agentes trabajan en paralelo (tres evaluadores en TFG Evaluator, seis lentes en RefinIA) y entregan documentos completos.",
+  "eth4": "Los informes simulados (TFG Evaluator, RefinIA, RevistaFit) orientan, pero no sustituyen a la evaluación ni a la revisión por pares reales.",
+  "footOrg": "Study Abroad · Vicerrectorado de Relaciones Internacionales · Universidad Miguel Hernández de Elche",
+  "footCourse": "Del prompt al DOI: herramientas para enseñar e investigar · Dirección académica:"
+ },
+ "en": {
+  "title": "From prompt to DOI · Tools for teaching and research",
+  "eyebrow": "Study Abroad · Universidad Miguel Hernández",
+  "h1": "From <span>prompt</span> to DOI",
+  "sub": "The AI-enhanced university lecturer: ready-to-use apps for teaching and research and, by the end of the course, your own published, citable app.",
+  "meta": ["10 hours · 4 sessions of 2.5 h", "1 ECTS credit", "30 Nov – 21 Dec 2026", "Live online", "Ibero-American faculty"],
+  "stApps": "course apps", "stOpt": "optional", "stSes": "live sessions", "stHours": "of training", "stDoi": "own app with DOI",
+  "navCal": "Calendar", "navPhases": "Phases", "navCourse": "Programme", "navGal": "Gallery",
+  "introH": "About the course",
+  "intro": ["A course by the <b>Universidad Miguel Hernández de Elche (UMH)</b>, part of the <b>Study Abroad</b> programme, for faculty at Ibero-American universities. It covers the whole path: from writing a good <i>prompt</i> to using AI apps in teaching and research, and finally building and publishing your own tool with a DOI.", "No coding is needed. Every app runs in the browser with your own API key from OpenAI, Google Gemini or Anthropic Claude, which we set up together in the first session."],
+  "objH": "Course objectives",
+  "obj": [["Foundations", "Understand how language models work, their limits and responsible use, and get your API key ready."], ["Teach with AI", "Design course guides, generate and audit exams, assess final projects and train students in AI use."], ["Research with AI", "Review the literature, analyse data, write results, check manuscripts and choose a journal."], ["Build your app", "Build your own tool with ForjaIA, publish it on GitHub Pages and make it citable with a DOI."]],
+  "calH": "Sessions and times",
+  "calLead": "Four live Mondays. Each session lasts two and a half hours.",
+  "thDate": "Date", "thHour": "Time (Spain)",
+  "tzMine": "In your time zone ({tz}) sessions start at {h}.",
+  "tzNote": "Start time in each country.",
+  "dates": ["Monday 30/11/2026", "Monday 07/12/2026", "Monday 14/12/2026", "Monday 21/12/2026"],
+  "tz": [["Mexico (CDMX)", "10:00"], ["Central America", "10:00"], ["Colombia · Peru · Ecuador", "11:00"], ["Cuba · Panama", "11:00"], ["Venezuela · Bolivia", "12:00"], ["Dominican Rep. · P. Rico", "12:00"], ["Chile · Paraguay", "13:00"], ["Argentina · Uruguay", "13:00"], ["Brazil (Brasília)", "13:00"], ["Portugal", "16:00"]],
+  "phasesH": "The apps at each stage of academic work",
+  "phasesLead": "The twelve course apps, the nine optional ones and other complementary apps from the catalogue, arranged by the stage of teaching and research in which they are used.",
+  "phasesNote": "Optional apps extend each session if you have time or want to continue on your own; complementary apps are not covered in the course. Check which AI provider each one supports. Student data is anonymised and the grade is always signed by the lecturer.",
+  "legOpt": "Optional", "tagOpt": "opt.",
+  "phases": ["Design the course", "Assess", "AI literacy and integrity", "State of the art", "Analyse and write", "Publish and fund", "Build and support"],
+  "short": {
+   "humanitas": "Social Sciences, Humanities and Law reviews with verified citations",
+   "cuadernia": "From CSV or Excel to a statistical analysis Jupyter notebook",
+   "narrativia": "From executed notebook to Results section, figure by figure",
+   "refinia": "Manuscript review through six lenses with anchored comments",
+   "prismia": "Systematic review with two AI reviewers and an arbitrator"
+  },
+  "appsH": "The twelve apps",
+  "appsLead": "Each app runs in the browser, with no installation or server, using OpenAI, Google Gemini or Anthropic Claude. The AI proposes and the code checks. Under each session, the optional apps to go further.",
+  "optH": "Optional apps for the session",
+  "apps": {
+   "anticonvocatoria": {"what": "Analyses your past exam papers to measure how predictable they are to students, derives a table of specifications from the learning outcomes and draws a new exam with difficulty control and rotation.", "chk": "An adversarial predictor rejects any draw it covers above the threshold; the sampling plan is published in a letter to students."},
+   "criteria": {"what": "AI literacy for your students: five levels of permitted use with what each allows, a usage log and the AI declaration for the assignment. Works without a key.", "chk": "Checks live in Crossref whether the references a model gives actually exist."},
+   "TFG_evaluator": {"what": "Assesses final projects and theses with your rubric and your country's rules: three independent AI assessors, a synthesis and formative feedback.", "chk": "Each rating rests on evidence verified in the text; a quality layer flags disagreements between assessors."},
+   "doctoralia": {"what": "State-of-the-art review in Health Sciences, Sciences and Engineering across six bibliographic databases, with a PRISMA diagram.", "chk": "Every citation is anchored to a real paper and verified in the browser; a final audit flags those that cannot be found."},
+   "humanitas": {"what": "The Doctoralia version for Social Sciences, Humanities and Law: it reviews the literature handling monographs, chapters and specialised sources as such.", "chk": "Every citation is anchored to a real work and verified in the browser before it enters the review."},
+   "cuadernia": {"what": "From a CSV or Excel file and a study description, it profiles the variables, proposes an editable analysis plan and writes a Jupyter notebook with descriptive and inferential statistics and models.", "chk": "Variables are profiled in the browser and the code uses pandas, scipy and statsmodels; the executed notebook feeds NarrativIA."},
+   "narrativia": {"what": "Turns an executed Jupyter or Colab notebook into the manuscript's Results section, with tables, figures and tests in order.", "chk": "Tables are built from the notebook's exact values and every number in the text is audited against its outputs."},
+   "refinia": {"what": "Reviews your manuscript passage by passage through six parallel lenses (data, mathematics, methods and statistics, consistency, references and argumentation) and drafts the response letter.", "chk": "Each comment is anchored to its exact quote; sections are cross-checked for contradictions and unsupported findings are filtered out."},
+   "revistafit": {"what": "Finds where literature similar to your manuscript is actually published, ranks candidate journals by your priorities (scope, impact, open access, cost) and drafts the cover letter.", "chk": "Journals and the articles behind each recommendation come from OpenAlex; the model does not invent them."}
+  },
+  "shared": "Each participant works on their own course and research line. In session 2, the SyllabusAI course guide steers the ExamForge exam and the AntiConvocatorIA audit; in session 3, the CuadernIA notebook feeds NarrativIA, and those Results go through RefinIA before choosing a journal with RevistaFit.",
+  "courseH": "Programme",
+  "courseLead": "Four 2.5-hour sessions: foundations, teaching, research and your own app. In sessions 2 and 3 each app takes about 30 minutes on your own material; optional apps are for going further.",
+  "slides": "Slides (in Spanish)", "soon": "Link coming soon", "optLbl": "Optional",
+  "sessions": [
+   {"t": "Foundations", "a": "Slides · Account setup · Tool catalogue", "d": "What a language model is, how to write good prompts and which ethical and practical limits to keep in mind. We set up the API key and the GitHub and Zenodo accounts.", "o": "API key with a spending limit, GitHub and Zenodo accounts created and a profile of your course and research line."},
+   {"t": "From syllabus to grade", "a": "SyllabusAI · ExamForge · AntiConvocatorIA · CriterIA · TFG Evaluator", "d": "Five apps, about thirty minutes each: from the course guide to the exam and the assessment of final projects, including students' AI literacy.", "o": "Checked course guide, a multiple-choice exam with one version per student, a predictability audit of your exams, an AI-use guide for your students and a final project assessed with your rubric."},
+   {"t": "From question to submission", "a": "Doctoralia / Humanitas · CuadernIA · NarrativIA · RefinIA · RevistaFit", "d": "The life cycle of a paper with five apps: state of the art, data analysis, writing results, manuscript review and journal choice.", "o": "State of the art with verified citations, an executed analysis notebook, an audited Results section, a reviewed manuscript and candidate journals with a cover letter."},
+   {"t": "Build your own app", "a": "ForjaIA · GitHub Pages · Zenodo", "d": "Each participant designs a tool with ForjaIA, publishes it on GitHub Pages and registers it in Zenodo to obtain a DOI. From prompt to DOI, literally.", "o": "Your teaching or research app published on GitHub Pages, with a Zenodo DOI and listed in the faculty gallery."}
+  ],
+  "lnk": {"slides1": "AI tools for academia", "cuentas": "Account setup (OpenAI, GitHub and Zenodo)", "catalogo": "Tool catalogue with DOIs", "cuentas4": "Review GitHub and Zenodo before publishing", "form": "Submit your app to the gallery"},
+  "galH": "Faculty app gallery",
+  "galP": "The apps each participant builds in session 4 are published on their own GitHub Pages and gathered in a shared section of the AI tools for academia catalogue.",
+  "galBtn": "View the gallery",
+  "recH": "Session recordings",
+  "recLead": "The link to each recording is added after the session.",
+  "recSoon": "Available after the session",
+  "api4": "Teams of agents work in parallel (three assessors in TFG Evaluator, six lenses in RefinIA) and deliver complete documents.",
+  "eth4": "Simulated reports (TFG Evaluator, RefinIA, RevistaFit) give guidance but do not replace real assessment or peer review.",
+  "footOrg": "Study Abroad · Vice-Rectorate for International Relations · Universidad Miguel Hernández de Elche",
+  "footCourse": "From prompt to DOI: tools for teaching and research · Academic director:"
+ },
+ "pt": {
+  "title": "Do prompt ao DOI · Ferramentas para ensinar e investigar",
+  "eyebrow": "Study Abroad · Universidad Miguel Hernández",
+  "h1": "Do <span>prompt</span> ao DOI",
+  "sub": "O professor universitário potenciado pela IA: aplicações prontas a usar na docência e na investigação e, no fim do curso, a tua própria app publicada e citável.",
+  "meta": ["10 horas · 4 sessões de 2,5 h", "1 crédito ECTS", "30 nov – 21 dez 2026", "Online ao vivo", "Professorado ibero-americano"],
+  "stApps": "apps do curso", "stOpt": "opcionais", "stSes": "sessões ao vivo", "stHours": "de formação", "stDoi": "app própria com DOI",
+  "navCal": "Calendário", "navPhases": "Fases", "navCourse": "Programa", "navGal": "Galeria",
+  "introH": "Sobre o curso",
+  "intro": ["Curso da <b>Universidad Miguel Hernández de Elche (UMH)</b>, no programa <b>Study Abroad</b>, dirigido a professorado de universidades ibero-americanas. Percorre o caminho completo: de escrever um bom <i>prompt</i> a usar aplicações de IA na docência e na investigação, até criar e publicar a tua própria ferramenta com um DOI.", "Não é preciso saber programar. Todas as aplicações funcionam no navegador com a tua própria chave de API da OpenAI, Google Gemini ou Anthropic Claude, que deixaremos pronta na primeira sessão."],
+  "objH": "Objetivos do curso",
+  "obj": [["Fundamentos", "Perceber como funcionam os modelos de linguagem, os seus limites e o seu uso responsável, e deixar pronta a tua chave de API."], ["Ensinar com IA", "Desenhar guias docentes, gerar e auditar exames, avaliar trabalhos finais e formar os estudantes no uso da IA."], ["Investigar com IA", "Rever a literatura, analisar dados, redigir resultados, verificar manuscritos e escolher revista."], ["Criar a tua app", "Construir a tua própria ferramenta com o ForjaIA, publicá-la no GitHub Pages e torná-la citável com um DOI."]],
+  "calH": "Sessões e horários",
+  "calLead": "Quatro segundas-feiras ao vivo. Cada sessão dura duas horas e meia.",
+  "thDate": "Data", "thHour": "Hora (Espanha)",
+  "tzMine": "No teu fuso horário ({tz}) as sessões começam às {h}.",
+  "tzNote": "Hora de início em cada país.",
+  "dates": ["Segunda 30/11/2026", "Segunda 07/12/2026", "Segunda 14/12/2026", "Segunda 21/12/2026"],
+  "tz": [["México (CDMX)", "10:00"], ["América Central", "10:00"], ["Colômbia · Peru · Equador", "11:00"], ["Cuba · Panamá", "11:00"], ["Venezuela · Bolívia", "12:00"], ["Rep. Dominicana · P. Rico", "12:00"], ["Chile · Paraguai", "13:00"], ["Argentina · Uruguai", "13:00"], ["Brasil (Brasília)", "13:00"], ["Portugal", "16:00"]],
+  "phasesH": "As apps em cada fase do trabalho académico",
+  "phasesLead": "As doze apps do curso, as nove opcionais e outras complementares do catálogo, organizadas pela fase do trabalho de ensinar e investigar em que se usam.",
+  "phasesNote": "As opcionais ampliam cada sessão se te sobrar tempo ou quiseres continuar por tua conta; as complementares não se trabalham no curso. Verifica em cada uma que fornecedor de IA admite. Os dados dos estudantes são anonimizados e a nota é sempre assinada pelo professor.",
+  "legOpt": "Opcional", "tagOpt": "opc.",
+  "phases": ["Desenhar a unidade curricular", "Avaliar", "Literacia e integridade", "Estado da arte", "Analisar e redigir", "Publicar e financiar", "Criar e acompanhar"],
+  "short": {
+   "humanitas": "Revisões em Sociais, Humanidades e Direito com citações verificadas",
+   "cuadernia": "Do CSV ou Excel a um caderno Jupyter de análise estatística",
+   "narrativia": "Do caderno executado à secção de Resultados, número a número",
+   "refinia": "Revisão do manuscrito com seis lentes e comentários ancorados",
+   "prismia": "Revisão sistemática com dois revisores de IA e um árbitro"
+  },
+  "appsH": "As doze apps",
+  "appsLead": "Cada app funciona no navegador, sem instalação nem servidor, com OpenAI, Google Gemini ou Anthropic Claude. A IA propõe e o código verifica. Em cada sessão, as apps opcionais para ampliar.",
+  "optH": "Opcionais da sessão",
+  "apps": {
+   "anticonvocatoria": {"what": "Analisa os teus exames anteriores para medir quanto um estudante os poderia prever, deriva a tabela de especificações dos resultados de aprendizagem e sorteia um exame novo com controlo de dificuldade e rotação.", "chk": "Um preditor adversário rejeita o sorteio se o cobrir acima do limiar; o plano de amostragem é publicado numa carta ao estudante."},
+   "criteria": {"what": "Literacia em IA para os teus estudantes: cinco níveis de uso permitido com o que cabe em cada um, diário de uso e declaração de IA para o trabalho. Funciona sem chave.", "chk": "Verifica ao vivo no Crossref se as referências dadas por um modelo existem de verdade."},
+   "TFG_evaluator": {"what": "Avalia TFG, TFM, TCC ou monografias com a tua rubrica e a norma do teu país: três avaliadores de IA independentes, síntese e comentário formativo.", "chk": "Cada apreciação apoia-se em evidências verificadas no texto; uma camada de qualidade assinala as discrepâncias entre avaliadores."},
+   "doctoralia": {"what": "Revisão do estado da arte em Ciências da Saúde, Ciências e Engenharia em seis bases bibliográficas, com diagrama PRISMA.", "chk": "Cada citação fica ancorada a um artigo real e é verificada no navegador; uma auditoria final assinala as que não se encontram."},
+   "humanitas": {"what": "A versão do Doctoralia para Ciências Sociais, Humanidades e Direito: revê a literatura tratando monografias, capítulos e fontes especializadas como tais.", "chk": "Cada citação fica ancorada a uma obra real e é verificada no navegador antes de entrar na revisão."},
+   "cuadernia": {"what": "A partir de um CSV ou Excel e da descrição do estudo, perfila as variáveis, propõe um plano de análise editável e escreve um caderno Jupyter com estatística descritiva, inferencial e modelos.", "chk": "O perfil das variáveis é calculado no navegador e o código usa pandas, scipy e statsmodels; o caderno executado é a entrada do NarrativIA."},
+   "narrativia": {"what": "Converte um caderno Jupyter ou Colab já executado na secção de Resultados do manuscrito, com tabelas, figuras e testes pela sua ordem.", "chk": "As tabelas são construídas com os valores exatos do caderno e cada número do texto é auditado contra as suas saídas."},
+   "refinia": {"what": "Revê o teu manuscrito passagem a passagem com seis lentes em paralelo (dados, matemática, método e estatística, consistência, referências e argumentação) e prepara o rascunho da carta de resposta.", "chk": "Cada comentário fica ancorado à sua citação exata; as secções são cruzadas para detetar contradições e os achados sem sustentação são descartados."},
+   "revistafit": {"what": "Procura onde se publica realmente a literatura semelhante ao teu manuscrito, ordena as revistas candidatas segundo as tuas prioridades (tema, impacto, acesso aberto, custo) e redige a carta de apresentação.", "chk": "As revistas e os artigos que justificam cada recomendação vêm do OpenAlex; o modelo não os inventa."}
+  },
+  "shared": "Cada participante trabalha sobre a sua própria unidade curricular e a sua linha de investigação. Na sessão 2, o guia do SyllabusAI orienta o exame do ExamForge e a auditoria do AntiConvocatorIA; na sessão 3, o caderno do CuadernIA é a entrada do NarrativIA, e esses Resultados passam pelo RefinIA antes de escolher revista com o RevistaFit.",
+  "courseH": "Programa",
+  "courseLead": "Quatro sessões de 2,5 horas: fundamentos, docência, investigação e a tua própria app. Nas sessões 2 e 3 trabalha-se cada app cerca de 30 minutos sobre o teu próprio material; as opcionais ficam para ampliar.",
+  "slides": "Apresentação (em espanhol)", "soon": "Ligação em breve", "optLbl": "Opcionais",
+  "sessions": [
+   {"t": "Fundamentos", "a": "Apresentação · Preparação de contas · Catálogo de ferramentas", "d": "O que é um modelo de linguagem, como escrever bons prompts e que limites éticos e práticos convém conhecer. Deixaremos pronta a chave de API e as contas do GitHub e do Zenodo.", "o": "Chave de API com limite de gastos, contas do GitHub e do Zenodo criadas e ficha da tua unidade curricular e da tua linha de investigação."},
+   {"t": "Do programa à classificação", "a": "SyllabusAI · ExamForge · AntiConvocatorIA · CriterIA · TFG Evaluator", "d": "Cinco aplicações, cerca de trinta minutos cada uma: do guia docente ao exame e à avaliação do trabalho final, passando pela literacia em IA dos estudantes.", "o": "Guia docente verificado, exame de escolha múltipla com uma versão por estudante, auditoria de previsibilidade dos teus exames, guia de uso de IA para os estudantes e um trabalho final avaliado com a tua rubrica."},
+   {"t": "Da pergunta ao envio", "a": "Doctoralia / Humanitas · CuadernIA · NarrativIA · RefinIA · RevistaFit", "d": "O ciclo de um artigo com cinco aplicações: estado da arte, análise de dados, redação de resultados, revisão do manuscrito e escolha de revista.", "o": "Estado da arte com citações verificadas, caderno de análise executado, secção de Resultados auditada, manuscrito revisto e revistas candidatas com carta de apresentação."},
+   {"t": "Forja a tua própria aplicação", "a": "ForjaIA · GitHub Pages · Zenodo", "d": "Cada participante desenha a sua ferramenta com o ForjaIA, publica-a no seu GitHub Pages e regista-a no Zenodo para obter um DOI. Do prompt ao DOI, literalmente.", "o": "A tua app de docência ou investigação publicada no GitHub Pages, com DOI do Zenodo e registada na galeria do professorado."}
+  ],
+  "lnk": {"slides1": "Ferramentas de IA para a academia", "cuentas": "Preparação de contas (OpenAI, GitHub e Zenodo)", "catalogo": "Catálogo de ferramentas com os seus DOI", "cuentas4": "Revê o GitHub e o Zenodo antes de publicar", "form": "Envia a tua app para a galeria"},
+  "galH": "Galeria de apps do professorado",
+  "galP": "As aplicações que cada participante criar na sessão 4 são publicadas no seu próprio GitHub Pages e reunidas numa secção comum do catálogo Ferramentas de IA para a academia.",
+  "galBtn": "Ver a galeria",
+  "recH": "Gravações das sessões",
+  "recLead": "A ligação para cada gravação é adicionada no fim da sessão.",
+  "recSoon": "Disponível após a sessão",
+  "api4": "Equipas de agentes trabalham em paralelo (três avaliadores no TFG Evaluator, seis lentes no RefinIA) e entregam documentos completos.",
+  "eth4": "Os relatórios simulados (TFG Evaluator, RefinIA, RevistaFit) orientam, mas não substituem a avaliação nem a revisão por pares reais.",
+  "footOrg": "Study Abroad · Vice-Reitoria de Relações Internacionais · Universidad Miguel Hernández de Elche",
+  "footCourse": "Do prompt ao DOI: ferramentas para ensinar e investigar · Direção académica:"
+ }
+};
+
+const T = {};
+LANGS.forEach(l => {
+  const r = R[l], n = NEW[l];
+  T[l] = Object.assign({}, r, n, {
+    short: Object.assign({}, r.short, n.short),
+    apps: Object.assign({}, r.apps, n.apps),
+    api: r.api.map((x, i) => i === 4 ? n.api4 : x),
+    eth: r.eth.map((x, i) => i === 4 ? n.eth4 : x)
+  });
+});
+
+const KX_MODELS = {"openai": [["GPT-6 Luna", 0.1, 0.5], ["GPT-6.1 Terra", 1, 5], ["GPT-6.1 Sol", 2, 10], ["GPT-6 Astra", 10, 50]], "gemini": [["Gemini 3.1 Flash-Lite", 0.25, 1.5], ["Gemini 3.8 Flash", 0.75, 3.75], ["Gemini 3.1 Pro", 2, 12], ["Gemini 4 Argon", 4, 20]], "anthropic": [["Claude Haiku 5.5", 0.1, 0.5], ["Claude Sonnet 5.5", 2, 10], ["Claude Opus 5.5", 4, 20], ["Claude Fable 5.1", 10, 50]]};
+const KX_GO = { openai:"https://platform.openai.com/api-keys", gemini:"https://aistudio.google.com/apikey", anthropic:"https://console.anthropic.com/settings/keys" };
+const KX_T = {
+ "es": {
+  "h": "La clave de IA, explicada desde cero",
+  "lead": "Las apps del curso funcionan con tu propia clave. Se consigue en diez minutos y, con un límite de gasto, nunca pagarás más de lo que decidas. La clave se guarda solo en tu navegador y nunca pasa por un servidor del curso.",
+  "whatH": "¿Qué es una clave de API?",
+  "what": [
+   "Es una contraseña larga que te da una empresa de inteligencia artificial (OpenAI, Google o Anthropic) para que una aplicación pueda pedirle trabajo a su modelo en tu nombre. Piensa en ella como una tarjeta de prepago: la app la usa para encargar cada tarea y el proveedor te cobra solo lo que gastes, normalmente céntimos.",
+   "No es lo mismo que una suscripción a ChatGPT o a Claude. Esas cuotas mensuales sirven para chatear en su web y no incluyen el uso por API: la clave se crea y se paga aparte, en la plataforma para desarrolladores de cada empresa."
+  ],
+  "needH": "Qué necesitas",
+  "need": [
+   "Una cuenta en la plataforma para desarrolladores de un proveedor",
+   "Un crédito de prepago pequeño (unos 5 €) o la capa gratuita de Gemini",
+   "Un límite de gasto mensual, fijado antes de crear la clave",
+   "Diez minutos"
+  ],
+  "tabsAria": "Proveedor de IA",
+  "rec": "recomendado",
+  "steps": {
+   "openai": [
+    "Entra en [[https://platform.openai.com|platform.openai.com]] y crea una cuenta. Es la plataforma para desarrolladores, distinta de ChatGPT, aunque puedes usar el mismo correo.",
+    "En <b>Billing</b>, añade un método de pago y compra un crédito pequeño, por ejemplo 5 €. Es saldo de prepago: cuando se acaba, deja de funcionar sin cobrarte más.",
+    "En <b>Limits</b>, fija un límite de gasto mensual bajo. Así controlas lo que puedes gastar como mucho.",
+    "En <b>API keys</b>, pulsa <b>Create new secret key</b>. Empieza por <code>sk-</code>. Cópiala en ese momento: no se vuelve a mostrar.",
+    "Pégala en la app que vayas a usar y elige OpenAI y un modelo económico. Queda guardada en tu navegador."
+   ],
+   "gemini": [
+    "Entra en [[https://aistudio.google.com/apikey|aistudio.google.com]] con tu cuenta de Google.",
+    "Acepta las condiciones y pulsa <b>Create API key</b>. Google ofrece una capa gratuita con límites de uso, suficiente para probar.",
+    "Copia la clave (empieza por <code>AIza</code>).",
+    "Si la usas mucho, la capa gratuita se queda corta: activa la facturación en Google Cloud y fija un presupuesto con alerta.",
+    "Pégala en la app y elige Google Gemini y un modelo."
+   ],
+   "anthropic": [
+    "Entra en [[https://console.anthropic.com|console.anthropic.com]] y crea una cuenta. Es distinta de la suscripción a Claude.",
+    "En <b>Billing</b>, compra un crédito pequeño de prepago.",
+    "En <b>Limits</b>, fija un límite de gasto mensual.",
+    "En <b>API keys</b>, pulsa <b>Create key</b> y cópiala (empieza por <code>sk-ant-</code>).",
+    "Pégala en la app y elige Anthropic Claude y un modelo."
+   ]
+  },
+  "go": {
+   "openai": "Abrir la página de claves de OpenAI",
+   "gemini": "Abrir Google AI Studio",
+   "anthropic": "Abrir la consola de Anthropic"
+  },
+  "newWin": "abre en nueva ventana",
+  "modelsH": "¿Qué modelo elegir?",
+  "modelsP": "Con la misma clave puedes usar varios modelos, de menor a mayor capacidad. Se paga por <b>tokens</b> (un token es más o menos tres cuartos de palabra): los de <b>entrada</b> son lo que la app envía al modelo y los de <b>salida</b>, lo que el modelo escribe. Entre el más barato y el más caro de un mismo proveedor el precio puede multiplicarse por cien, así que empieza por el económico y sube solo si el resultado no te convence.",
+  "viewAria": "Ver modelos de",
+  "unit": "USD por millón de tokens, entrada / salida",
+  "desc": {
+   "openai": [
+    "Tareas acotadas y de gran volumen",
+    "Uso del ordenador, razonamiento visual y trabajo de oficina",
+    "Equilibrio entre capacidad y coste para programación y trabajo profesional",
+    "El razonamiento y la programación más exigentes"
+   ],
+   "anthropic": [
+    "Rápido y económico, para tareas acotadas y de mucho volumen",
+    "Equilibrio entre capacidad y coste para el trabajo diario",
+    "Razonamiento complejo, programación y tareas largas",
+    "El más capaz disponible al público, para lo más exigente"
+   ],
+   "gemini": [
+    "El más económico, para tareas sencillas y de mucho volumen",
+    "Rápido y equilibrado para el trabajo diario",
+    "Razonamiento complejo y documentos largos",
+    "El modelo más capaz de Google"
+   ]
+  },
+  "notes": {
+   "openai": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "anthropic": [
+    "Con más de 100.000 tokens de entrada por petición sube a 0,50 / 2,50.",
+    "",
+    "",
+    ""
+   ],
+   "gemini": [
+    "Con capa gratuita.",
+    "Con capa gratuita. Precio de lanzamiento hasta el 31 de diciembre; después, 1,50 / 7,50.",
+    "Sin capa gratuita.",
+    "Sin capa gratuita. Desde el 1 de diciembre; hasta entonces, 2 / 10."
+   ]
+  },
+  "foot": {
+   "openai": "Tarifas base de OpenAI, finales de 2026 (fuente: LISDATA).",
+   "anthropic": "Tarifas base publicadas por Anthropic, consultadas el 18 de noviembre de 2026.",
+   "gemini": "Tarifas de pago de la API de Gemini (hasta 200.000 tokens de entrada), consultadas el 18 de noviembre de 2026."
+  },
+  "costH": "¿Cuánto cuesta?",
+  "costP": "Se paga por uso. Con un modelo económico, la mayoría de tareas cuestan céntimos y, con el límite de gasto, nunca pagarás más de lo que hayas decidido.",
+  "safeH": "¿Es seguro?",
+  "safeP": "La clave se guarda solo en tu navegador, nunca en un servidor del curso. Si usas un ordenador compartido, bórrala de la app al terminar.",
+  "leakH": "Si se te escapa",
+  "leakP": "No la pegues en chats, trabajos ni capturas. Si crees que alguien la ha visto, revócala en la web del proveedor y crea otra: la antigua deja de funcionar al momento."
+ },
+ "en": {
+  "h": "Your AI key, explained from scratch",
+  "lead": "The course apps run on your own key. It takes ten minutes to get one and, with a spending limit, you will never pay more than you decide. The key is stored only in your browser and never passes through a course server.",
+  "whatH": "What is an API key?",
+  "what": [
+   "It is a long password that an artificial intelligence company (OpenAI, Google or Anthropic) gives you so that an application can ask its model to do work on your behalf. Think of it as a prepaid card: the app uses it to commission each task and the provider charges you only for what you use, usually a few cents.",
+   "It is not the same as a ChatGPT or Claude subscription. Those monthly fees are for chatting on their website and do not include API usage: the key is created and paid for separately, on each company's developer platform."
+  ],
+  "needH": "What you need",
+  "need": [
+   "An account on a provider's developer platform",
+   "A small prepaid credit (about €5) or Gemini's free tier",
+   "A monthly spending limit, set before you create the key",
+   "Ten minutes"
+  ],
+  "tabsAria": "AI provider",
+  "rec": "recommended",
+  "steps": {
+   "openai": [
+    "Go to [[https://platform.openai.com|platform.openai.com]] and create an account. It is the developer platform, separate from ChatGPT, although you can use the same email.",
+    "Under <b>Billing</b>, add a payment method and buy a small credit, for example €5. It is prepaid balance: when it runs out, the key stops working without charging you more.",
+    "Under <b>Limits</b>, set a low monthly spending limit. That way you control the most you can spend.",
+    "Under <b>API keys</b>, click <b>Create new secret key</b>. It starts with <code>sk-</code>. Copy it right away: it is not shown again.",
+    "Paste it into the app you are going to use and choose OpenAI and an inexpensive model. It stays stored in your browser."
+   ],
+   "gemini": [
+    "Go to [[https://aistudio.google.com/apikey|aistudio.google.com]] with your Google account.",
+    "Accept the terms and click <b>Create API key</b>. Google offers a free tier with usage limits, enough to try things out.",
+    "Copy the key (it starts with <code>AIza</code>).",
+    "If you use it a lot, the free tier falls short: enable billing in Google Cloud and set a budget with an alert.",
+    "Paste it into the app and choose Google Gemini and a model."
+   ],
+   "anthropic": [
+    "Go to [[https://console.anthropic.com|console.anthropic.com]] and create an account. It is separate from the Claude subscription.",
+    "Under <b>Billing</b>, buy a small prepaid credit.",
+    "Under <b>Limits</b>, set a monthly spending limit.",
+    "Under <b>API keys</b>, click <b>Create key</b> and copy it (it starts with <code>sk-ant-</code>).",
+    "Paste it into the app and choose Anthropic Claude and a model."
+   ]
+  },
+  "go": {
+   "openai": "Open the OpenAI keys page",
+   "gemini": "Open Google AI Studio",
+   "anthropic": "Open the Anthropic console"
+  },
+  "newWin": "opens in a new window",
+  "modelsH": "Which model should you choose?",
+  "modelsP": "With the same key you can use several models, from least to most capable. You pay per <b>token</b> (a token is roughly three quarters of a word): <b>input</b> tokens are what the app sends to the model and <b>output</b> tokens are what the model writes. Between the cheapest and the most expensive model from the same provider the price can rise a hundredfold, so start with the inexpensive one and move up only if the results do not convince you.",
+  "viewAria": "Show models from",
+  "unit": "USD per million tokens, input / output",
+  "desc": {
+   "openai": [
+    "Narrow, high-volume tasks",
+    "Computer use, visual reasoning and office work",
+    "Balance of capability and cost for coding and professional work",
+    "The most demanding reasoning and coding"
+   ],
+   "anthropic": [
+    "Fast and inexpensive, for narrow, high-volume tasks",
+    "Balance of capability and cost for everyday work",
+    "Complex reasoning, coding and long tasks",
+    "The most capable publicly available model, for the most demanding work"
+   ],
+   "gemini": [
+    "The cheapest, for simple, high-volume tasks",
+    "Fast and balanced for everyday work",
+    "Complex reasoning and long documents",
+    "Google's most capable model"
+   ]
+  },
+  "notes": {
+   "openai": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "anthropic": [
+    "Above 100,000 input tokens per request it rises to 0.50 / 2.50.",
+    "",
+    "",
+    ""
+   ],
+   "gemini": [
+    "Free tier available.",
+    "Free tier available. Launch price until 31 December; afterwards, 1.50 / 7.50.",
+    "No free tier.",
+    "No free tier. From 1 December; until then, 2 / 10."
+   ]
+  },
+  "foot": {
+   "openai": "OpenAI base rates, late 2026 (source: LISDATA).",
+   "anthropic": "Base rates published by Anthropic, checked on 18 November 2026.",
+   "gemini": "Gemini API paid-tier rates (up to 200,000 input tokens), checked on 18 November 2026."
+  },
+  "costH": "How much does it cost?",
+  "costP": "You pay for what you use. With an inexpensive model most tasks cost a few cents, and with the spending limit you will never pay more than you have decided.",
+  "safeH": "Is it safe?",
+  "safeP": "The key is stored only in your browser, never on a course server. If you use a shared computer, delete it from the app when you finish.",
+  "leakH": "If it leaks",
+  "leakP": "Do not paste it into chats, assignments or screenshots. If you think someone has seen it, revoke it on the provider's website and create a new one: the old one stops working immediately."
+ },
+ "pt": {
+  "h": "A chave de IA, explicada do zero",
+  "lead": "As apps do curso funcionam com a tua própria chave. Obtém-se em dez minutos e, com um limite de gastos, nunca pagarás mais do que decidires. A chave fica guardada apenas no teu navegador e nunca passa por um servidor do curso.",
+  "whatH": "O que é uma chave de API?",
+  "what": [
+   "É uma palavra-passe longa que uma empresa de inteligência artificial (OpenAI, Google ou Anthropic) te dá para que uma aplicação possa pedir trabalho ao modelo dela em teu nome. Pensa nela como um cartão pré-pago: a app usa-a para encomendar cada tarefa e o fornecedor cobra-te apenas o que gastares, normalmente cêntimos.",
+   "Não é o mesmo que uma subscrição do ChatGPT ou do Claude. Essas mensalidades servem para conversar no site deles e não incluem o uso por API: a chave cria-se e paga-se à parte, na plataforma de programadores de cada empresa."
+  ],
+  "needH": "O que precisas",
+  "need": [
+   "Uma conta na plataforma de programadores de um fornecedor",
+   "Um pequeno crédito pré-pago (cerca de 5 €) ou o nível gratuito do Gemini",
+   "Um limite de gastos mensal, definido antes de criar a chave",
+   "Dez minutos"
+  ],
+  "tabsAria": "Fornecedor de IA",
+  "rec": "recomendado",
+  "steps": {
+   "openai": [
+    "Entra em [[https://platform.openai.com|platform.openai.com]] e cria uma conta. É a plataforma de programadores, diferente do ChatGPT, embora possas usar o mesmo e-mail.",
+    "Em <b>Billing</b>, adiciona um método de pagamento e compra um pequeno crédito, por exemplo 5 €. É saldo pré-pago: quando acaba, deixa de funcionar sem te cobrar mais.",
+    "Em <b>Limits</b>, define um limite de gastos mensal baixo. Assim controlas o máximo que podes gastar.",
+    "Em <b>API keys</b>, carrega em <b>Create new secret key</b>. Começa por <code>sk-</code>. Copia-a nesse momento: não volta a ser mostrada.",
+    "Cola-a na app que vais usar e escolhe a OpenAI e um modelo económico. Fica guardada no teu navegador."
+   ],
+   "gemini": [
+    "Entra em [[https://aistudio.google.com/apikey|aistudio.google.com]] com a tua conta Google.",
+    "Aceita as condições e carrega em <b>Create API key</b>. A Google oferece um nível gratuito com limites de uso, suficiente para experimentar.",
+    "Copia a chave (começa por <code>AIza</code>).",
+    "Se a usares muito, o nível gratuito não chega: ativa a faturação no Google Cloud e define um orçamento com alerta.",
+    "Cola-a na app e escolhe o Google Gemini e um modelo."
+   ],
+   "anthropic": [
+    "Entra em [[https://console.anthropic.com|console.anthropic.com]] e cria uma conta. É diferente da subscrição do Claude.",
+    "Em <b>Billing</b>, compra um pequeno crédito pré-pago.",
+    "Em <b>Limits</b>, define um limite de gastos mensal.",
+    "Em <b>API keys</b>, carrega em <b>Create key</b> e copia-a (começa por <code>sk-ant-</code>).",
+    "Cola-a na app e escolhe o Anthropic Claude e um modelo."
+   ]
+  },
+  "go": {
+   "openai": "Abrir a página de chaves da OpenAI",
+   "gemini": "Abrir o Google AI Studio",
+   "anthropic": "Abrir a consola da Anthropic"
+  },
+  "newWin": "abre numa nova janela",
+  "modelsH": "Que modelo escolher?",
+  "modelsP": "Com a mesma chave podes usar vários modelos, do menos ao mais capaz. Paga-se por <b>tokens</b> (um token é mais ou menos três quartos de palavra): os de <b>entrada</b> são o que a app envia ao modelo e os de <b>saída</b>, o que o modelo escreve. Entre o mais barato e o mais caro do mesmo fornecedor o preço pode multiplicar-se por cem, por isso começa pelo económico e sobe apenas se o resultado não te convencer.",
+  "viewAria": "Ver modelos de",
+  "unit": "USD por milhão de tokens, entrada / saída",
+  "desc": {
+   "openai": [
+    "Tarefas delimitadas e de grande volume",
+    "Uso do computador, raciocínio visual e trabalho de escritório",
+    "Equilíbrio entre capacidade e custo para programação e trabalho profissional",
+    "O raciocínio e a programação mais exigentes"
+   ],
+   "anthropic": [
+    "Rápido e económico, para tarefas delimitadas e de grande volume",
+    "Equilíbrio entre capacidade e custo para o trabalho diário",
+    "Raciocínio complexo, programação e tarefas longas",
+    "O mais capaz disponível ao público, para o mais exigente"
+   ],
+   "gemini": [
+    "O mais económico, para tarefas simples e de grande volume",
+    "Rápido e equilibrado para o trabalho diário",
+    "Raciocínio complexo e documentos longos",
+    "O modelo mais capaz da Google"
+   ]
+  },
+  "notes": {
+   "openai": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "anthropic": [
+    "Acima de 100 000 tokens de entrada por pedido sobe para 0,50 / 2,50.",
+    "",
+    "",
+    ""
+   ],
+   "gemini": [
+    "Com nível gratuito.",
+    "Com nível gratuito. Preço de lançamento até 31 de dezembro; depois, 1,50 / 7,50.",
+    "Sem nível gratuito.",
+    "Sem nível gratuito. A partir de 1 de dezembro; até lá, 2 / 10."
+   ]
+  },
+  "foot": {
+   "openai": "Tarifas base da OpenAI, final de 2026 (fonte: LISDATA).",
+   "anthropic": "Tarifas base publicadas pela Anthropic, consultadas a 18 de novembro de 2026.",
+   "gemini": "Tarifas pagas da API do Gemini (até 200 000 tokens de entrada), consultadas a 18 de novembro de 2026."
+  },
+  "costH": "Quanto custa?",
+  "costP": "Paga-se pelo uso. Com um modelo económico, a maioria das tarefas custa cêntimos e, com o limite de gastos, nunca pagarás mais do que decidiste.",
+  "safeH": "É seguro?",
+  "safeP": "A chave fica guardada apenas no teu navegador, nunca num servidor do curso. Se usares um computador partilhado, apaga-a da app ao terminar.",
+  "leakH": "Se se te escapar",
+  "leakP": "Não a coles em chats, trabalhos ou capturas de ecrã. Se achares que alguém a viu, revoga-a no site do fornecedor e cria outra: a antiga deixa de funcionar de imediato."
+ }
+};
+let kxProv = "openai";
+function kxRender(lg, refocus){
+  const K = KX_T[lg] || KX_T.es, P = ["openai","gemini","anthropic"];
+  const N = { openai:"OpenAI", gemini:"Google Gemini", anthropic:"Anthropic Claude" };
+  const num = v => Number.isInteger(v) ? String(v) : v.toFixed(2).replace(".", lg === "en" ? "." : ",");
+  const sr = `<span class="kx-sr"> (${K.newWin})</span>`;
+  const lnk = s => s.replace(/\[\[([^|\]]+)\|([^\]]+)\]\]/g, (m, u, t) => `<a href="${u}" target="_blank" rel="noopener">${t}${sr}</a>`);
+  const root = document.getElementById("kx"), M = KX_MODELS[kxProv];
+  root.innerHTML = (root.dataset.head === "no" ? "" : `<h2>${K.h}</h2><p class="lead">${K.lead}</p>`) + `
+  <div class="kx-what">
+    <div><h3>${K.whatH}</h3>${K.what.map(p => `<p>${p}</p>`).join("")}</div>
+    <div class="kx-need"><h3>${K.needH}</h3><ul>${K.need.map(i => `<li>${i}</li>`).join("")}</ul></div>
+  </div>
+  <div class="kx-tabs" role="tablist" aria-label="${K.tabsAria}">${P.map(p => `<button type="button" role="tab" id="kx-t-${p}" aria-controls="kx-g" aria-selected="${p === kxProv}" tabindex="${p === kxProv ? 0 : -1}" data-p="${p}">${N[p]}${p === "openai" ? ` <small>${K.rec}</small>` : ""}</button>`).join("")}</div>
+  <div class="kx-guide" role="tabpanel" id="kx-g" aria-labelledby="kx-t-${kxProv}">
+    <ol>${K.steps[kxProv].map(s => `<li><div>${lnk(s)}</div></li>`).join("")}</ol>
+    <a class="kx-go" href="${KX_GO[kxProv]}" target="_blank" rel="noopener">${K.go[kxProv]}${sr}</a>
+  </div>
+  <div class="kx-models"><h3>${K.modelsH}</h3><p>${K.modelsP}</p>
+    <div class="kx-tabs" role="group" aria-label="${K.viewAria}">${P.map(p => `<button type="button" class="kx-sel" data-p="${p}" aria-pressed="${p === kxProv}">${N[p]}</button>`).join("")}</div>
+    <div class="kx-ladder"><span class="kx-arc" aria-hidden="true"></span><span class="kx-x" aria-hidden="true">×${Math.round(M[3][2] / M[0][2])}</span>
+      <div class="kx-steps">${M.map((m, i) => `<div class="kx-step"><h4>${m[0]}</h4><p>${K.desc[kxProv][i]}</p><span class="kx-price">${num(m[1])} / ${num(m[2])}</span><small>${K.unit}</small>${K.notes[kxProv][i] ? `<em>${K.notes[kxProv][i]}</em>` : ""}</div>`).join("")}</div>
+      <p class="kx-foot">${K.foot[kxProv]}</p>
+    </div>
+  </div>
+  <div class="kx-trio">
+    <div><h3>${K.costH}</h3><p>${K.costP}</p></div>
+    <div><h3>${K.safeH}</h3><p>${K.safeP}</p></div>
+    <div><h3>${K.leakH}</h3><p>${K.leakP}</p></div>
+  </div>`;
+  const pick = (p, sel) => { kxProv = p; kxRender(lg, sel); };
+  root.querySelectorAll("[role=tab]").forEach((t, i) => {
+    t.addEventListener("click", () => pick(t.dataset.p, "#kx-t-" + t.dataset.p));
+    t.addEventListener("keydown", e => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      e.preventDefault();
+      const p = P[(i + (e.key === "ArrowRight" ? 1 : P.length - 1)) % P.length];
+      pick(p, "#kx-t-" + p);
+    });
+  });
+  root.querySelectorAll(".kx-sel").forEach(b => b.addEventListener("click", () => pick(b.dataset.p, `.kx-sel[data-p="${b.dataset.p}"]`)));
+  if (refocus) root.querySelector(refocus).focus();
+}
+
+
+let lang = "es";
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+const appUrl = id => `https://fborrasumh.github.io/${id}/`;
+const optOf = id => { for (const n in OPT) if (OPT[n].some(o => o[0] === id)) return +n; return 0; };
+const optName = id => { for (const n in OPT) { const o = OPT[n].find(o => o[0] === id); if (o) return o[1]; } return id; };
+function lnk(url, icon, label, L){
+  return url
+    ? `<a class="slink" href="${url}" target="_blank" rel="noopener"><i class="ti ${icon}"></i> ${esc(label)}</a>`
+    : `<span class="slink off" title="${esc(L.soon)}"><i class="ti ${icon}"></i> ${esc(label)} · ${esc(L.soon)}</span>`;
+}
+
+function render(){
+  const L = T[lang];
+  document.documentElement.lang = lang;
+  document.title = L.title;
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = L[el.dataset.i18n]; });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => { el.innerHTML = L[el.dataset.i18nHtml]; });
+  document.querySelectorAll("#langs button").forEach(b => b.classList.toggle("active", b.dataset.l === lang));
+
+  document.getElementById("meta").innerHTML = L.meta.map(m => `<span>${esc(m)}</span>`).join("");
+  document.getElementById("introP").innerHTML = L.intro.map(p => `<p>${p}</p>`).join("");
+  document.getElementById("objs").innerHTML = L.obj.map((o, i) => `<div class="obj"><span class="n">0${i+1}</span><h3>${esc(o[0])}</h3><p>${esc(o[1])}</p></div>`).join("");
+
+  /* CALENDARIO */
+  document.getElementById("dt").innerHTML =
+    `<tr><th>${esc(L.thSes)}</th><th>${esc(L.thDate)}</th><th>${esc(L.thHour)}</th></tr>` +
+    L.sessions.map((s, i) => `<tr><td>${i+1} · ${esc(s.t)}</td><td>${esc(L.dates[i])}</td><td>17:00–19:30</td></tr>`).join("");
+  let tz = "", h = "17:00";
+  try {
+    tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    h = new Intl.DateTimeFormat(lang, { hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date(START_UTC));
+  } catch(e) {}
+  document.getElementById("tzmine").innerHTML = `<i class="ti ti-map-pin"></i> ` +
+    esc(L.tzMine).replace("{tz}", esc(tz || "—")).replace("{h}", `<b>${esc(h)}</b>`);
+  document.getElementById("tzgrid").innerHTML = L.tz.map(t => `<div class="tz"><span>${esc(t[0])}</span><b>${esc(t[1])}</b></div>`).join("");
+
+  /* PROGRAMA */
+  const K = L.lnk;
+  const extra = {
+    1: [lnk(LINKS.slides[1], "ti-presentation", K.slides1, L), lnk(LINKS.cuentas, "ti-file-type-pdf", K.cuentas, L), lnk(CATALOGO, "ti-link", K.catalogo, L)],
+    2: [lnk(LINKS.slides[2], "ti-presentation", L.slides, L)],
+    3: [lnk(LINKS.slides[3], "ti-presentation", L.slides, L)],
+    4: [lnk(LINKS.slides[4], "ti-presentation", L.slides, L), lnk(LINKS.cuentas, "ti-file-type-pdf", K.cuentas4, L), lnk(LINKS.form, "ti-forms", K.form, L)]
+  };
+  document.getElementById("sessions").innerHTML =
+    `<div class="srow head"><div></div><div>${esc(L.thSes)}</div><div class="hide-sm">${esc(L.thOut)}</div></div>` +
+    L.sessions.map((s, i) => { const n = i + 1; return `<div class="srow" style="--c:var(${SES_COLOR[n]})">
+      <div class="snum">${n}</div>
+      <div><div class="stit">${esc(s.t)}</div><div class="sdate">${esc(L.dates[i])} · 17:00–19:30 (${esc(L.thHour.replace(/^[^(]*\(|\)$/g, ""))})</div>
+        <div class="sapp">${esc(s.a)}</div><div class="sdesc">${esc(s.d)}</div>
+        <div class="slinks">${extra[n].join("")}</div>
+        ${OPT[n] ? `<div class="sopt">${esc(L.optLbl)}: ${OPT[n].map(o => `<a href="${appUrl(o[0])}" target="_blank" rel="noopener">${esc(o[1])}</a>`).join(" · ")}</div>` : ""}
+      </div>
+      <div class="hide-sm">${esc(s.o)}</div>
+    </div>`; }).join("");
+
+  /* APPS POR SESIÓN + OPCIONALES */
+  document.getElementById("groups").innerHTML = [2,3,4].map(n => {
+    const cards = APPS.filter(a => a.ses === n).map(a => {
+      const A = L.apps[a.id];
+      return `<article class="card">
+        <div class="card-h"><div class="icon-box"><i class="ti ${a.icon}"></i></div><h4>${a.name}</h4></div>
+        <p>${esc(A.what)}</p>
+        <div class="chk"><b>${esc(L.checks)}</b>${esc(A.chk)}</div>
+        <div class="foot"><a class="btn" href="${appUrl(a.id)}" target="_blank" rel="noopener"><i class="ti ti-external-link"></i> ${esc(L.open)}</a></div>
+      </article>`;
+    }).join("");
+    const opts = OPT[n].map(o => `<a class="optcard" href="${appUrl(o[0])}" target="_blank" rel="noopener"><b>${esc(o[1])} <i class="ti ti-external-link"></i></b>${esc(L.short[o[0]])}</a>`).join("");
+    return `<div class="sgroup" style="--c:var(${SES_COLOR[n]})"><h3>${esc(L.session)} ${n} · ${esc(L.sessions[n-1].t)}</h3><div class="grid">${cards}</div>
+      <div class="optrow"><h4><i class="ti ti-circle-plus"></i> ${esc(L.optH)} ${n}</h4><div class="optgrid">${opts}</div></div></div>`;
+  }).join("");
+
+  /* FRANJA DE FASES */
+  document.getElementById("legend").innerHTML =
+    [2,3,4].map(n => `<span style="--c:var(${SES_COLOR[n]})"><i class="sw"></i>${esc(L.legSes)} ${n}</span>`).join("") +
+    `<span><i class="sw opt"></i>${esc(L.legOpt)}</span><span><i class="sw comp"></i>${esc(L.legComp)}</span>`;
+  document.getElementById("phases").innerHTML = PHASES.map((ids, i) => `<div class="phase">
+      <div class="phase-h"><span class="phase-n">${i+1}</span><span class="phase-t">${esc(L.phases[i])}</span></div>
+      ${ids.map(id => {
+        const a = APPS.find(x => x.id === id), o = optOf(id);
+        if (a) return `<a class="chip ses" style="--c:var(${SES_COLOR[a.ses]})" href="${appUrl(id)}" target="_blank" rel="noopener"><span class="tag">S${a.ses}</span><b>${esc(a.name)}</b>${esc(L.short[id])}</a>`;
+        if (o) return `<a class="chip opt" style="--c:var(${SES_COLOR[o]})" href="${appUrl(id)}" target="_blank" rel="noopener"><span class="tag">S${o} ${esc(L.tagOpt)}</span><b>${esc(optName(id))}</b>${esc(L.short[id])}</a>`;
+        return `<a class="chip comp" href="${appUrl(id)}" target="_blank" rel="noopener"><span class="tag">${esc(L.tagComp)}</span><b>${esc(COMP[id])}</b>${esc(L.short[id])}</a>`;
+      }).join("")}
+    </div>`).join("");
+
+  /* GALERÍA Y GRABACIONES */
+  document.getElementById("galBtn").href = LINKS.galeria || CATALOGO;
+  document.getElementById("recs").innerHTML = L.sessions.map((s, i) => { const n = i + 1, u = LINKS.grabaciones[n];
+    const inner = `<i class="ti ti-player-play-filled"></i><span class="rn">${esc(L.session)} ${n}</span><span class="rt">${esc(s.t)}</span>${u ? "" : `<span class="rs">${esc(L.recSoon)}</span>`}`;
+    return u ? `<a class="rec" style="--c:var(${SES_COLOR[n]})" href="${u}" target="_blank" rel="noopener">${inner}</a>`
+             : `<div class="rec off" style="--c:var(${SES_COLOR[n]})">${inner}</div>`; }).join("");
+
+  const list = (id, arr) => { document.getElementById(id).innerHTML = arr.map(x => `<li>${esc(x)}</li>`).join(""); };
+  list("chatL", L.chat); list("apiL", L.api); list("priv", L.priv); list("eth", L.eth);
+  kxRender(lang);
+}
+
+function setLang(l){
+  lang = l;
+  try { localStorage.setItem("pdi_ia2027-lang", l); } catch(e) {}
+  render();
+}
+
+document.getElementById("langs").innerHTML = LANGS.map(l => `<button data-l="${l}" onclick="setLang('${l}')">${l.toUpperCase()}</button>`).join("");
+try {
+  const saved = localStorage.getItem("pdi_ia2027-lang");
+  lang = LANGS.includes(saved) ? saved : "es";
+} catch(e) {}
+render();
+</script>
+</body>
+</html>
