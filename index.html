@@ -375,18 +375,18 @@ const APPS = [
 ];
 /* APPS OPCIONALES POR SESIÓN */
 const OPT = {
-  2: [["aulia","AulIA"], ["corrigia","CorrigIA"], ["justitia","JustitIA"]],
-  3: [["prismia","PRISMIA"], ["publication_radar","Publication Radar"], ["grantwriter","GrantWriter"]],
+  2: [["aulia","AulIA"], ["corrigia","CorrigIA"]],
+  3: [["prismia","PRISMIA"], ["publication_radar","Publication Radar"], ["grantwriter","GrantWriter"], ["autoresearch","Autoresearch"]],
   4: [["tutoria","TutorIA"], ["claria","ClarIA"], ["generator","Generator"]]
 };
 /* COMPLEMENTARIAS DEL CATÁLOGO (solo en la franja de fases) */
 const COMP = {"pericia":"Pericia", "casopracticoAI":"CasoPrácticoAI", "evaluador_oral":"Evaluador Oral", "desafia":"DesafIA", "cribia":"CribIA", "mentoria":"MentorIA", "meritoria":"MeritorIA", "Estudia":"EstudIA"};
 const PHASES = [
   ["sillabusAI","aulia","generator","pericia","casopracticoAI"],
-  ["examforge","anticonvocatoria","TFG_evaluator","corrigia","justitia","evaluador_oral"],
+  ["examforge","anticonvocatoria","TFG_evaluator","corrigia","evaluador_oral"],
   ["criteria","desafia","cribia","mentoria"],
   ["doctoralia","humanitas","prismia","publication_radar"],
-  ["cuadernia","narrativia","refinia"],
+  ["cuadernia","narrativia","refinia","autoresearch"],
   ["revistafit","grantwriter","meritoria"],
   ["forja_ai","tutoria","claria","Estudia"]
 ];
@@ -725,7 +725,8 @@ const NEW = {
    "cuadernia": "Del CSV o Excel a un cuaderno Jupyter de análisis estadístico",
    "narrativia": "Del cuaderno ejecutado a la sección de Resultados, cifra a cifra",
    "refinia": "Revisión del manuscrito con seis lentes y comentarios anclados",
-   "prismia": "Revisión sistemática con dos revisores de IA y un árbitro"
+   "prismia": "Revisión sistemática con dos revisores de IA y un árbitro",
+   "autoresearch": "Mejora un documento científico ronda a ronda con tu rúbrica hasta el umbral"
   },
   "appsH": "Las doce apps",
   "appsLead": "Cada app funciona en el navegador, sin instalación ni servidor, con OpenAI, Google Gemini o Anthropic Claude. La IA propone y el código comprueba. Bajo cada sesión, las apps opcionales para ampliar.",
@@ -792,7 +793,8 @@ const NEW = {
    "cuadernia": "From CSV or Excel to a statistical analysis Jupyter notebook",
    "narrativia": "From executed notebook to Results section, figure by figure",
    "refinia": "Manuscript review through six lenses with anchored comments",
-   "prismia": "Systematic review with two AI reviewers and an arbitrator"
+   "prismia": "Systematic review with two AI reviewers and an arbitrator",
+   "autoresearch": "Improves a scientific document round by round against your rubric"
   },
   "appsH": "The twelve apps",
   "appsLead": "Each app runs in the browser, with no installation or server, using OpenAI, Google Gemini or Anthropic Claude. The AI proposes and the code checks. Under each session, the optional apps to go further.",
@@ -859,7 +861,8 @@ const NEW = {
    "cuadernia": "Do CSV ou Excel a um caderno Jupyter de análise estatística",
    "narrativia": "Do caderno executado à secção de Resultados, número a número",
    "refinia": "Revisão do manuscrito com seis lentes e comentários ancorados",
-   "prismia": "Revisão sistemática com dois revisores de IA e um árbitro"
+   "prismia": "Revisão sistemática com dois revisores de IA e um árbitro",
+   "autoresearch": "Melhora um documento científico ronda a ronda com a tua rubrica"
   },
   "appsH": "As doze apps",
   "appsLead": "Cada app funciona no navegador, sem instalação nem servidor, com OpenAI, Google Gemini ou Anthropic Claude. A IA propõe e o código verifica. Em cada sessão, as apps opcionais para ampliar.",
