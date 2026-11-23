@@ -27,7 +27,7 @@ Probado en Chrome con clave de OpenAI (modelo por defecto de cada app). «Comple
 | 2 | SyllabusAI | Completa | Guía generada; revisión de calidad 90/100 (0 errores, 2 avisos). |
 | 2 | ExamForge | Completa | 12 exámenes, 120 preguntas, 119 con cita verificada en los apuntes. |
 | 2 | AntiConvocatorIA | Completa | 6 exámenes leídos; previsibilidad 39 %; tabla, sorteo y examen redactado. |
-| 2 | CriterIA | Completa | Declaración generada; la referencia inventada se detecta. **Fallo de la app:** las dos reales salen «No coincide». |
+| 2 | CriterIA | Completa | Declaración generada; las dos referencias reales salen «Existe» y la inventada «No la encuentro» (tras corregir la app). |
 | 2 | TFG Evaluator | Completa | Nota 6,49/10; 21 de 21 citas verificadas (fidelidad 100 %), tras corregir el verificador de la app. |
 | 2 | AulIA · CorrigIA · OralIA · ConvocatorIA | Lectura | Leen los ficheros (apuntes, 3 copias manuscritas, cuaderno, exámenes). |
 | 2 | MentorIA | — | Solo texto pegado; no lee ficheros. |
