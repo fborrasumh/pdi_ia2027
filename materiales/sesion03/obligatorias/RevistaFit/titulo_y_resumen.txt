@@ -1,0 +1,6 @@
+Glucemia, índice de masa corporal y edad como predictores de diabetes tipo 2 en mujeres pima: análisis de una cohorte de datos abiertos
+
+Resumen
+Objetivo: identificar predictores clínicos rutinarios de diabetes tipo 2 a los cinco años en mujeres pima y estimar su capacidad discriminativa. Métodos: cohorte de 768 mujeres de 21 años o más con datos abiertos del NIDDK; los valores imposibles se trataron como perdidos; regresión logística multivariable (724 mujeres con datos completos). Resultados: el 34,9 % desarrolló diabetes. La glucosa a las 2 h (OR por 10 mg/dL: 1,42), el IMC, la carga familiar y el número de embarazos se asociaron de forma independiente con la diabetes; el AUC fue 0,84. Conclusiones: un modelo con variables de consulta discrimina bien el riesgo y podría ayudar a enfermería de atención primaria a priorizar el cribado, aunque requiere validación externa.
+
+Palabras clave: diabetes mellitus tipo 2; predicción del riesgo; atención primaria; enfermería; pueblos indígenas

@@ -1,0 +1,20 @@
+TEMARIO OFICIAL (un tema por línea)
+Introducción a la bioestadística y tipos de variables
+Estadística descriptiva: tablas, gráficos y medidas de resumen
+Probabilidad y teorema de Bayes
+Pruebas diagnósticas: sensibilidad, especificidad y valores predictivos
+Distribuciones de probabilidad: binomial, Poisson y normal
+Muestreo y estimación por intervalos de confianza
+Contraste de hipótesis y error tipo I y II
+Comparación de medias: t de Student y ANOVA
+Comparación de proporciones: ji cuadrado
+Correlación y regresión lineal simple
+
+RESULTADOS DE APRENDIZAJE
+RA1. Identificar el tipo de variable y elegir la medida de resumen y el gráfico adecuados.
+RA2. Calcular e interpretar probabilidades en contextos clínicos, incluido el teorema de Bayes.
+RA3. Evaluar la validez de una prueba diagnóstica mediante sensibilidad, especificidad y valores predictivos.
+RA4. Construir e interpretar intervalos de confianza para medias y proporciones.
+RA5. Plantear un contraste de hipótesis, elegir la prueba adecuada e interpretar el valor p.
+RA6. Describir la relación entre dos variables cuantitativas con correlación y regresión lineal.
+RA7. Leer críticamente los resultados estadísticos de un artículo de enfermería.

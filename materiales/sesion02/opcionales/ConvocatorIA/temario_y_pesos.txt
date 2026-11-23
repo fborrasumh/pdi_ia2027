@@ -1,0 +1,23 @@
+TEMARIO OFICIAL
+1. Introducción a la bioestadística y tipos de variables
+2. Estadística descriptiva: tablas, gráficos y medidas de resumen
+3. Probabilidad y teorema de Bayes
+4. Pruebas diagnósticas: sensibilidad, especificidad y valores predictivos
+5. Distribuciones de probabilidad: binomial, Poisson y normal
+6. Muestreo y estimación por intervalos de confianza
+7. Contraste de hipótesis y error tipo I y II
+8. Comparación de medias: t de Student y ANOVA
+9. Comparación de proporciones: ji cuadrado
+10. Correlación y regresión lineal simple
+
+TABLA PUBLICADA (tema · peso)
+Introducción a la bioestadística y tipos de variables · 5 %
+Estadística descriptiva: tablas, gráficos y medidas de resumen · 10 %
+Probabilidad y teorema de Bayes · 15 %
+Pruebas diagnósticas: sensibilidad, especificidad y valores predictivos · 20 %
+Distribuciones de probabilidad: binomial, Poisson y normal · 10 %
+Muestreo y estimación por intervalos de confianza · 10 %
+Contraste de hipótesis y error tipo I y II · 10 %
+Comparación de medias: t de Student y ANOVA · 10 %
+Comparación de proporciones: ji cuadrado · 5 %
+Correlación y regresión lineal simple · 5 %

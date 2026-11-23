@@ -1,0 +1,16 @@
+DATOS DEL TRABAJO (pestaña de declaración)
+Nombre y apellidos: Lucía Álvarez Prieto
+Asignatura: Bioestadística
+Título del trabajo: Práctica 2: contraste de hipótesis
+Tipo de trabajo: Práctica
+Universidad: Universidad Iberoamericana de Ejemplo (UIE)
+Profesor o profesora: Ana Ruiz Morales
+
+USO DE IA QUE DECLARA LA ESTUDIANTE
+Herramienta 1: ChatGPT · Para qué: entender un concepto
+Qué le pediste: Explícame la diferencia entre error estándar y desviación típica con un ejemplo clínico
+Qué hiciste con lo que te devolvió: Lo contrasté con el manual de la asignatura y escribí mi propia explicación
+
+Herramienta 2: DeepL Write · Para qué: revisar la redacción de la conclusión
+Qué le pediste: Mejora la redacción de este párrafo sin cambiar el contenido
+Qué hiciste con lo que te devolvió: Acepté dos cambios de estilo y rechacé uno que alteraba el sentido

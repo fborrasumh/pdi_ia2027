@@ -1,0 +1,5 @@
+IDEA (pégala en «Tu idea»):
+Una calculadora para estudiantes de 1.º de Enfermería que reciba una tabla 2 × 2 de una prueba diagnóstica (verdaderos y falsos positivos y negativos) y una prevalencia, devuelva sensibilidad, especificidad, valores predictivos y razones de verosimilitud con su intervalo de confianza, e interprete cada resultado en una frase clínica sencilla. Debe explicar el paso a paso del cálculo. Nunca debe dar un diagnóstico sobre un paciente real ni pedir datos personales.
+
+QUIÉN APORTÓ LA IDEA:
+A partir de la idea original de Ana Ruiz Morales (cuaderno de prácticas de Bioestadística).

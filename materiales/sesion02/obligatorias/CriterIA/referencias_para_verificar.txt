@@ -1,0 +1,3 @@
+Bland JM, Altman DG. Statistical methods for assessing agreement between two methods of clinical measurement. Lancet. 1986;1(8476):307-10. doi:10.1016/S0140-6736(86)90837-8
+Altman DG, Bland JM. Diagnostic tests 1: sensitivity and specificity. BMJ. 1994;308(6943):1552. doi:10.1136/bmj.308.6943.1552
+Ruiz-Peña M, Okafor T. Smartphone-based blood pressure apps outperform validated cuffs in nursing homes. J Nurs Stat Methods. 2023;12(4):211-219. doi:10.5555/jnsm.2023.0412

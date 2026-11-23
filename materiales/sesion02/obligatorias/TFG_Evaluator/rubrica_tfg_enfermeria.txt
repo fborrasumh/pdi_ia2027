@@ -1,0 +1,14 @@
+# Rúbrica de evaluación del Trabajo Fin de Grado · Grado en Enfermería
+
+Escala de 0 a 10. Cada criterio se puntúa con cuatro niveles: insuficiente (0–4,9), suficiente (5–6,9), notable (7–8,9) y sobresaliente (9–10).
+
+| Criterio | Peso | Qué se valora |
+|---|---|---|
+| 1. Planteamiento y justificación | 15 % | Problema relevante para enfermería, antecedentes actualizados, justificación local clara. |
+| 2. Objetivos e hipótesis | 10 % | Objetivos concretos, medibles y coherentes con el diseño; hipótesis contrastable. |
+| 3. Metodología | 25 % | Diseño adecuado, muestra y cálculo del tamaño, variables operativizadas, análisis estadístico pertinente, aspectos éticos. |
+| 4. Resultados | 20 % | Presentación clara en tablas y texto, coherencia entre ambos, uso correcto de la estadística (no solo valores p). |
+| 5. Discusión y conclusiones | 20 % | Interpretación prudente, comparación con la literatura, limitaciones honestas, conclusiones que no van más allá de los datos. |
+| 6. Forma, bibliografía y estilo | 10 % | Estructura, redacción, normas de citación (Vancouver), bibliografía actual y pertinente. |
+
+Penalizaciones: plagio o uso de IA no declarado (suspenso); conclusiones causales con un diseño que no las permite (máximo «suficiente» en el criterio 5).

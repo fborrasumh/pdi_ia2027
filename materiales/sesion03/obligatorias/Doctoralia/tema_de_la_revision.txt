@@ -1,0 +1,5 @@
+TEMA: Modelos de predicción de diabetes tipo 2 basados en variables clínicas rutinarias (glucemia, IMC, edad) en poblaciones de alto riesgo, incluidas poblaciones indígenas
+PALABRAS CLAVE ADICIONALES: type 2 diabetes; risk prediction model; Pima; primary care; logistic regression
+PERIODO: 2000-2026
+INDICACIONES: priorizar estudios de cohorte y de validación de modelos; incluir revisiones sistemáticas de modelos de predicción; excluir estudios solo genéticos.
+IDIOMA: español · ESTILO DE CITAS: Vancouver
