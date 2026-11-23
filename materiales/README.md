@@ -28,7 +28,7 @@ Probado en Chrome con clave de OpenAI (modelo por defecto de cada app). «Comple
 | 2 | ExamForge | Completa | 12 exámenes, 120 preguntas, 119 con cita verificada en los apuntes. |
 | 2 | AntiConvocatorIA | Completa | 6 exámenes leídos; previsibilidad 39 %; tabla, sorteo y examen redactado. |
 | 2 | CriterIA | Completa | Declaración generada; la referencia inventada se detecta. **Fallo de la app:** las dos reales salen «No coincide». |
-| 2 | TFG Evaluator | Completa | TFG y rúbrica leídos (6 criterios). **Fallo de la app:** el verificador falla su autotest y deja la nota en 0,7. |
+| 2 | TFG Evaluator | Completa | Nota 6,49/10; 21 de 21 citas verificadas (fidelidad 100 %), tras corregir el verificador de la app. |
 | 2 | AulIA · CorrigIA · OralIA · ConvocatorIA | Lectura | Leen los ficheros (apuntes, 3 copias manuscritas, cuaderno, exámenes). |
 | 2 | MentorIA | — | Solo texto pegado; no lee ficheros. |
 | 3 | Doctoralia | Completa | Borrador rápido: 81 papers, 30 citas, 4700 palabras, 100 % de citas resueltas. |

@@ -4,4 +4,4 @@
 - `rubrica_tfg_enfermeria.pdf` (o `.txt`): súbela en «Sube la rúbrica en PDF o texto plano».
 - Nivel: Grado · País: España · Nota mínima de aprobado: 5.
 - Flujo: «Corregir mis trabajos» → sube el PDF → sube la rúbrica y pulsa «Extraer criterios con IA» → «Iniciar evaluación».
-- **Aviso (prueba del 23/11/2026):** la app lee bien el TFG y la rúbrica (6 criterios), pero su verificador de evidencias falla en el autotest inicial y manda a cuarentena todos los subcriterios (nota 0,7, fidelidad 0 %). Es un fallo de la app, no del material: revisarlo antes de la sesión 2.
+- Prueba del 23/11/2026 (tras corregir la app): nota 6,49/10, acuerdo entre los tres evaluadores, 21 de 21 citas verificadas en el TFG (fidelidad 100 %).
