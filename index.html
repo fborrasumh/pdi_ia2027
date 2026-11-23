@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Del prompt al DOI · Herramientas para enseñar e investigar</title>
-<meta name="description" content="Curso «Del prompt al DOI» (Study Abroad, UMH): doce apps de IA para enseñar e investigar en cuatro sesiones, once opcionales y tu propia app publicada con DOI.">
+<meta name="description" content="Curso «Del prompt al DOI» (Study Abroad, UMH): doce apps de IA para enseñar e investigar en cuatro sesiones, doce opcionales y tu propia app publicada con DOI.">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -175,7 +175,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .meta span::before { content: "·"; margin-right: 18px; color: #555; }
 .meta span:first-child::before { content: none; margin: 0; }
 .intro { max-width: 760px; margin-bottom: 26px; }
-#apps .grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+#apps .grid { grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); }
+#apps .card h4 { min-width: 0; overflow-wrap: anywhere; }
 .chip.opt b { padding-right: 58px; }
 .chip.ses b, .chip.comp b { padding-right: 30px; }
 .intro p { font-size: 15px; margin-bottom: 10px; }
@@ -237,7 +238,7 @@ table.dt td:first-child { font-weight: 600; }
   <p class="meta" id="meta"></p>
   <div class="stats">
     <div><div class="stat-n">12</div><div class="stat-l" data-i18n="stApps"></div></div>
-    <div><div class="stat-n">11</div><div class="stat-l" data-i18n="stOpt"></div></div>
+    <div><div class="stat-n">12</div><div class="stat-l" data-i18n="stOpt"></div></div>
     <div><div class="stat-n">4</div><div class="stat-l" data-i18n="stSes"></div></div>
     <div><div class="stat-n">10 h</div><div class="stat-l" data-i18n="stHours"></div></div>
     <div><div class="stat-n">1</div><div class="stat-l" data-i18n="stDoi"></div></div>
@@ -380,7 +381,7 @@ const APPS = [
 ];
 /* APPS OPCIONALES POR SESIÓN */
 const OPT = {
-  2: [["aulia","AulIA"], ["corrigia","CorrigIA"], ["mentoria","MentorIA"], ["evaluador_oral","Evaluador Oral"]],
+  2: [["aulia","AulIA"], ["corrigia","CorrigIA"], ["mentoria","MentorIA"], ["evaluador_oral","Evaluador Oral"], ["convocatoria","ConvocatorIA"]],
   3: [["prismia","PRISMIA"], ["publication_radar","Publication Radar"], ["grantwriter","GrantWriter"], ["autoresearch","Autoresearch"]],
   4: [["tutoria","TutorIA"], ["claria","ClarIA"], ["generator","Generator"]]
 };
@@ -388,7 +389,7 @@ const OPT = {
 const COMP = {"pericia":"Pericia", "casopracticoAI":"CasoPrácticoAI", "desafia":"DesafIA", "arbitria":"ArbitrIA", "Estudia":"EstudIA"};
 const PHASES = [
   ["sillabusAI","aulia","generator","pericia","casopracticoAI"],
-  ["examforge","anticonvocatoria","TFG_evaluator","corrigia","evaluador_oral"],
+  ["examforge","anticonvocatoria","convocatoria","TFG_evaluator","corrigia","evaluador_oral"],
   ["criteria","desafia","mentoria"],
   ["doctoralia","humanitas","prismia","publication_radar"],
   ["cuadernia","narrativia","refinia","autoresearch"],
@@ -721,7 +722,7 @@ const NEW = {
   "dates": ["Lunes 30/11/2026", "Lunes 07/12/2026", "Lunes 14/12/2026", "Lunes 21/12/2026"],
   "tz": [["México (CDMX)", "10:00"], ["Centroamérica", "10:00"], ["Colombia · Perú · Ecuador", "11:00"], ["Cuba · Panamá", "11:00"], ["Venezuela · Bolivia", "12:00"], ["Rep. Dominicana · P. Rico", "12:00"], ["Chile · Paraguay", "13:00"], ["Argentina · Uruguay", "13:00"], ["Brasil (Brasilia)", "13:00"], ["Portugal", "16:00"]],
   "phasesH": "Las apps en cada fase del trabajo académico",
-  "phasesLead": "Las doce apps del curso, las once opcionales y otras complementarias del catálogo, ordenadas por la fase del trabajo de enseñar e investigar en que se usan.",
+  "phasesLead": "Las doce apps del curso, las doce opcionales y otras complementarias del catálogo, ordenadas por la fase del trabajo de enseñar e investigar en que se usan.",
   "phasesNote": "Las opcionales amplían cada sesión si te sobra tiempo o quieres seguir por tu cuenta; las complementarias no se trabajan en el curso. Revisa en cada una qué proveedor de IA admite. Los datos de estudiantes se anonimizan y la nota siempre la firma el profesor.",
   "legOpt": "Opcional", "tagOpt": "opc.",
   "phases": ["Diseñar la asignatura", "Evaluar", "Alfabetización e integridad", "Estado del arte", "Analizar y redactar", "Publicar y financiar", "Crear y acompañar"],
@@ -732,7 +733,8 @@ const NEW = {
    "refinia": "Revisión del manuscrito con seis lentes y comentarios anclados",
    "prismia": "Revisión sistemática con dos revisores de IA y un árbitro",
    "autoresearch": "Mejora un documento científico ronda a ronda con tu rúbrica hasta el umbral",
-   "arbitria": "Simulacro de revisión por pares con cinco revisores antes del envío"
+   "arbitria": "Simulacro de revisión por pares con cinco revisores antes del envío",
+   "convocatoria": "Qué temas caen más en tus exámenes, con probabilidad calibrada"
   },
   "appsH": "Las doce apps",
   "appsLead": "Cada app funciona en el navegador, sin instalación ni servidor, con OpenAI, Google Gemini o Anthropic Claude. La IA propone y el código comprueba. Bajo cada sesión, las apps opcionales para ampliar.",
@@ -790,7 +792,7 @@ const NEW = {
   "dates": ["Monday 30/11/2026", "Monday 07/12/2026", "Monday 14/12/2026", "Monday 21/12/2026"],
   "tz": [["Mexico (CDMX)", "10:00"], ["Central America", "10:00"], ["Colombia · Peru · Ecuador", "11:00"], ["Cuba · Panama", "11:00"], ["Venezuela · Bolivia", "12:00"], ["Dominican Rep. · P. Rico", "12:00"], ["Chile · Paraguay", "13:00"], ["Argentina · Uruguay", "13:00"], ["Brazil (Brasília)", "13:00"], ["Portugal", "16:00"]],
   "phasesH": "The apps at each stage of academic work",
-  "phasesLead": "The twelve course apps, the eleven optional ones and other complementary apps from the catalogue, arranged by the stage of teaching and research in which they are used.",
+  "phasesLead": "The twelve course apps, the twelve optional ones and other complementary apps from the catalogue, arranged by the stage of teaching and research in which they are used.",
   "phasesNote": "Optional apps extend each session if you have time or want to continue on your own; complementary apps are not covered in the course. Check which AI provider each one supports. Student data is anonymised and the grade is always signed by the lecturer.",
   "legOpt": "Optional", "tagOpt": "opt.",
   "phases": ["Design the course", "Assess", "AI literacy and integrity", "State of the art", "Analyse and write", "Publish and fund", "Build and support"],
@@ -801,7 +803,8 @@ const NEW = {
    "refinia": "Manuscript review through six lenses with anchored comments",
    "prismia": "Systematic review with two AI reviewers and an arbitrator",
    "autoresearch": "Improves a scientific document round by round against your rubric",
-   "arbitria": "Peer-review rehearsal with five reviewers before submission"
+   "arbitria": "Peer-review rehearsal with five reviewers before submission",
+   "convocatoria": "Which topics come up most in your exams, with calibrated probability"
   },
   "appsH": "The twelve apps",
   "appsLead": "Each app runs in the browser, with no installation or server, using OpenAI, Google Gemini or Anthropic Claude. The AI proposes and the code checks. Under each session, the optional apps to go further.",
@@ -859,7 +862,7 @@ const NEW = {
   "dates": ["Segunda 30/11/2026", "Segunda 07/12/2026", "Segunda 14/12/2026", "Segunda 21/12/2026"],
   "tz": [["México (CDMX)", "10:00"], ["América Central", "10:00"], ["Colômbia · Peru · Equador", "11:00"], ["Cuba · Panamá", "11:00"], ["Venezuela · Bolívia", "12:00"], ["Rep. Dominicana · P. Rico", "12:00"], ["Chile · Paraguai", "13:00"], ["Argentina · Uruguai", "13:00"], ["Brasil (Brasília)", "13:00"], ["Portugal", "16:00"]],
   "phasesH": "As apps em cada fase do trabalho académico",
-  "phasesLead": "As doze apps do curso, as onze opcionais e outras complementares do catálogo, organizadas pela fase do trabalho de ensinar e investigar em que se usam.",
+  "phasesLead": "As doze apps do curso, as doze opcionais e outras complementares do catálogo, organizadas pela fase do trabalho de ensinar e investigar em que se usam.",
   "phasesNote": "As opcionais ampliam cada sessão se te sobrar tempo ou quiseres continuar por tua conta; as complementares não se trabalham no curso. Verifica em cada uma que fornecedor de IA admite. Os dados dos estudantes são anonimizados e a nota é sempre assinada pelo professor.",
   "legOpt": "Opcional", "tagOpt": "opc.",
   "phases": ["Desenhar a unidade curricular", "Avaliar", "Literacia e integridade", "Estado da arte", "Analisar e redigir", "Publicar e financiar", "Criar e acompanhar"],
@@ -870,7 +873,8 @@ const NEW = {
    "refinia": "Revisão do manuscrito com seis lentes e comentários ancorados",
    "prismia": "Revisão sistemática com dois revisores de IA e um árbitro",
    "autoresearch": "Melhora um documento científico ronda a ronda com a tua rubrica",
-   "arbitria": "Simulação de revisão por pares com cinco revisores antes do envio"
+   "arbitria": "Simulação de revisão por pares com cinco revisores antes do envio",
+   "convocatoria": "Que temas saem mais nos teus exames, com probabilidade calibrada"
   },
   "appsH": "As doze apps",
   "appsLead": "Cada app funciona no navegador, sem instalação nem servidor, com OpenAI, Google Gemini ou Anthropic Claude. A IA propõe e o código verifica. Em cada sessão, as apps opcionais para ampliar.",
