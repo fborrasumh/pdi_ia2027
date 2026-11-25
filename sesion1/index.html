@@ -183,6 +183,155 @@ body.lectura .news { grid-template-columns: 1fr !important; }
 .mapa .acto.dos { display: grid; grid-template-columns: 1fr 1fr; column-gap: 6px; align-content: start; }
 .mapa .acto.dos h3 { grid-column: 1 / -1; }
 body.lectura .mapa .acto.dos { grid-template-columns: 1fr; }
+/* ── transiciones entre diapositivas ── */
+.slide { display: flex; opacity: 0; visibility: hidden; transform: translateX(46px) scale(.985); pointer-events: none;
+  transition: opacity .45s ease, transform .65s cubic-bezier(.2,.75,.2,1), visibility 0s linear .65s; }
+.slide.on { opacity: 1; visibility: visible; transform: none; pointer-events: auto; transition-delay: 0s; }
+#stage.atras .slide:not(.on) { transform: translateX(-46px) scale(.985); }
+@keyframes subir { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes aparecer { from { opacity: 0; } to { opacity: 1; } }
+.slide.on .cards > *, .slide.on .flow > *, .slide.on .news > *, .slide.on .mapa > * { animation: subir .6s cubic-bezier(.2,.75,.2,1) both; }
+.slide.on .cards > *:nth-child(2), .slide.on .flow > *:nth-child(2), .slide.on .news > *:nth-child(2), .slide.on .mapa > *:nth-child(2) { animation-delay: .07s; }
+.slide.on .cards > *:nth-child(3), .slide.on .flow > *:nth-child(3), .slide.on .news > *:nth-child(3), .slide.on .mapa > *:nth-child(3) { animation-delay: .14s; }
+.slide.on .cards > *:nth-child(4), .slide.on .flow > *:nth-child(4), .slide.on .news > *:nth-child(4), .slide.on .mapa > *:nth-child(4) { animation-delay: .21s; }
+.slide.on .cards > *:nth-child(5), .slide.on .flow > *:nth-child(5), .slide.on .mapa > *:nth-child(5) { animation-delay: .28s; }
+.slide.on .cards > *:nth-child(6), .slide.on .flow > *:nth-child(6) { animation-delay: .35s; }
+.slide.on .flow > *:nth-child(7) { animation-delay: .42s; }
+.slide.on > .note-box, .slide.on .body .note-box { animation: subir .6s .3s cubic-bezier(.2,.75,.2,1) both; }
+
+/* ── acto 4: la explosión de inteligencia ── */
+.fx { background: #05060f; color: #e8ecff; }
+.fx::before { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(900px 520px at 85% -10%, rgba(124,58,237,.34), transparent 60%), radial-gradient(760px 520px at -10% 115%, rgba(6,182,212,.24), transparent 60%); }
+.fx > :not(.src):not(.foot):not(canvas):not(aside) { position: relative; z-index: 1; }
+.fx .src, .fx .foot { z-index: 1; color: #8b93b8; }
+.fx canvas.bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+.fx h2 { color: #fff; }
+.fx .lead { color: #aab3d6; }
+.fx p, .fx li { color: #d5dbf5; }
+.fx .card { background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.11); color: #e8ecff; backdrop-filter: blur(6px); }
+.fx .card h3 { color: #fff; }
+.fx .card p { color: #c3cbee; }
+.fx .note-box { background: rgba(255,255,255,.06); color: #e8ecff; border-left-color: var(--c, #5eead4); }
+.fx .glowc { border-top: 3px solid var(--c); box-shadow: 0 0 0 1px rgba(255,255,255,.03), 0 18px 50px -22px var(--c); }
+.grad { background: linear-gradient(90deg, #5eead4, #a78bfa 50%, #f472b6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.fx-sep { justify-content: center; }
+.fx-num { font-size: 150px !important; background: linear-gradient(180deg, #a78bfa, rgba(167,139,250,0)); -webkit-background-clip: text; background-clip: text; color: transparent !important; }
+.fx-title { font-size: 76px !important; letter-spacing: -.03em; line-height: 1.02 !important; }
+.slide.on .fx-title { animation: titulo 1.4s cubic-bezier(.2,.75,.2,1) both; }
+.slide.on.fx-sep .lead { animation: subir 1s .6s both; }
+@keyframes titulo { from { opacity: 0; letter-spacing: .12em; filter: blur(12px); } to { opacity: 1; letter-spacing: -.03em; filter: none; } }
+.mega { font-family: 'Sora', 'Inter', system-ui, sans-serif; font-weight: 800; font-size: 52px; line-height: 1; color: var(--c, #5eead4); text-shadow: 0 0 28px color-mix(in srgb, var(--c, #5eead4) 45%, transparent); margin-bottom: 8px; }
+.fx .card h3 + p, .fx .mega + p { margin-top: 4px; }
+.meter { position: relative; height: 10px; border-radius: 99px; background: rgba(255,255,255,.1); margin: 16px 0 22px; }
+.meter i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 99px; background: linear-gradient(90deg, #5eead4, #a78bfa); box-shadow: 0 0 18px #5eead4; }
+.slide.on .meter i { animation: llenar 1.6s .3s cubic-bezier(.2,.75,.2,1) both; }
+@keyframes llenar { from { width: 0; } }
+.meter b { position: absolute; top: 14px; transform: translateX(-50%); font-size: 11.5px; font-weight: 600; color: #8b93b8; white-space: nowrap; }
+.meter b::before { content: ''; position: absolute; left: 50%; top: -18px; width: 2px; height: 14px; background: rgba(255,255,255,.35); }
+/* bucle */
+.loopbox { flex: 1.05; display: flex; justify-content: center; }
+.loop { width: 100%; max-width: 470px; overflow: visible; }
+.loop .node { fill: #0b1030; stroke: rgba(255,255,255,.25); stroke-width: 1.5; }
+.loop .ico { font-size: 28px; text-anchor: middle; }
+.loop .lbl { fill: #c3cbee; font: 600 15px Inter, sans-serif; text-anchor: middle; }
+.loop .comet { fill: #fff; }
+.loop .ctr { fill: #fff; font: 800 46px Sora, sans-serif; text-anchor: middle; }
+.loop .ctr2 { fill: #8b93b8; font: 500 14px Inter, sans-serif; text-anchor: middle; letter-spacing: .08em; text-transform: uppercase; }
+.loop .ring { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.slide.on .loop .ring { animation: trazar 1.8s cubic-bezier(.6,0,.2,1) both; }
+@keyframes trazar { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.quote { font-family: 'Sora', 'Inter', system-ui, sans-serif; font-size: 27px; font-weight: 700; line-height: 1.25; color: #fff; }
+.quote span { display: block; font: 500 15px Inter, sans-serif; color: #8b93b8; margin-top: 10px; letter-spacing: .06em; text-transform: uppercase; }
+/* horizonte */
+.hzwrap { flex: 1.45; min-width: 0; }
+.hzwrap svg, .fcwrap svg { width: 100%; height: auto; overflow: visible; }
+.hzside label { font-size: 17px; color: #d5dbf5; display: block; }
+.hzside label b { font-family: Sora, sans-serif; font-size: 24px; color: #f472b6; }
+.hzside input[type=range] { width: 100%; margin: 14px 0 10px; accent-color: #f472b6; }
+.hzbtn { display: flex; flex-wrap: wrap; gap: 6px; }
+.hzbtn button { font: 600 12.5px Inter, sans-serif; color: #c3cbee; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 99px; padding: 5px 10px; cursor: pointer; }
+.hzbtn button.on { background: #f472b6; color: #05060f; border-color: #f472b6; }
+.hzout { margin-top: 16px; display: grid; gap: 8px; }
+.hzout div { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 9px 12px; border-radius: 10px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); font-size: 15px; color: #c3cbee; }
+.hzout div b { font-family: Sora, sans-serif; font-size: 19px; color: #fff; white-space: nowrap; }
+svg .ax { stroke: rgba(255,255,255,.12); stroke-width: 1; }
+svg .axt { fill: #8b93b8; font: 500 15px Inter, sans-serif; }
+svg .thr { stroke: rgba(251,191,36,.45); stroke-dasharray: 4 5; }
+svg .thrt { fill: #fbbf24; font: 600 15px Inter, sans-serif; }
+svg .meas { fill: none; stroke: #5eead4; stroke-width: 3; filter: drop-shadow(0 0 6px #5eead4); stroke-dasharray: 1; }
+svg .proj { fill: none; stroke: #f472b6; stroke-width: 3; stroke-dasharray: 8 7; filter: drop-shadow(0 0 7px #f472b6); }
+svg .pt { fill: #05060f; stroke: #5eead4; stroke-width: 2.5; }
+svg .ptl { fill: #e8ecff; font: 600 15px Inter, sans-serif; }
+svg .star { fill: #fbbf24; filter: drop-shadow(0 0 6px #fbbf24); }
+svg .hoyl { stroke: rgba(255,255,255,.5); stroke-dasharray: 2 4; }
+svg .hoyt { fill: #fff; font: 700 15px Inter, sans-serif; }
+.slide.on svg .meas { animation: trazar 1.8s .2s cubic-bezier(.6,0,.2,1) both; }
+.slide.on svg .pt, .slide.on svg .ptl { animation: aparecer .5s both; animation-delay: calc(.25s + var(--k, 0) * .22s); }
+.slide.on svg .proj { animation: aparecer 1s 1.9s both; }
+.slide.on svg .thr, .slide.on svg .thrt { animation: aparecer .8s 1.5s both; }
+svg .pulse { fill: #f472b6; transform-box: fill-box; transform-origin: center; animation: latir 1.6s infinite; }
+@keyframes latir { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(3.2); } }
+/* previsiones */
+.fcwrap { flex: 1.3; min-width: 0; }
+svg .fcl { fill: none; stroke: #f472b6; stroke-width: 3.5; filter: drop-shadow(0 0 8px #f472b6); stroke-dasharray: 1; }
+svg .diag { stroke: rgba(255,255,255,.4); stroke-dasharray: 5 6; }
+svg .fcp { fill: #05060f; stroke: #f472b6; stroke-width: 3; }
+svg .fct { fill: #fff; font: 800 18px Sora, sans-serif; }
+svg .fcs { fill: #aab3d6; font: 500 14px Inter, sans-serif; }
+.slide.on svg .fcl { animation: trazar 2.2s .3s cubic-bezier(.6,0,.2,1) both; }
+.slide.on svg .fcp, .slide.on svg .fct, .slide.on svg .fcs { animation: aparecer .5s both; animation-delay: calc(.4s + var(--k, 0) * .5s); }
+/* combustible y dinero */
+.spark { width: 100%; height: 60px; margin-top: 10px; }
+.spark path { fill: none; stroke: var(--c); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; filter: drop-shadow(0 0 6px var(--c)); }
+.slide.on .spark path { animation: trazar 1.6s .4s cubic-bezier(.6,0,.2,1) both; }
+.capex { display: grid; gap: 14px; margin-top: 14px; }
+.cx { display: grid; grid-template-columns: 56px 1fr 70px; align-items: center; gap: 12px; }
+.cx span { font: 700 18px Sora, sans-serif; color: #aab3d6; }
+.cx b { font: 800 30px Sora, sans-serif; color: #fff; text-align: right; }
+.cbar { height: 46px; border-radius: 10px; background: rgba(255,255,255,.05); overflow: hidden; }
+.cbar i { display: block; height: 100%; width: var(--w); border-radius: 10px; background: linear-gradient(90deg, #334155, #64748b); }
+.cx.hot .cbar i { background: linear-gradient(90deg, #a78bfa, #f472b6); box-shadow: 0 0 30px #f472b6; }
+.slide.on .cbar i { animation: llenar 1.5s .3s cubic-bezier(.2,.75,.2,1) both; }
+.slide.on .cx.hot .cbar i { animation-delay: .7s; }
+/* cronología */
+.tlx { position: relative; flex: 1; display: grid; grid-template-columns: repeat(9, 1fr); margin: 10px 0 40px; }
+.tlx .line { position: absolute; left: 0; right: 33.3%; top: 50%; height: 3px; background: linear-gradient(90deg, #5eead4, #a78bfa); box-shadow: 0 0 14px #a78bfa; }
+.tlx .line.fut { left: 66.7%; right: 0; background: repeating-linear-gradient(90deg, #f472b6 0 10px, transparent 10px 18px); box-shadow: none; }
+.slide.on .tlx .line:not(.fut) { animation: crecer 1.6s cubic-bezier(.6,0,.2,1) both; transform-origin: left; }
+.slide.on .tlx .line.fut { animation: aparecer 1s 1.4s both; }
+@keyframes crecer { from { transform: scaleX(0); } }
+.tlx .it { position: relative; }
+.tlx .it i { position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; margin: -6.5px 0 0 -8px; border-radius: 50%; background: #5eead4; box-shadow: 0 0 14px #5eead4; }
+.tlx .it.fut i { background: #05060f; border: 2.5px solid #f472b6; box-shadow: 0 0 12px #f472b6; }
+.tlx .it.hoy i { background: #fbbf24; box-shadow: 0 0 0 0 rgba(251,191,36,.7); animation: faro 1.8s infinite; }
+@keyframes faro { 0% { box-shadow: 0 0 0 0 rgba(251,191,36,.7); } 100% { box-shadow: 0 0 0 22px rgba(251,191,36,0); } }
+.tlx .tx { position: absolute; left: -42%; right: -42%; font-size: 13.5px; line-height: 1.3; color: #c3cbee; padding: 10px; border-radius: 10px; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.1); }
+.tlx .tx { font-size: 14px; }
+.tlx .tx b { display: block; font: 700 13px Sora, sans-serif; color: #5eead4; margin-bottom: 3px; }
+.tlx .it.fut .tx { border-style: dashed; border-color: rgba(244,114,182,.5); }
+.tlx .it.fut .tx b { color: #f472b6; }
+.tlx .it.hoy .tx b { color: #fbbf24; }
+.tlx .up .tx { bottom: calc(50% + 22px); }
+.tlx .dn .tx { top: calc(50% + 22px); }
+.slide.on .tlx .it { animation: subir .55s both; animation-delay: calc(.3s + var(--k) * .17s); }
+.ico2 { font-size: 30px; display: block; margin-bottom: 6px; }
+/* modo lectura y movimiento reducido */
+body.lectura .slide { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
+body.lectura .fx-title { font-size: 40px !important; }
+body.lectura .tlx { display: block; margin: 0; }
+body.lectura .tlx .line { display: none; }
+body.lectura .tlx .it { margin-bottom: 10px; }
+body.lectura .tlx .it i { display: none; }
+body.lectura .tlx .tx { position: static; }
+body.lectura .loopbox, body.lectura .hzwrap, body.lectura .fcwrap { width: 100%; }
+body.lectura .cx { grid-template-columns: 46px 1fr 60px; }
+@media (prefers-reduced-motion: reduce) { .slide, .slide * { transition: none !important; animation: none !important; } }
+
+.mapa.v3 { align-self: flex-start; margin-top: 18px; }
+.mapa.v3 a { font-size: 13.5px; padding: 2px 4px; }
+.mapa.v3 { grid-template-columns: 1fr 2fr 1.05fr 1fr; gap: 12px; }
+.mapa .pila { display: grid; gap: 12px; align-content: start; }
 </style>
 </head>
 <body>
@@ -203,7 +352,7 @@ body.lectura .mapa .acto.dos { grid-template-columns: 1fr; }
   <p class="lead" style="font-size:24px;max-width:900px">Qué hay detrás de un chat de IA, cuánto cuesta de verdad y cómo usarla con tu propia clave sin perder el control del gasto ni de los datos de tu docencia y tu investigación.</p>
   <p style="font-size:18px;color:#c9d3e6">Fernando Borrás Rocher · Universidad Miguel Hernández de Elche</p>
   <div class="logos"><span style="font-size:16px;color:#c9d3e6">Del prompt al DOI · Study Abroad UMH</span></div>
-  <aside class="notes">Sesión de 2 h 30 min: unos 90 minutos de explicación en cuatro actos (con una demostración en directo de CriterIA), 40 minutos de práctica y margen para preguntas. Pasa con las flechas o deslizando; la tecla N abre estas notas y F, la pantalla completa.</aside>
+  <aside class="notes">Sesión de 2 h 30 min: unos 105 minutos de explicación en cinco actos (con una demostración en directo de CriterIA y el acto 4 sobre la explosión de inteligencia) y 40 minutos de práctica. Si vas justo, abrevia el acto 3 o salta «El combustible» y «El dinero». Pasa con las flechas o deslizando; la tecla N abre estas notas y F, la pantalla completa.</aside>
 </section>
 
 <section class="slide">
@@ -216,7 +365,7 @@ body.lectura .mapa .acto.dos { grid-template-columns: 1fr; }
       <div class="card" style="--c:var(--enc)"><span class="step-n">3</span><h3>Tu ficha</h3><p>Tu asignatura, tu línea de investigación y tu idea de app: el hilo que recorre las cuatro sesiones.</p></div>
     </div>
   </div>
-  <div class="note-box"><b>Hoja de ruta:</b> Acto 1, la infraestructura detrás del chat · Acto 2, la economía del modelo · Acto 3, criterios de elección · Acto 4, de la clave a las apps · Práctica (40 min).</div>
+  <div class="note-box"><b>Hoja de ruta:</b> Acto 1, la infraestructura detrás del chat · Acto 2, la economía del modelo · Acto 3, criterios de elección · Acto 4, la explosión de inteligencia · Acto 5, de la clave a tu app · Práctica (40 min).</div>
   <aside class="notes">Los puntos 2 y 3 son el entregable de la sesión. Si alguien no puede pagar con tarjeta en dólares, tiene un plan B con una clave gratuita de Gemini (diapositiva de la práctica).</aside>
 </section>
 
@@ -236,13 +385,13 @@ body.lectura .mapa .acto.dos { grid-template-columns: 1fr; }
 
 <section class="slide">
   <div class="kicker">Hoja de ruta</div>
-  <h2>37 conceptos en cuatro actos</h2>
+  <h2>46 conceptos en cinco actos</h2>
   <div class="body">
-    <div class="mapa v2">
-      <div class="acto" style="--c:#6ea0ff"><h3>Acto 1 · Infraestructura</h3><a href="#" data-go="Escribes un texto. El modelo devuelve otro."><span>1</span>Prompt y respuesta</a><a href="#" data-go="Un modelo de lenguaje predice la siguiente palabra"><span>2</span>Predice la siguiente palabra</a><a href="#" data-go="Quién fabrica los modelos"><span>3</span>Proveedores</a><a href="#" data-go="Quién va en cabeza hoy" class="nuevo"><span>4</span>Quién va en cabeza hoy</a><a href="#" data-go="En la nube o en tu ordenador"><span>5</span>Nube o local</a><a href="#" data-go="Suscripción o clave de API"><span>6</span>Suscripción o API</a><a href="#" data-go="Qué es una API y por qué la usan las apps del curso"><span>7</span>API y clave</a><a href="#" data-go="Del chat al agente" class="nuevo"><span>8</span>Del chat al agente</a></div>
-      <div class="acto" style="--c:#f59e0b"><h3>Acto 2 · Economía</h3><a href="#" data-go="El modelo no lee palabras: lee tokens"><span>9</span>Token</a><a href="#" data-go="Se paga lo que envías y lo que recibes"><span>10</span>Entrada y salida</a><a href="#" data-go="De un modelo a otro, el precio cambia 80 veces"><span>11</span>Precio por millón</a><a href="#" data-go="¿Cuánto cuesta una tarea de docencia o de investigación?"><span>12</span>Coste de una tarea</a><a href="#" data-go="Una sesión entera de prácticas: 3 céntimos"><span>13</span>Gasto real</a></div>
-      <div class="acto dos" style="--c:#34d399"><h3>Acto 3 · Criterios</h3><a href="#" data-go="La IA y el examen MIR: del 51 % al 97 % en tres años"><span>14</span>Exámenes: MIR y ENEM</a><a href="#" data-go="«La IA nunca podrá…»" class="nuevo"><span>15</span>«La IA nunca podrá…»</a><a href="#" data-go="Los hallazgos sobre la IA caducan en unos 16 meses" class="nuevo"><span>16</span>Los hallazgos caducan</a><a href="#" data-go="Las citas inventadas ya están en la literatura" class="nuevo"><span>17</span>Citas inventadas</a><a href="#" data-go="¿Existe esta referencia? Lo comprobamos ahora" class="nuevo"><span>18</span>Demo: CriterIA</a><a href="#" data-go="Las tareas que completa la IA son cada vez más largas" class="nuevo"><span>19</span>Horizonte de tareas</a><a href="#" data-go="Una sociedad de 936 científicos de IA" class="nuevo"><span>20</span>Científicos de IA</a><a href="#" data-go="En investigación, ya es la norma" class="nuevo"><span>21</span>La IA en la universidad</a><a href="#" data-go="Anota el uso mientras trabajas: ProcedencIA" class="nuevo"><span>22</span>Registrar el uso</a><a href="#" data-go="Qué funciona: tutor sí, atajo no"><span>23</span>Qué funciona en el aula</a><a href="#" data-go="Los detectores de IA no sirven como prueba" class="nuevo"><span>24</span>Detectores de IA</a><a href="#" data-go="Cinco niveles de uso permitido, tarea a tarea" class="nuevo"><span>25</span>Niveles de uso</a><a href="#" data-go="«Shadow AI»: un riesgo… y una señal" class="nuevo"><span>26</span>Shadow AI</a><a href="#" data-go="No hace falta el modelo más caro"><span>27</span>Calidad y coste</a><a href="#" data-go="La ventana de contexto: cuánto texto cabe en una petición"><span>28</span>Ventana de contexto</a><a href="#" data-go="Lo que las apps ajustan por ti"><span>29</span>Temperatura y sistema</a><a href="#" data-go="Datos personales: la responsabilidad es tuya, en cualquier país"><span>30</span>Datos y normativa</a><a href="#" data-go="Cuatro normas de uso"><span>31</span>Cuatro normas de uso</a><a href="#" data-go="Prompts ocultos: cuando el PDF da órdenes a la IA" class="nuevo"><span>32</span>Prompts ocultos</a></div>
-      <div class="acto" style="--c:#c084fc"><h3>Acto 4 · De la clave a tu app</h3><a href="#" data-go="Apps de un solo archivo, con tu clave"><span>33</span>App de un solo archivo</a><a href="#" data-go="Cuatro sesiones, doce apps y tu propia app con DOI"><span>34</span>Las cuatro sesiones</a><a href="#" data-go="Tu ficha recorre las cuatro sesiones"><span>35</span>Tu ficha</a><a href="#" data-go="Del prompt al DOI: cómo se publica tu app" class="nuevo"><span>36</span>Del prompt al DOI</a><a href="#" data-go="Apps de profesores como tú, todas con DOI" class="nuevo"><span>37</span>Apps de colegas</a></div>
+    <div class="mapa v3">
+      <div class="pila"><div class="acto" style="--c:#6ea0ff"><h3>Acto 1 · Infraestructura</h3><a href="#" data-go="Escribes un texto. El modelo devuelve otro."><span>1</span>Prompt y respuesta</a><a href="#" data-go="Un modelo de lenguaje predice la siguiente palabra"><span>2</span>Predice la siguiente palabra</a><a href="#" data-go="Quién fabrica los modelos"><span>3</span>Proveedores</a><a href="#" data-go="Quién va en cabeza hoy" class="nuevo"><span>4</span>Quién va en cabeza</a><a href="#" data-go="En la nube o en tu ordenador"><span>5</span>Nube o local</a><a href="#" data-go="Suscripción o clave de API"><span>6</span>Suscripción o API</a><a href="#" data-go="Qué es una API y por qué la usan las apps del curso"><span>7</span>API y clave</a><a href="#" data-go="Del chat al agente" class="nuevo"><span>8</span>Del chat al agente</a></div><div class="acto" style="--c:#f59e0b"><h3>Acto 2 · Economía</h3><a href="#" data-go="El modelo no lee palabras: lee tokens"><span>9</span>Token</a><a href="#" data-go="Se paga lo que envías y lo que recibes"><span>10</span>Entrada y salida</a><a href="#" data-go="De un modelo a otro, el precio cambia 80 veces"><span>11</span>Precio por millón</a><a href="#" data-go="¿Cuánto cuesta una tarea de docencia o de investigación?"><span>12</span>Coste de una tarea</a><a href="#" data-go="Una sesión entera de prácticas: 3 céntimos"><span>13</span>Gasto real</a></div></div>
+      <div class="acto dos" style="--c:#34d399"><h3>Acto 3 · Criterios</h3><a href="#" data-go="La IA y el examen MIR: del 51 % al 97 % en tres años"><span>14</span>MIR y ENEM</a><a href="#" data-go="«La IA nunca podrá…»" class="nuevo"><span>15</span>«Nunca podrá…»</a><a href="#" data-go="Los hallazgos sobre la IA caducan en unos 16 meses" class="nuevo"><span>16</span>Hallazgos que caducan</a><a href="#" data-go="Las citas inventadas ya están en la literatura" class="nuevo"><span>17</span>Citas inventadas</a><a href="#" data-go="¿Existe esta referencia? Lo comprobamos ahora" class="nuevo"><span>18</span>Demo: CriterIA</a><a href="#" data-go="Las tareas que completa la IA son cada vez más largas" class="nuevo"><span>19</span>Horizonte de tareas</a><a href="#" data-go="Una sociedad de 936 científicos de IA" class="nuevo"><span>20</span>Científicos de IA</a><a href="#" data-go="En investigación, ya es la norma" class="nuevo"><span>21</span>IA en la universidad</a><a href="#" data-go="Anota el uso mientras trabajas: ProcedencIA" class="nuevo"><span>22</span>Registrar el uso</a><a href="#" data-go="Qué funciona: tutor sí, atajo no"><span>23</span>Qué funciona</a><a href="#" data-go="Los detectores de IA no sirven como prueba" class="nuevo"><span>24</span>Detectores</a><a href="#" data-go="Cinco niveles de uso permitido, tarea a tarea" class="nuevo"><span>25</span>Niveles de uso</a><a href="#" data-go="«Shadow AI»: un riesgo… y una señal" class="nuevo"><span>26</span>Shadow AI</a><a href="#" data-go="No hace falta el modelo más caro"><span>27</span>Calidad y coste</a><a href="#" data-go="La ventana de contexto: cuánto texto cabe en una petición"><span>28</span>Contexto</a><a href="#" data-go="Lo que las apps ajustan por ti"><span>29</span>Temperatura</a><a href="#" data-go="Datos personales: la responsabilidad es tuya, en cualquier país"><span>30</span>Datos y normativa</a><a href="#" data-go="Cuatro normas de uso"><span>31</span>Normas de uso</a><a href="#" data-go="Prompts ocultos: cuando el PDF da órdenes a la IA" class="nuevo"><span>32</span>Prompts ocultos</a></div>
+      <div class="acto" style="--c:#f472b6"><h3>Acto 4 · Lo que viene</h3><a href="#" data-go="El bucle: una IA que mejora la IA" class="nuevo"><span>33</span>El bucle</a><a href="#" data-go="El bucle ya ha empezado" class="nuevo"><span>34</span>Ya ha empezado</a><a href="#" data-go="Si la curva sigue: de horas a meses de trabajo" class="nuevo"><span>35</span>Si la curva sigue</a><a href="#" data-go="El combustible: tres exponenciales a la vez" class="nuevo"><span>36</span>El combustible</a><a href="#" data-go="El dinero: la mayor inversión de este siglo" class="nuevo"><span>37</span>El dinero</a><a href="#" data-go="Las previsiones se desploman" class="nuevo"><span>38</span>Previsiones</a><a href="#" data-go="De lo que ya ha pasado a lo que se prevé" class="nuevo"><span>39</span>Cronología</a><a href="#" data-go="¿Y en la universidad? Cuatro escenarios para pensar" class="nuevo"><span>40</span>Universidad</a><a href="#" data-go="Lo que tendría que fallar para que no ocurra" class="nuevo"><span>41</span>Los frenos</a></div>
+      <div class="acto" style="--c:#c084fc"><h3>Acto 5 · Tu app</h3><a href="#" data-go="Apps de un solo archivo, con tu clave"><span>42</span>App de un archivo</a><a href="#" data-go="Cuatro sesiones, doce apps y tu propia app con DOI"><span>43</span>Las sesiones</a><a href="#" data-go="Tu ficha recorre las cuatro sesiones"><span>44</span>Tu ficha</a><a href="#" data-go="Del prompt al DOI: cómo se publica tu app" class="nuevo"><span>45</span>Del prompt al DOI</a><a href="#" data-go="Apps de profesores como tú, todas con DOI" class="nuevo"><span>46</span>Apps de colegas</a></div>
     </div>
   </div>
   <div class="src">Pulsa un concepto para ir a su diapositiva. Las marcadas como «nuevo» recogen novedades de 2026.</div>
@@ -902,14 +1051,201 @@ PAPER: <span class="v">{{paper_text}}</span></pre>
   <aside class="notes">Esto se llama inyección de prompt. Es fraude cuando busca una revisión favorable; ICML 2025 lo calificó de mala conducta científica. Para quien usa IA para revisar: el texto de un documento son datos, nunca instrucciones.</aside>
 </section>
 
+<section class="slide fx sep fx-sep" data-fx="warp">
+  <canvas class="bg"></canvas>
+  <div class="num fx-num">4</div>
+  <h2 class="fx-title"><span class="grad">La explosión de inteligencia</span></h2>
+  <p class="lead">Lo que viene cuando la IA empieza a hacer la investigación que mejora la IA. Ya no es ciencia ficción: es el plan declarado de los laboratorios.</p>
+  <aside class="notes">Cambio de tono: apaga la luz si puedes. Este acto dura unos 15 minutos. Mensaje central: la curva que hemos visto en el acto 3 puede acelerarse sola, porque la propia IA ya hace buena parte del trabajo de crear la siguiente IA. Si vas justo de tiempo, puedes saltarte «El combustible» y «El dinero».</aside>
+</section>
+
+<section class="slide fx" data-fx="loop">
+  <div class="kicker" style="--c:#5eead4">Acto 4 · Lo que viene</div>
+  <h2>El bucle: una IA que mejora la IA</h2>
+  <div class="body">
+    <div class="loopbox">
+      <svg viewBox="0 0 420 420" class="loop" aria-label="Bucle de automejora: IA más capaz, investiga y programa, entrena un modelo mejor">
+        <defs>
+          <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5eead4"/><stop offset=".5" stop-color="#a78bfa"/><stop offset="1" stop-color="#f472b6"/></linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <circle cx="210" cy="210" r="150" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="22"/>
+        <circle cx="210" cy="210" r="150" fill="none" stroke="url(#lg1)" stroke-width="3" class="ring" pathLength="1"/>
+        <g class="nodes">
+          <g transform="translate(210 60)"><circle r="34" class="node"/><text y="6" class="ico">🧠</text></g>
+          <g transform="translate(340 285)"><circle r="34" class="node"/><text y="6" class="ico">⚙️</text></g>
+          <g transform="translate(80 285)"><circle r="34" class="node"/><text y="6" class="ico">🚀</text></g>
+        </g>
+        <text x="210" y="14" class="lbl">IA más capaz</text>
+        <text x="372" y="345" class="lbl">investiga y programa</text>
+        <text x="48" y="345" class="lbl">entrena un modelo mejor</text>
+        <g class="trail"></g>
+        <circle r="9" class="comet" filter="url(#glow)" cx="210" cy="60"/>
+        <text x="210" y="205" class="ctr" id="loopN">×1</text>
+        <text x="210" y="235" class="ctr2">velocidad del bucle</text>
+      </svg>
+    </div>
+    <div class="col narrow">
+      <div class="quote">«La primera máquina ultrainteligente es el último invento que el ser humano necesitará hacer.»<span>I. J. Good, 1965</span></div>
+      <p style="margin-top:18px">Si la IA hace la investigación que crea la siguiente IA, cada vuelta del bucle es <b class="grad">más rápida</b> que la anterior.</p>
+      <div class="note-box" style="--c:#f472b6">Sept. 2026: investigadores de <b>OpenAI, Anthropic, Microsoft y Meta</b> avisan de que automatizar la I+D en IA podría comprimir <b>años de progreso en meses</b>, y piden supervisión pública.</div>
+    </div>
+  </div>
+  <div class="src">Good IJ. Speculations concerning the first ultraintelligent machine. Advances in Computers 1966;6:31-88 · Quartz, sept. 2026, sobre el artículo conjunto de investigadores de los cuatro laboratorios.</div>
+  <aside class="notes">Deja que el punto dé unas vueltas en silencio: cada vuelta va más rápida. Esa es toda la idea de la «explosión de inteligencia», propuesta por el matemático I. J. Good, que trabajó con Turing en Bletchley Park. La novedad de 2026 es que ya no lo dicen los futurólogos: lo dicen los responsables de investigación de los laboratorios.</aside>
+</section>
+
+<section class="slide fx" data-fx="count">
+  <div class="kicker" style="--c:#5eead4">Acto 4 · Lo que viene</div>
+  <h2>El bucle ya ha empezado</h2>
+  <p class="lead">Lo que cuentan los propios laboratorios sobre quién hace ya el trabajo de crear la IA.</p>
+  <div class="body">
+    <div class="cards c2" style="gap:18px">
+      <div class="card glowc" style="--c:#5eead4"><div class="mega" data-count="51" data-suf=" %">51 %</div><p>del trabajo de construir un modelo puntero de principios de 2026 lo hizo la IA, según la mediana del personal de <b>Anthropic</b> (ago. 2026).</p>
+        <div class="meter"><i style="width:51%"></i><b style="left:80%">80 % · 2027</b><b style="left:95%">95 % · 2030</b></div></div>
+      <div class="card glowc" style="--c:#a78bfa"><div class="mega" data-count="26" data-suf=" %">26 %</div><p>de las tareas de I+D de modelos las <b>dirige</b> Claude, frente a menos del 1 % en febrero de 2026. En más del 90 %, al menos colabora.</p></div>
+      <div class="card glowc" style="--c:#f472b6"><div class="mega" data-count="5.7" data-dec="1">5,7</div><p>jornadas de trabajo de agentes <b>por investigador y día</b> en OpenAI (oct. 2026). En mayo eran 0,5: once veces más en cinco meses.</p></div>
+      <div class="card glowc" style="--c:#fbbf24"><div class="mega">2028</div><p>Objetivo de OpenAI: un <b>investigador de IA automatizado</b> en marzo de 2028. El paso intermedio, un «becario» de investigación automatizado, lo alcanzó en septiembre de 2026.</p></div>
+    </div>
+  </div>
+  <div class="src">Forecasting Research Institute, «How close is recursive self-improvement?», 20 nov. 2026, con datos de Anthropic y OpenAI.</div>
+  <aside class="notes">Matiz importante: el 51 % es la mediana de lo que estima el propio personal, no una medición externa, y nadie ha visto aún a la IA trabajar de forma totalmente autónoma en estas tareas. Pero las cifras se mueven en meses: de menos del 1 % al 26 % en medio año. La previsión del personal de Anthropic: 80 % a finales de 2027 y 95 % en 2030.</aside>
+</section>
+
+<section class="slide fx" data-fx="horizon">
+  <div class="kicker" style="--c:#5eead4">Acto 4 · Lo que viene · interactiva</div>
+  <h2>Si la curva sigue: de horas a meses de trabajo</h2>
+  <div class="body" style="gap:26px">
+    <div class="hzwrap"><svg id="hz" viewBox="0 0 780 430" aria-label="Horizonte de tareas de la IA, medido y proyectado, en escala logarítmica"></svg></div>
+    <div class="col narrow hzside">
+      <label for="hzD">La duración de las tareas se duplica cada <b id="hzDv">3,6</b> meses</label>
+      <input type="range" id="hzD" min="2" max="8" step="0.1" value="3.6">
+      <div class="hzbtn"><button data-d="7">7 · 2019-2025</button><button data-d="3.6" class="on">3,6 · METR, nov. 2026</button><button data-d="2">2 · si se acelera</button></div>
+      <div class="hzout" id="hzOut"></div>
+    </div>
+  </div>
+  <div class="src">METR, Time Horizon 1.0 y 1.1 (puntos medidos, aproximados) y actualización del 20 nov. 2026 (duplicación cada 3,61 meses, IC 95 % 2,08-4,94; hasta 27 h en el subconjunto verificable de TH2). Horizonte al 50 % de éxito, en tareas de software e investigación.</div>
+  <aside class="notes">Mueve el control delante del grupo. Con el ritmo medido por METR en noviembre, la IA completaría la mitad de las veces tareas de un mes de trabajo humano hacia 2027 y de un año hacia 2028. Incluso con el ritmo lento de 2019-2025 (7 meses), el año de trabajo llega antes de 2031. Avisos honestos: «50 %» significa que falla la otra mitad, y son tareas de software; la investigación abierta va por detrás.</aside>
+</section>
+
+<section class="slide fx" data-fx="count">
+  <div class="kicker" style="--c:#5eead4">Acto 4 · Lo que viene</div>
+  <h2>El combustible: tres exponenciales a la vez</h2>
+  <div class="body">
+    <div class="cards c3" style="gap:20px">
+      <div class="card glowc" style="--c:#5eead4"><div class="mega">×<span data-count="5">5</span></div><h3>al año</h3><p>crece el cómputo con que se entrenan los modelos punteros desde 2020.</p><svg class="spark" viewBox="0 0 200 70"><path pathLength="1" d="M0 68 C70 66 110 60 140 44 S185 8 200 2"/></svg></div>
+      <div class="card glowc" style="--c:#a78bfa"><div class="mega">×<span data-count="3">3</span></div><h3>al año</h3><p>mejora la eficiencia del software: el mismo resultado con un tercio del cómputo.</p><svg class="spark" viewBox="0 0 200 70"><path pathLength="1" d="M0 68 C80 66 120 58 150 40 S190 14 200 6"/></svg></div>
+      <div class="card glowc" style="--c:#f472b6"><div class="mega">÷<span data-count="100">100</span></div><h3>al año</h3><p>baja el coste de usar un modelo con un rendimiento fijo: se reduce a la mitad cada dos meses.</p><svg class="spark" viewBox="0 0 200 70"><path pathLength="1" d="M0 2 C30 50 60 64 200 68"/></svg></div>
+    </div>
+  </div>
+  <div class="note-box" style="--c:#fbbf24">Cuenta aproximada: más cómputo (×5) por mejor software (×3) da unas <b>15 veces más «cómputo efectivo» cada año</b>. Y la IA que acelera la investigación se suma encima.</div>
+  <div class="src">Epoch AI, Trends in AI (actualizado el 5 feb. 2026): cómputo de entrenamiento ×5 al año, eficiencia del preentrenamiento ×3 al año, coste de inferencia a rendimiento fijo −2 órdenes de magnitud al año.</div>
+  <aside class="notes">Por eso los precios de la diapositiva del acto 2 bajan tan deprisa: lo que hoy cuesta un dólar, el año que viene puede costar un céntimo. Y por eso el curso no depende de un modelo concreto: las apps aprovechan la bajada sin cambiar nada.</aside>
+</section>
+
+<section class="slide fx" data-fx="count">
+  <div class="kicker" style="--c:#5eead4">Acto 4 · Lo que viene</div>
+  <h2>El dinero: la mayor inversión de este siglo</h2>
+  <div class="body">
+    <div class="col">
+      <p style="color:#aab3d6;font-size:17px">Inversión en capital de Alphabet, Amazon, Meta y Microsoft (miles de millones de dólares)</p>
+      <div class="capex">
+        <div class="cx"><span>2025</span><div class="cbar"><i style="--w:56.6%"></i></div><b data-count="410">410</b></div>
+        <div class="cx hot"><span>2026</span><div class="cbar"><i style="--w:100%"></i></div><b data-count="725">725</b></div>
+      </div>
+      <p style="margin-top:10px"><b class="grad" style="font-size:26px">+77 % en un año.</b> Solo en el tercer trimestre de 2026, 208.700 millones.</p>
+    </div>
+    <div class="col narrow">
+      <div class="card glowc" style="--c:#fbbf24"><div class="mega" style="font-size:64px"><span data-count="5.3" data-dec="1">5,3</span> billones $</div><p>de inversión prevista por esas cuatro empresas entre 2025 y 2030 (Goldman Sachs).</p></div>
+      <div class="note-box" style="--c:#f472b6">El gasto de 2026 de estas cuatro empresas supera el <b>PIB de Israel</b>.</div>
+    </div>
+  </div>
+  <div class="src">Financial Times y Yahoo Finance, resultados del primer trimestre de 2026 · The Motley Fool, tercer trimestre de 2026 · Goldman Sachs (vía Yahoo Finance, 2026) · The Register, 6 feb. 2026.</div>
+  <aside class="notes">«Billones» en español: millones de millones (trillions en inglés). Mensaje: con este dinero ya comprometido, los centros de datos de 2027 y 2028 se están construyendo ahora. La capacidad de cómputo va a seguir creciendo durante años aunque cambie la opinión pública.</aside>
+</section>
+
+<section class="slide fx" data-fx="forecast">
+  <div class="kicker" style="--c:#5eead4">Acto 4 · Lo que viene</div>
+  <h2>Las previsiones se desploman</h2>
+  <div class="body" style="gap:30px">
+    <div class="fcwrap"><svg id="fc" viewBox="0 0 620 400" aria-label="Fecha prevista de la primera IA general por la comunidad de Metaculus, según el año de la previsión"></svg></div>
+    <div class="col narrow">
+      <div class="card glowc" style="--c:#f472b6"><h3>Los que miden la curva de cerca</h3><p>El AI Futures Project (autores de «AI 2027») prevé ya un <b>investigador de IA sobrehumano en 2027</b>: medianas de mayo a noviembre. Kokotajlo adelantó la suya 19 meses.</p></div>
+      <div class="card" style="margin-top:14px"><h3>La encuesta académica (2024)</h3><p>Mediana para automatizar del todo el trabajo de un investigador de IA: <b>2052</b>. Una cifra que cada actualización empuja hacia atrás.</p></div>
+    </div>
+  </div>
+  <div class="src">Metaculus, «Date of general AI», según The Decoder (2023), 80.000 Hours (feb. 2026) y ETC Journal (oct. 2026) · AI Futures Project, actualización del 10 nov. 2026 · AI Impacts, ESPAI 2024 (vía FRI).</div>
+  <aside class="notes">La previsión de la comunidad de Metaculus ha caído de 2057 a finales de 2030 en cuatro años: cada vez queda menos distancia entre la fecha de la previsión y la fecha prevista. Ojo con las definiciones: cada pregunta define la «IA general» a su manera. Las previsiones del AI Futures Project suponen que no hay una ralentización deliberada.</aside>
+</section>
+
+<section class="slide fx" data-fx="none">
+  <div class="kicker" style="--c:#5eead4">Acto 4 · Lo que viene</div>
+  <h2>De lo que ya ha pasado a lo que se prevé</h2>
+  <div class="tlx">
+    <div class="line"></div><div class="line fut"></div>
+    <div class="it up" style="--k:0"><i></i><div class="tx"><b>mar. 2023</b>GPT-4 saca una A en el examen de Caplan</div></div>
+    <div class="it dn" style="--k:1"><i></i><div class="tx"><b>dic. 2024</b>o3: 87,5 % en ARC-AGI</div></div>
+    <div class="it up" style="--k:2"><i></i><div class="tx"><b>jul. 2025</b>Nivel de oro en la Olimpiada Internacional de Matemáticas</div></div>
+    <div class="it dn" style="--k:3"><i></i><div class="tx"><b>ago. 2026</b>Claude mejora la cota de ceros de la función zeta: del 41,6 al 67,2 %</div></div>
+    <div class="it up" style="--k:4"><i></i><div class="tx"><b>sept. 2026</b>OpenAI logra un becario de investigación automatizado</div></div>
+    <div class="it dn hoy" style="--k:5"><i></i><div class="tx"><b>nov. 2026 · hoy</b>Riemann certificada en Lean · ARC-AGI-3 al 100 % · 936 científicos de IA</div></div>
+    <div class="it up fut" style="--k:6"><i></i><div class="tx"><b>2027 · previsión</b>Investigador de IA sobrehumano (AI Futures Project)</div></div>
+    <div class="it dn fut" style="--k:7"><i></i><div class="tx"><b>mar. 2028 · objetivo</b>Investigador de IA automatizado (OpenAI)</div></div>
+    <div class="it up fut" style="--k:8"><i></i><div class="tx"><b>dic. 2030 · previsión</b>Primera IA general (mediana de Metaculus)</div></div>
+  </div>
+  <div class="src">Diapositivas anteriores de esta sesión · Anthropic, 10 ago. 2026 · Lean FRO y Mathlib, 21 nov. 2026 · ARC Prize, 17 nov. 2026 · FRI, 20 nov. 2026 · AI Futures Project, 10 nov. 2026 · Metaculus, oct. 2026.</div>
+  <aside class="notes">A la izquierda, hechos comprobados; a la derecha, previsiones y objetivos declarados. Fíjate en la densidad: entre 2023 y 2025 hay un hito por año; en 2026, varios por mes. Pregunta al grupo: ¿en qué punto de esta línea estará tu asignatura cuando la cursen los estudiantes que hoy empiezan el grado?</aside>
+</section>
+
+<section class="slide fx" data-fx="none">
+  <div class="kicker" style="--c:#5eead4">Acto 4 · Lo que viene</div>
+  <h2>¿Y en la universidad? Cuatro escenarios para pensar</h2>
+  <div class="body">
+    <div class="cards c2" style="gap:18px">
+      <div class="card glowc" style="--c:#5eead4"><span class="ico2">🧪</span><h3>Cada profesor, un laboratorio</h3><p>Si un investigador de OpenAI ya dirige casi seis jornadas de agentes al día, tu grupo puede tener decenas de «asistentes» que replican, programan y revisan.</p></div>
+      <div class="card glowc" style="--c:#a78bfa"><span class="ico2">🧭</span><h3>El juicio vale más que la ejecución</h3><p>Elegir la pregunta y decidir qué significa un resultado es justo lo que la IA aún hace peor. Es lo que hay que enseñar y lo que te diferencia.</p></div>
+      <div class="card glowc" style="--c:#f472b6"><span class="ico2">📝</span><h3>Se evalúa el proceso</h3><p>Un trabajo escrito sin supervisión ya no prueba quién lo ha hecho. Cuentan la defensa, la bitácora y el criterio con que se usó la IA.</p></div>
+      <div class="card glowc" style="--c:#fbbf24"><span class="ico2">🔖</span><h3>Verificar y publicar, la ventaja</h3><p>Cuando generar es casi gratis, lo escaso es lo comprobado y lo citable: referencias reales, código que se ejecuta y herramientas con DOI.</p></div>
+    </div>
+  </div>
+  <div class="src">Escenarios para el debate, no predicciones. Datos: FRI, 20 nov. 2026 (5,7 jornadas de agentes por investigador y día en OpenAI; el criterio de investigación, principal cuello de botella).</div>
+  <aside class="notes">Abre el debate: ¿cuál de los cuatro te parece más cercano en tu área? Enlaza con el resto del curso: la sesión 2 trabaja la evaluación (CriterIA, TFG Evaluator), la 3 la verificación en investigación y la 4 la publicación con DOI.</aside>
+</section>
+
+<section class="slide fx" data-fx="none">
+  <div class="kicker" style="--c:#5eead4">Acto 4 · Lo que viene</div>
+  <h2>Lo que tendría que fallar para que no ocurra</h2>
+  <div class="body">
+    <div class="cards c3" style="gap:16px">
+      <div class="card"><h3>🧭 El criterio</h3><p>La IA aún elige peor los objetivos de investigación. Las ideas clave de GPT-6 Astra salieron de personas.</p></div>
+      <div class="card"><h3>⏱️ La fiabilidad</h3><p>En OpenAI, los agentes terminan sin ayuda el 46 % de las tareas de 2 a 4 horas y el 35 % de las de 4 a 8.</p></div>
+      <div class="card"><h3>⚡ Energía y chips</h3><p>Un centro de datos de un gigavatio tarda unos dos años en construirse. El cómputo no crece por decreto.</p></div>
+      <div class="card"><h3>👁️ La supervisión</h3><p>Anthropic dice que no espera crear modelos sucesores de forma segura sin una supervisión humana significativa.</p></div>
+      <div class="card"><h3>🏛️ Una pausa deliberada</h3><p>Regulación o acuerdo entre laboratorios. Las previsiones de 2027 suponen que no la habrá.</p></div>
+      <div class="card"><h3>🤔 Los escépticos</h3><p>16 de 25 investigadores entrevistados dudan de que el bucle surja solo de mejoras graduales.</p></div>
+    </div>
+  </div>
+  <div class="note-box" style="--c:#5eead4">Ninguno de estos frenos ha parado la curva hasta ahora. Lo sensato es <b>prepararse para el escenario rápido</b> y alegrarse si llega despacio.</div>
+  <div class="src">FRI, «How close is recursive self-improvement?», 20 nov. 2026 · Epoch AI, Trends in AI, 2026 · AI Futures Project, 10 nov. 2026 · Field, Douglas y Krueger, ago. 2026.</div>
+  <aside class="notes">Diapositiva de honestidad: estos son los argumentos serios en contra, no los de «la IA nunca podrá…». Si alguno falla de verdad, la explosión se retrasa, pero la IA de hoy ya basta para cambiar la docencia y la investigación. Por eso el curso merece la pena en cualquier escenario.</aside>
+</section>
+
+<section class="slide fx sep fx-sep" data-fx="warp2">
+  <canvas class="bg"></canvas>
+  <div class="kicker" style="--c:#5eead4">Acto 4 · Para cerrar</div>
+  <h2 class="fx-title" style="font-size:60px">No sabemos la fecha.<br><span class="grad">Sabemos la dirección.</span></h2>
+  <p class="lead">En cualquier escenario, la mejor apuesta es la misma: aprender a <b style="color:#fff">dirigir</b>, <b style="color:#fff">verificar</b> y <b style="color:#fff">publicar</b> con IA. Es lo que vamos a hacer en estas cuatro sesiones, y empieza hoy, con tu clave.</p>
+  <aside class="notes">Pausa. Transición al acto 5: «Y para todo eso, lo primero es tener tu propia clave y tus herramientas. Vamos a ello.»</aside>
+</section>
+
 <section class="slide dark sep" style="--c:#c084fc">
-  <div class="num">4</div>
+  <div class="num">5</div>
   <h2>De la clave a las apps</h2>
   <p class="lead">Apps de un solo archivo que usan tu clave: las doce del curso, sesión a sesión.</p>
 </section>
 
 <section class="slide">
-  <div class="kicker" style="--c:var(--enc)">Acto 4 · La idea</div>
+  <div class="kicker" style="--c:var(--enc)">Acto 5 · La idea</div>
   <h2>Apps de un solo archivo, con tu clave</h2>
   <div class="body">
     <div class="col narrow">
@@ -926,7 +1262,7 @@ PAPER: <span class="v">{{paper_text}}</span></pre>
 </section>
 
 <section class="slide">
-  <div class="kicker" style="--c:var(--enc)">Acto 4 · El curso</div>
+  <div class="kicker" style="--c:var(--enc)">Acto 5 · El curso</div>
   <h2>Cuatro sesiones, doce apps y tu propia app con DOI</h2>
   <div class="body">
     <div class="cards c4" style="align-items:start">
@@ -940,7 +1276,7 @@ PAPER: <span class="v">{{paper_text}}</span></pre>
 </section>
 
 <section class="slide">
-  <div class="kicker" style="--c:var(--enc)">Acto 4 · El hilo conductor</div>
+  <div class="kicker" style="--c:var(--enc)">Acto 5 · El hilo conductor</div>
   <h2>Tu ficha recorre las cuatro sesiones</h2>
   <div class="body">
     <div class="col">
@@ -960,7 +1296,7 @@ PAPER: <span class="v">{{paper_text}}</span></pre>
 </section>
 
 <section class="slide">
-  <div class="kicker" style="--c:var(--ext)">Acto 4 · La meta</div>
+  <div class="kicker" style="--c:var(--ext)">Acto 5 · La meta</div>
   <h2>Del prompt al DOI: cómo se publica tu app</h2>
   <div class="body">
     <div class="col">
@@ -980,7 +1316,7 @@ PAPER: <span class="v">{{paper_text}}</span></pre>
 </section>
 
 <section class="slide">
-  <div class="kicker" style="--c:var(--ext)">Acto 4 · Ya lo han hecho</div>
+  <div class="kicker" style="--c:var(--ext)">Acto 5 · Ya lo han hecho</div>
   <h2>Apps de profesores como tú, todas con DOI</h2>
   <div class="body">
     <div class="cards c3">
@@ -1172,6 +1508,155 @@ PAPER: <span class="v">{{paper_text}}</span></pre>
 <script>
 (() => {
   'use strict';
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (tag, attrs = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+  const MES = ['ene.', 'feb.', 'mar.', 'abr.', 'may.', 'jun.', 'jul.', 'ago.', 'sept.', 'oct.', 'nov.', 'dic.'];
+  const fecha = t => { const y = Math.floor(t); const m = Math.min(11, Math.floor((t - y) * 12)); return `${MES[m]} ${y}`; };
+  const num = (v, d) => v.toFixed(d).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* contadores */
+  function contar(slide) {
+    slide.querySelectorAll('[data-count]').forEach(e => {
+      const fin = +e.dataset.count, d = +(e.dataset.dec || 0), suf = e.dataset.suf || '';
+      if (reduce) { e.textContent = num(fin, d) + suf; return; }
+      const t0 = performance.now(), dur = 1500;
+      const paso = now => { const p = Math.min(1, (now - t0) / dur), v = fin * (1 - Math.pow(1 - p, 3)); e.textContent = num(v, d) + suf; if (p < 1) requestAnimationFrame(paso); };
+      requestAnimationFrame(paso);
+    });
+  }
+
+  /* fondo de estrellas que acelera */
+  function warp(slide, maxV) {
+    const cv = slide.querySelector('canvas.bg'); if (!cv) return {start() {}, stop() {}};
+    const ctx = cv.getContext('2d'), W = 1280, H = 720, dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = W * dpr; cv.height = H * dpr; ctx.scale(dpr, dpr);
+    const COL = ['#ffffff', '#5eead4', '#a78bfa', '#f472b6'];
+    const st = Array.from({length: 520}, () => ({x: (Math.random() - .5) * W, y: (Math.random() - .5) * H, z: Math.random() * W, c: COL[Math.random() * 4 | 0]}));
+    let raf = 0, v = 1.2, t0 = 0;
+    const frame = now => {
+      if (!t0) t0 = now;
+      const t = (now - t0) / 1000; v = Math.min(maxV, 1.2 + t * t * 2.2);
+      ctx.fillStyle = 'rgba(5,6,15,.32)'; ctx.fillRect(0, 0, W, H);
+      for (const s of st) {
+        const pz = s.z; s.z -= v; if (s.z < 1) { s.z = W; s.x = (Math.random() - .5) * W; s.y = (Math.random() - .5) * H; continue; }
+        const k = 280 / s.z, kp = 280 / pz, x = W / 2 + s.x * k, y = H / 2 + s.y * k, xp = W / 2 + s.x * kp, yp = H / 2 + s.y * kp;
+        ctx.strokeStyle = s.c; ctx.globalAlpha = Math.min(1, 1.4 - s.z / W); ctx.lineWidth = Math.max(.6, 2.2 - s.z / 400);
+        ctx.beginPath(); ctx.moveTo(xp, yp); ctx.lineTo(x, y); ctx.stroke();
+      }
+      ctx.globalAlpha = 1; raf = requestAnimationFrame(frame);
+    };
+    const pintaFijo = () => { ctx.fillStyle = '#05060f'; ctx.fillRect(0, 0, W, H); for (const s of st) { const k = 280 / s.z; ctx.fillStyle = s.c; ctx.globalAlpha = .7; ctx.fillRect(W / 2 + s.x * k, H / 2 + s.y * k, 1.6, 1.6); } ctx.globalAlpha = 1; };
+    pintaFijo();
+    return {start() { if (reduce) return; cancelAnimationFrame(raf); t0 = 0; raf = requestAnimationFrame(frame); }, stop() { cancelAnimationFrame(raf); }};
+  }
+
+  /* bucle de automejora */
+  function bucle(slide) {
+    const svg = slide.querySelector('svg.loop'); if (!svg) return {start() {}, stop() {}};
+    const comet = svg.querySelector('.comet'), trail = svg.querySelector('.trail'), lab = svg.querySelector('#loopN');
+    const C = 210, R = 150, N = 16, dots = [];
+    for (let k = 0; k < N; k++) dots.push(el('circle', {r: 7 - k * .38, fill: k < 6 ? '#f472b6' : '#a78bfa', opacity: (1 - k / N) * .7}, trail));
+    let raf = 0, ang = -Math.PI / 2, w = 1.8, vuelta = 0, last = 0, hist = [];
+    const pos = a => [C + R * Math.cos(a), C + R * Math.sin(a)];
+    const frame = now => {
+      const dt = last ? Math.min(.05, (now - last) / 1000) : 0; last = now;
+      const prev = ang; ang += w * dt;
+      if (Math.floor((ang + Math.PI / 2) / (2 * Math.PI)) > Math.floor((prev + Math.PI / 2) / (2 * Math.PI))) {
+        vuelta++; w = Math.min(w * 1.3, 30); lab.textContent = '×' + num(w / 1.8, w / 1.8 < 10 ? 1 : 0);
+      }
+      hist.unshift(ang); hist.length = N;
+      const [x, y] = pos(ang); comet.setAttribute('cx', x); comet.setAttribute('cy', y);
+      dots.forEach((d, k) => { const a = hist[k] ?? ang; const [dx, dy] = pos(a); d.setAttribute('cx', dx); d.setAttribute('cy', dy); });
+      raf = requestAnimationFrame(frame);
+    };
+    return {
+      start() { if (reduce) return; cancelAnimationFrame(raf); ang = -Math.PI / 2; w = 1.8; vuelta = 0; last = 0; hist = []; lab.textContent = '×1'; raf = requestAnimationFrame(frame); },
+      stop() { cancelAnimationFrame(raf); }
+    };
+  }
+
+  /* horizonte de tareas, medido y proyectado */
+  function horizonte(slide) {
+    const svg = slide.querySelector('#hz'); if (!svg) return;
+    const W = 780, H = 430, L = 92, Rm = 16, T = 14, B = 36;
+    const x0 = 2019, x1 = 2031, ymin = 0, ymax = Math.log10(3.6e7);
+    const X = t => L + (t - x0) / (x1 - x0) * (W - L - Rm);
+    const Y = s => T + (1 - (Math.log10(s) - ymin) / (ymax - ymin)) * (H - T - B);
+    const HR = 3600;
+    [[1, '1 s'], [60, '1 min'], [HR, '1 h']].forEach(([s, t]) => { el('line', {x1: L, x2: W - Rm, y1: Y(s), y2: Y(s), class: 'ax'}, svg); el('text', {x: L - 10, y: Y(s) + 4, 'text-anchor': 'end', class: 'axt'}, svg).textContent = t; });
+    const UMB = [[40 * HR, 'una semana de trabajo'], [167 * HR, 'un mes de trabajo'], [2000 * HR, 'un año de trabajo']];
+    UMB.forEach(([s, t]) => { el('line', {x1: L, x2: W - Rm, y1: Y(s), y2: Y(s), class: 'thr'}, svg); el('text', {x: L - 10, y: Y(s) + 4, 'text-anchor': 'end', class: 'thrt'}, svg).textContent = t.replace(' de trabajo', ''); });
+    for (let a = 2019; a <= 2031; a += 2) el('text', {x: X(a), y: H - 12, 'text-anchor': 'middle', class: 'axt'}, svg).textContent = a;
+    const hoy = 2026.9;
+    el('line', {x1: X(hoy), x2: X(hoy), y1: T, y2: H - B, class: 'hoyl'}, svg);
+    el('text', {x: X(hoy) + 6, y: T + 12, class: 'hoyt'}, svg).textContent = 'hoy';
+    const P = [[2019.12, 3, 'GPT-2'], [2023.2, 300, 'GPT-4'], [2025.15, 59 * 60, 'Claude 3.7 Sonnet'], [2025.88, 4.82 * HR, 'Opus 4.5'], [2026.1, 12 * HR, 'Opus 4.6'], [2026.2, 18 * HR, 'Frontera, mar. 2026']];
+    el('path', {d: 'M' + P.map(p => `${X(p[0]).toFixed(1)} ${Y(p[1]).toFixed(1)}`).join(' L'), class: 'meas', pathLength: 1}, svg);
+    const proj = el('path', {class: 'proj'}, svg);
+    const LB = [[10, -10, 'start', 'GPT-2'], [10, -10, 'start', 'GPT-4'], [12, 20, 'start', 'Claude 3.7 Sonnet'], [-14, 4, 'end', 'Opus 4.5'], null, [-14, -8, 'end', 'mar. 2026: 18 h']];
+    P.forEach((p, k) => {
+      el('circle', {cx: X(p[0]), cy: Y(p[1]), r: 6, class: 'pt', style: `--k:${k}`}, svg);
+      const lb = LB[k]; if (!lb) return;
+      el('text', {x: X(p[0]) + lb[0], y: Y(p[1]) + lb[1], 'text-anchor': lb[2], class: 'ptl', style: `--k:${k}`}, svg).textContent = lb[3];
+    });
+    const sx = X(2026.89), sy = Y(27 * HR);
+    el('path', {d: `M${sx} ${sy - 9} L${sx + 2.6} ${sy - 2.8} L${sx + 9} ${sy - 2.8} L${sx + 3.9} ${sy + 1.2} L${sx + 5.6} ${sy + 8} L${sx} ${sy + 4} L${sx - 5.6} ${sy + 8} L${sx - 3.9} ${sy + 1.2} L${sx - 9} ${sy - 2.8} L${sx - 2.6} ${sy - 2.8} Z`, class: 'star'}, svg);
+    el('text', {x: sx + 14, y: sy + 22, class: 'ptl', style: 'fill:#fbbf24'}, svg).textContent = 'TH2: 27 h';
+    const pulse = el('circle', {r: 6, class: 'pulse'}, svg);
+    const out = slide.querySelector('#hzOut'), inp = slide.querySelector('#hzD'), dv = slide.querySelector('#hzDv');
+    const t0 = 2026.2, s0 = 18 * HR;
+    function pinta(D) {
+      dv.textContent = num(D, 1);
+      const pts = []; let t = t0;
+      for (; t <= x1; t += .02) { const s = s0 * Math.pow(2, (t - t0) * 12 / D); if (s > 3.6e7) break; pts.push(`${X(t).toFixed(1)} ${Y(s).toFixed(1)}`); }
+      proj.setAttribute('d', 'M' + pts.join(' L'));
+      const [lx, ly] = pts[pts.length - 1].split(' '); pulse.setAttribute('cx', lx); pulse.setAttribute('cy', ly);
+      out.innerHTML = UMB.map(([s, txt]) => { const tt = t0 + Math.log2(s / s0) * D / 12; return `<div><span>${txt[0].toUpperCase() + txt.slice(1)}</span><b>${tt < hoy ? 'ya, según la tendencia' : fecha(tt)}</b></div>`; }).join('');
+      slide.querySelectorAll('.hzbtn button').forEach(b => b.classList.toggle('on', Math.abs(+b.dataset.d - D) < .05));
+    }
+    inp.addEventListener('input', () => pinta(+inp.value));
+    slide.querySelectorAll('.hzbtn button').forEach(b => b.addEventListener('click', () => { inp.value = b.dataset.d; pinta(+b.dataset.d); }));
+    pinta(3.6);
+  }
+
+  /* previsiones de Metaculus */
+  function previsiones(slide) {
+    const svg = slide.querySelector('#fc'); if (!svg) return;
+    const W = 620, H = 400, L = 56, Rm = 18, T = 18, B = 40;
+    const x0 = 2021.8, x1 = 2027.2, y0 = 2025, y1 = 2060;
+    const X = t => L + (t - x0) / (x1 - x0) * (W - L - Rm), Y = a => T + (1 - (a - y0) / (y1 - y0)) * (H - T - B);
+    for (let a = 2030; a <= 2060; a += 10) { el('line', {x1: L, x2: W - Rm, y1: Y(a), y2: Y(a), class: 'ax'}, svg); el('text', {x: L - 8, y: Y(a) + 4, 'text-anchor': 'end', class: 'axt'}, svg).textContent = a; }
+    for (let a = 2022; a <= 2027; a++) el('text', {x: X(a), y: H - 14, 'text-anchor': 'middle', class: 'axt'}, svg).textContent = a;
+    el('text', {x: L, y: T - 4, class: 'axt'}, svg).textContent = 'Año previsto para la primera IA general';
+    const P = [[2022.3, 2057, 'previsión de 2022'], [2023.3, 2031.8, 'previsión de 2023'], [2026.1, 2033, 'feb. 2026'], [2026.8, 2030.9, 'oct. 2026']];
+    el('path', {d: 'M' + P.map(p => `${X(p[0]).toFixed(1)} ${Y(p[1]).toFixed(1)}`).join(' L'), class: 'fcl', pathLength: 1}, svg);
+    const LB = [[14, -4, 'start', '2057', 'previsión de 2022'], [14, 34, 'start', '2031', 'previsión de 2023'], [-14, -30, 'end', '2033', 'feb. 2026'], [-6, 40, 'end', 'dic. 2030', 'oct. 2026']];
+    P.forEach((p, k) => {
+      const [dx, dy, an, big, sm] = LB[k];
+      el('circle', {cx: X(p[0]), cy: Y(p[1]), r: 7, class: 'fcp', style: `--k:${k}`}, svg);
+      el('text', {x: X(p[0]) + dx, y: Y(p[1]) + dy, 'text-anchor': an, class: 'fct', style: `--k:${k}`}, svg).textContent = big;
+      el('text', {x: X(p[0]) + dx, y: Y(p[1]) + dy + 17, 'text-anchor': an, class: 'fcs', style: `--k:${k}`}, svg).textContent = sm;
+    });
+  }
+
+  /* registro y ciclo de vida */
+  const vivos = new Map();
+  document.querySelectorAll('.slide[data-fx]').forEach(s => {
+    const t = s.dataset.fx;
+    if (t === 'warp') vivos.set(s, warp(s, 34));
+    else if (t === 'warp2') vivos.set(s, warp(s, 9));
+    else if (t === 'loop') vivos.set(s, bucle(s));
+    else if (t === 'horizon') horizonte(s);
+    else if (t === 'forecast') previsiones(s);
+  });
+  document.addEventListener('slide:enter', e => { const s = e.detail.el; contar(s); const v = vivos.get(s); if (v) v.start(); });
+  document.addEventListener('slide:leave', e => { const v = vivos.get(e.detail.el); if (v) v.stop(); });
+})();
+</script>
+<script>
+(() => {
+  'use strict';
   const S = [...document.querySelectorAll('.slide')];
   const stage = document.getElementById('stage');
   let i = 0;
@@ -1191,12 +1676,16 @@ PAPER: <span class="v">{{paper_text}}</span></pre>
     stage.style.transform = `translate(-50%, -50%) scale(${sc})`;
   }
   function go(n) {
+    const prev = i;
     i = Math.max(0, Math.min(S.length - 1, n));
+    stage.classList.toggle('atras', i < prev);
     S.forEach((s, k) => s.classList.toggle('on', k === i));
     document.getElementById('count').textContent = `${i + 1} / ${S.length}`;
     document.getElementById('prog').style.width = `${(i + 1) / S.length * 100}%`;
     const nt = S[i].querySelector('aside.notes');
     document.getElementById('notesTxt').textContent = nt ? nt.textContent : 'Sin notas en esta diapositiva.';
+    if (prev !== i) document.dispatchEvent(new CustomEvent('slide:leave', {detail: {el: S[prev]}}));
+    document.dispatchEvent(new CustomEvent('slide:enter', {detail: {el: S[i]}}));
     if (location.hash !== '#' + (i + 1)) history.replaceState(null, '', '#' + (i + 1));
   }
   const notas = () => document.body.classList.toggle('notas');
