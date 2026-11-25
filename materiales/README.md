@@ -13,7 +13,7 @@ sesion01/  obligatorias/  Cuentas_y_clave · Practica_de_prompts      opcionales
 sesion02/  obligatorias/  SyllabusAI · ExamForge · AntiConvocatorIA · CriterIA · TFG_Evaluator
            opcionales/    AulIA · CorrigIA · MentorIA · Evaluador_Oral · ConvocatorIA
 sesion03/  obligatorias/  Doctoralia · Humanitas · CuadernIA · NarrativIA · RefinIA · RevistaFit
-           opcionales/    PRISMIA · Publication_Radar · GrantWriter · Autoresearch
+           opcionales/    PRISMIA · Publication_Radar · GrantWriter · Autoresearch · ProcedencIA
 sesion04/  obligatorias/  ForjaIA
            opcionales/    TutorIA · ClarIA · Generator
 ```
@@ -40,6 +40,7 @@ Probado en Chrome con clave de OpenAI (modelo por defecto de cada app). «Comple
 | 3 | GrantWriter · Autoresearch | Lectura | Leen bases, idea y borrador. |
 | 3 | PRISMIA | — | Pide claves de tres proveedores distintos. |
 | 3 | Publication Radar | — | No usa ficheros. |
+| 3 | ProcedencIA | Sellado sin IA (25/11/2026) | 5 puntos de control sellados, cadena íntegra; la comparación 2→3 muestra la frase inventada; declaración generada (ChatGPT, edición de estilo, Discusión). |
 | 4 | ForjaIA | Completa hasta autoría | Entiende el encargo y el cuaderno y propone las preguntas. No se construyó la app. |
 | 4 | TutorIA · ClarIA · Generator | Lectura | Leen el tema, el PowerPoint con notas y la guía docente. |
 
